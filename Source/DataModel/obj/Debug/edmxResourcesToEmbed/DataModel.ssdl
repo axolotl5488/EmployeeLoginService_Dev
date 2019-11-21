@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppCompanyLeaveManagement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="TotalYearlyLeaves" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppLeaveApprovedStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AppLeaveType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AppMasterLeaveType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="AppUserLeave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="AppMasterLeaveTypeID" Type="int" Nullable="false" />
+    <Property Name="AppLeaveTypeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="AppLeaveApprovedStatusId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="TotalDays" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsPaidLeave" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BranchType">
+    <Key>
+      <PropertyRef Name="BranchTypeID" />
+    </Key>
+    <Property Name="BranchTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchType" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Break">
+    <Key>
+      <PropertyRef Name="BreakId" />
+    </Key>
+    <Property Name="BreakId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="BreakinTime" Type="datetime" Nullable="false" />
+    <Property Name="BreakoutTime" Type="datetime" />
+    <Property Name="BreakinType" Type="bit" />
+    <Property Name="BILocationId" Type="int" />
+    <Property Name="BILatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="BreakoutType" Type="bit" />
+    <Property Name="BOLocationId" Type="int" />
+    <Property Name="BOLatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="BreakinOutsideLocationReason" Type="varchar(max)" />
+    <Property Name="BreakoutOutsideLocationReason" Type="varchar(max)" />
+    <Property Name="SystemBreakout" Type="bit" Nullable="false" />
+    <Property Name="BreakinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BreakoutDeviceId" Type="varchar" MaxLength="50" />
+    <Property Name="BreakTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BreakCategory">
+    <Key>
+      <PropertyRef Name="BreakCategoryId" />
+    </Key>
+    <Property Name="BreakCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BreakCategoryName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="HasTextbox" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BreakType">
+    <Key>
+      <PropertyRef Name="BreakTypeId" />
+    </Key>
+    <Property Name="BreakTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BreakTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallIn">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="CallinTime" Type="datetime" Nullable="false" />
+    <Property Name="CalloutTime" Type="datetime" />
+    <Property Name="CallTitle" Type="nvarchar" MaxLength="300" />
+    <Property Name="CallinType" Type="bit" />
+    <Property Name="CILocationId" Type="int" />
+    <Property Name="CILatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="CalloutType" Type="bit" />
+    <Property Name="COLocationId" Type="int" />
+    <Property Name="COLatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="SystemCallout" Type="bit" Nullable="false" />
+    <Property Name="CallTime" Type="nvarchar" MaxLength="20" />
+    <Property Name="CallinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CalloutDeviceId" Type="varchar" MaxLength="50" />
+    <Property Name="CallConclusion" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="DefaultTimeFrom" Type="datetime" Nullable="false" />
+    <Property Name="DefaultTimeTo" Type="datetime" Nullable="false" />
+    <Property Name="BreakCategoryId" Type="int" Nullable="false" />
+    <Property Name="LunchTimeFrom" Type="datetime" Nullable="false" />
+    <Property Name="LunchTimeTo" Type="datetime" Nullable="false" />
+    <Property Name="TeaTimeFrom" Type="datetime" Nullable="false" />
+    <Property Name="TeaTimeTo" Type="datetime" Nullable="false" />
+    <Property Name="TotalBreakCount" Type="int" Nullable="false" />
+    <Property Name="UserLimit" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyBranch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchTypeId" Type="tinyint" />
+    <Property Name="ParentBranchId" Type="int" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="nvarchar" MaxLength="100" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" />
+    <Property Name="Pincode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="CretedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CompanyLeaveTypeCount">
+    <Key>
+      <PropertyRef Name="LeaveCountId" />
+    </Key>
+    <Property Name="LeaveCountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+    <Property Name="LeaveCountByType" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CompanyWeekOffDay">
+    <Key>
+      <PropertyRef Name="WeekOffId" />
+    </Key>
+    <Property Name="WeekOffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="WeekOffDay" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsAlternative" Type="bit" Nullable="false" />
+    <Property Name="AlternativeDay" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Components">
+    <Key>
+      <PropertyRef Name="ComponentId" />
+    </Key>
+    <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComponentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PageId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="EmployeeAddress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CurrAddress" Type="nvarchar" MaxLength="300" />
+    <Property Name="CurrCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrState" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrPincode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImergencyCntNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImergencyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeBankDetails">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="BankAccountNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="200" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="IFSCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeeEducationDetails">
+    <Key>
+      <PropertyRef Name="EduId" />
+    </Key>
+    <Property Name="EduId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+    <Property Name="Institute" Type="nvarchar" MaxLength="100" />
+    <Property Name="University" Type="nvarchar" MaxLength="100" />
+    <Property Name="YearOfPassing" Type="int" />
+    <Property Name="GradeType" Type="tinyint" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="10" />
+    <Property Name="CourseType" Type="tinyint" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeeFamily">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Relation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeeMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="10" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nchar" MaxLength="3" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="DOBFather" Type="datetime" />
+    <Property Name="DOBMother" Type="datetime" />
+    <Property Name="MaritalStatus" Type="int" />
+    <Property Name="AnniversaryDate" Type="datetime" />
+    <Property Name="SpouseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DOBSpouse" Type="datetime" />
+    <Property Name="DegreeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="10" />
+    <Property Name="YearOfPassing" Type="int" />
+    <Property Name="DegreeDesc" Type="nvarchar" MaxLength="300" />
+    <Property Name="ProfileImg" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpType" Type="int" />
+    <Property Name="ReportingPerson" Type="int" />
+    <Property Name="CompanyEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CompanyJoinDate" Type="datetime" />
+    <Property Name="CompanyLeaveDate" Type="datetime" />
+    <Property Name="SalaryACNumber" Type="nvarchar" MaxLength="30" />
+    <Property Name="SalaryBank" Type="nvarchar" MaxLength="30" />
+    <Property Name="SalaryBankBranch" Type="nvarchar" MaxLength="30" />
+    <Property Name="SalaryBankIFSC" Type="nvarchar" MaxLength="16" />
+    <Property Name="PANNo" Type="nvarchar" MaxLength="11" />
+    <Property Name="AdharNo" Type="nvarchar" MaxLength="15" />
+    <Property Name="DLNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="PassportNo" Type="nvarchar" MaxLength="10" />
+    <Property Name="VoterID" Type="nvarchar" MaxLength="25" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeePersonalIDs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="IDType" Type="int" />
+    <Property Name="IDNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="imageUrl" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="GroupAccess">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupID" Type="bigint" />
+    <Property Name="GroupAccessID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="GroupMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="HalfDay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveID" Type="int" Nullable="false" />
+    <Property Name="HalfDayDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Holiday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidayDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="LeaveId" />
+    </Key>
+    <Property Name="LeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+    <Property Name="LeaveFromDate" Type="datetime" Nullable="false" />
+    <Property Name="LeaveToDate" Type="datetime" Nullable="false" />
+    <Property Name="LeaveDays" Type="int" Nullable="false" />
+    <Property Name="WeekoffBetweenLeave" Type="int" Nullable="false" />
+    <Property Name="WeekoffId" Type="nvarchar" MaxLength="50" />
+    <Property Name="HolidayBetweenLeave" Type="int" Nullable="false" />
+    <Property Name="HolidayId" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LeaveApprovalType">
+    <Key>
+      <PropertyRef Name="LeaveApprovalTypeId" />
+    </Key>
+    <Property Name="LeaveApprovalTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveApprovalTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeId" />
+    </Key>
+    <Property Name="LeaveTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShortForm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LocationPin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="Lat" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PinAddress" Type="text" Nullable="false" />
+    <Property Name="Long" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="LocationName" Type="varchar(max)" />
+    <Property Name="PlaceName" Type="varchar(max)" />
+    <Property Name="LocationImage" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="BreakCategoryId" Type="int" />
+    <Property Name="TotalBreakCount" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MId" />
+    </Key>
+    <Property Name="MId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="varchar" MaxLength="50" />
+    <Property Name="FormName" Type="varchar" MaxLength="50" />
+    <Property Name="IconName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SortNumber" Type="int" />
+    <Property Name="PMId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OfficialLeaves">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveFor" Type="tinyint" />
+    <Property Name="ObjectId" Type="bigint" />
+    <Property Name="ApplicableFromDate" Type="datetime" />
+    <Property Name="ApplicableToDate" Type="datetime" />
+    <Property Name="LeaveTypeId" Type="tinyint" />
+    <Property Name="LeaveTypeCount" Type="int" />
+    <Property Name="CarryForwarded" Type="int" />
+    <Property Name="LeavesTaken" Type="int" />
+    <Property Name="Balance" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="int" />
+    <Property Name="CreatedBy" Type="datetime" />
+    <Property Name="UpdatedOn" Type="int" />
+    <Property Name="UpdatedBy" Type="datetime" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Pages">
+    <Key>
+      <PropertyRef Name="PageId" />
+    </Key>
+    <Property Name="PageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="PunchIn">
+    <Key>
+      <PropertyRef Name="PId" />
+    </Key>
+    <Property Name="PId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PunchinTime" Type="datetime" Nullable="false" />
+    <Property Name="PunchoutTime" Type="datetime" />
+    <Property Name="PunchinType" Type="bit" />
+    <Property Name="PILocationId" Type="int" />
+    <Property Name="PILatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="PunchoutType" Type="bit" />
+    <Property Name="POLocationId" Type="int" />
+    <Property Name="POLatitudeLongitude" Type="varchar" MaxLength="50" />
+    <Property Name="PunchinOutsideLocationReason" Type="varchar(max)" />
+    <Property Name="PunchoutOutsideLocationReason" Type="varchar(max)" />
+    <Property Name="SystemPunchout" Type="bit" Nullable="false" />
+    <Property Name="LatePunchin" Type="bit" Nullable="false" />
+    <Property Name="LatePunchinReason" Type="varchar(max)" />
+    <Property Name="EarlyPunchout" Type="bit" Nullable="false" />
+    <Property Name="EarlyPunchoutReason" Type="varchar(max)" />
+    <Property Name="PunchinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PunchoutDeviceId" Type="varchar" MaxLength="50" />
+    <Property Name="WorkHourReason" Type="varchar(max)" />
+    <Property Name="WorkingHour" Type="nvarchar" MaxLength="20" />
+    <Property Name="ExtraWorkingHour" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsHalfDay" Type="bit" Nullable="false" />
+    <Property Name="PunchinOnHoliday" Type="bit" Nullable="false" />
+    <Property Name="PunchinOnWeekoff" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleMaster">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KeyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="value" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserAccess">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="UserAccessID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="UserComponentRights">
+    <Key>
+      <PropertyRef Name="ComponentRightId" />
+    </Key>
+    <Property Name="ComponentRightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ComponentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="UDId" />
+    </Key>
+    <Property Name="UDId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DeviceId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DeviceType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="RequestDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="AccessToken" Type="varchar(max)" />
+    <Property Name="ApprovedBy" Type="int" Nullable="false" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="DeviceName" Type="nvarchar" MaxLength="150" />
+    <Property Name="OSVersion" Type="nvarchar" MaxLength="50" />
+    <Property Name="LocationName" Type="nvarchar" MaxLength="300" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserLeaveApproval">
+    <Key>
+      <PropertyRef Name="ApprovalId" />
+    </Key>
+    <Property Name="ApprovalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveId" Type="int" Nullable="false" />
+    <Property Name="IsApprovedFirst" Type="bit" Nullable="false" />
+    <Property Name="IsApprovedSecond" Type="bit" />
+    <Property Name="FirstApprovedBy" Type="int" Nullable="false" />
+    <Property Name="SecondApprovedBy" Type="int" />
+    <Property Name="FirstDescription" Type="nvarchar(max)" />
+    <Property Name="SecondDescription" Type="nvarchar(max)" />
+    <Property Name="FirstCreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="FirstUpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="SecondCreatedDate" Type="datetime" />
+    <Property Name="SecondUpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserLeaveTypeCount">
+    <Key>
+      <PropertyRef Name="LeaveCountId" />
+    </Key>
+    <Property Name="LeaveCountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+    <Property Name="LeaveCountByType" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserLocation">
+    <Key>
+      <PropertyRef Name="ULId" />
+    </Key>
+    <Property Name="ULId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+    <Property Name="UserDeviceId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRights">
+    <Key>
+      <PropertyRef Name="RightId" />
+    </Key>
+    <Property Name="RightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="int" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="TopId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GenderTypeId" Type="tinyint" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="ProfilePic" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="PunchinStatus" Type="bit" Nullable="false" />
+    <Property Name="EmployeeTypeId" Type="int" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="nvarchar" MaxLength="100" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
+    <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailIDPer" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNoCmp" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNoPer" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaveApprovalTypeId" Type="int" Nullable="false" />
+    <Property Name="LeaveApprovalSecondLevelId" Type="int" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersOTP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="OTP" Type="bigint" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeviceID" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeviceType" Type="nchar" MaxLength="10" />
+    <Property Name="LatLong" Type="nvarchar" MaxLength="50" />
+    <Property Name="OTPSentTime" Type="datetime" Nullable="false" />
+    <Property Name="OTPSent" Type="bit" />
+    <Property Name="IsVerified" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserWeekOffDay">
+    <Key>
+      <PropertyRef Name="WeekOffId" />
+    </Key>
+    <Property Name="WeekOffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="WeekOffDay" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsAlternative" Type="bit" Nullable="false" />
+    <Property Name="AlternativeDay" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VersionMaster">
+    <Key>
+      <PropertyRef Name="VersionId" />
+    </Key>
+    <Property Name="VersionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PCVersion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IOSVersion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AndroidVersion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WeeklyTimings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="TimingFor" Type="tinyint" />
+    <Property Name="ObjectId" Type="bigint" />
+    <Property Name="TimingType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Day" Type="nvarchar" MaxLength="20" />
+    <Property Name="DayType" Type="tinyint" />
+    <Property Name="TimeFrom" Type="datetime" Nullable="false" />
+    <Property Name="TimeUpto" Type="datetime" Nullable="false" />
+    <Property Name="WorkingHours" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AppUserLeave_AppLeaveApprovedStatus">
+    <End Role="AppLeaveApprovedStatus" Type="Self.AppLeaveApprovedStatus" Multiplicity="1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppLeaveApprovedStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppLeaveApprovedStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppLeaveType">
+    <End Role="AppLeaveType" Type="Self.AppLeaveType" Multiplicity="1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppLeaveType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppLeaveTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppMasterLeaveType">
+    <End Role="AppMasterLeaveType" Type="Self.AppMasterLeaveType" Multiplicity="1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppMasterLeaveType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppMasterLeaveTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppUserLeave">
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="1" />
+    <End Role="AppUserLeave1" Type="Self.AppUserLeave" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AppUserLeave">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Fn_GetEmployeeHeirarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar(max)">
+    <Parameter Name="p_Command" Type="varchar" Mode="In" />
+    <Parameter Name="p_UserID" Type="int" Mode="In" />
+    <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeHeirarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Command" Type="varchar" Mode="In" />
+    <Parameter Name="p_UserID" Type="int" Mode="In" />
+    <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeHeirarchyBOTTOMTOTOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Command" Type="varchar" Mode="In" />
+    <Parameter Name="p_UserID" Type="int" Mode="In" />
+    <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserHierarchyWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_UserId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="EmployeeLoginModelStoreContainer">
+    <EntitySet Name="AppCompanyLeaveManagement" EntityType="Self.AppCompanyLeaveManagement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppLeaveApprovedStatus" EntityType="Self.AppLeaveApprovedStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppLeaveType" EntityType="Self.AppLeaveType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppMasterLeaveType" EntityType="Self.AppMasterLeaveType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppUserLeave" EntityType="Self.AppUserLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchType" EntityType="Self.BranchType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Break" EntityType="Self.Break" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BreakCategory" EntityType="Self.BreakCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BreakType" EntityType="Self.BreakType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallIn" EntityType="Self.CallIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyBranch" EntityType="Self.CompanyBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyLeaveTypeCount" EntityType="Self.CompanyLeaveTypeCount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyWeekOffDay" EntityType="Self.CompanyWeekOffDay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeAddress" EntityType="Self.EmployeeAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeBankDetails" EntityType="Self.EmployeeBankDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeEducationDetails" EntityType="Self.EmployeeEducationDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeFamily" EntityType="Self.EmployeeFamily" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeMaster" EntityType="Self.EmployeeMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePersonalIDs" EntityType="Self.EmployeePersonalIDs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupAccess" EntityType="Self.GroupAccess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupMaster" EntityType="Self.GroupMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HalfDay" EntityType="Self.HalfDay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Holiday" EntityType="Self.Holiday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LeaveApprovalType" EntityType="Self.LeaveApprovalType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationPin" EntityType="Self.LocationPin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OfficialLeaves" EntityType="Self.OfficialLeaves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PunchIn" EntityType="Self.PunchIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccess" EntityType="Self.UserAccess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserComponentRights" EntityType="Self.UserComponentRights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLeaveApproval" EntityType="Self.UserLeaveApproval" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLeaveTypeCount" EntityType="Self.UserLeaveTypeCount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLocation" EntityType="Self.UserLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRights" EntityType="Self.UserRights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersOTP" EntityType="Self.UsersOTP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserWeekOffDay" EntityType="Self.UserWeekOffDay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VersionMaster" EntityType="Self.VersionMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WeeklyTimings" EntityType="Self.WeeklyTimings" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AppUserLeave_AppLeaveApprovedStatus" Association="Self.FK_AppUserLeave_AppLeaveApprovedStatus">
+      <End Role="AppLeaveApprovedStatus" EntitySet="AppLeaveApprovedStatus" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppLeaveType" Association="Self.FK_AppUserLeave_AppLeaveType">
+      <End Role="AppLeaveType" EntitySet="AppLeaveType" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppMasterLeaveType" Association="Self.FK_AppUserLeave_AppMasterLeaveType">
+      <End Role="AppMasterLeaveType" EntitySet="AppMasterLeaveType" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppUserLeave" Association="Self.FK_AppUserLeave_AppUserLeave">
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+      <End Role="AppUserLeave1" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Company" Association="Self.FK_AppUserLeave_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Users" Association="Self.FK_AppUserLeave_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Users1" Association="Self.FK_AppUserLeave_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

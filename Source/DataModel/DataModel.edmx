@@ -1,0 +1,2721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmployeeLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppCompanyLeaveManagement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="TotalYearlyLeaves" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppLeaveApprovedStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AppLeaveType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AppMasterLeaveType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="AppUserLeave">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AppMasterLeaveTypeID" Type="int" Nullable="false" />
+          <Property Name="AppLeaveTypeId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="AppLeaveApprovedStatusId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="TotalDays" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsPaidLeave" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BranchType">
+          <Key>
+            <PropertyRef Name="BranchTypeID" />
+          </Key>
+          <Property Name="BranchTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchType" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Break">
+          <Key>
+            <PropertyRef Name="BreakId" />
+          </Key>
+          <Property Name="BreakId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="BreakinTime" Type="datetime" Nullable="false" />
+          <Property Name="BreakoutTime" Type="datetime" />
+          <Property Name="BreakinType" Type="bit" />
+          <Property Name="BILocationId" Type="int" />
+          <Property Name="BILatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="BreakoutType" Type="bit" />
+          <Property Name="BOLocationId" Type="int" />
+          <Property Name="BOLatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="BreakinOutsideLocationReason" Type="varchar(max)" />
+          <Property Name="BreakoutOutsideLocationReason" Type="varchar(max)" />
+          <Property Name="SystemBreakout" Type="bit" Nullable="false" />
+          <Property Name="BreakinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BreakoutDeviceId" Type="varchar" MaxLength="50" />
+          <Property Name="BreakTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BreakCategory">
+          <Key>
+            <PropertyRef Name="BreakCategoryId" />
+          </Key>
+          <Property Name="BreakCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BreakCategoryName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="HasTextbox" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BreakType">
+          <Key>
+            <PropertyRef Name="BreakTypeId" />
+          </Key>
+          <Property Name="BreakTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BreakTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CallIn">
+          <Key>
+            <PropertyRef Name="CId" />
+          </Key>
+          <Property Name="CId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="CallinTime" Type="datetime" Nullable="false" />
+          <Property Name="CalloutTime" Type="datetime" />
+          <Property Name="CallTitle" Type="nvarchar" MaxLength="300" />
+          <Property Name="CallinType" Type="bit" />
+          <Property Name="CILocationId" Type="int" />
+          <Property Name="CILatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="CalloutType" Type="bit" />
+          <Property Name="COLocationId" Type="int" />
+          <Property Name="COLatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="SystemCallout" Type="bit" Nullable="false" />
+          <Property Name="CallTime" Type="nvarchar" MaxLength="20" />
+          <Property Name="CallinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CalloutDeviceId" Type="varchar" MaxLength="50" />
+          <Property Name="CallConclusion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DefaultTimeFrom" Type="datetime" Nullable="false" />
+          <Property Name="DefaultTimeTo" Type="datetime" Nullable="false" />
+          <Property Name="BreakCategoryId" Type="int" Nullable="false" />
+          <Property Name="LunchTimeFrom" Type="datetime" Nullable="false" />
+          <Property Name="LunchTimeTo" Type="datetime" Nullable="false" />
+          <Property Name="TeaTimeFrom" Type="datetime" Nullable="false" />
+          <Property Name="TeaTimeTo" Type="datetime" Nullable="false" />
+          <Property Name="TotalBreakCount" Type="int" Nullable="false" />
+          <Property Name="UserLimit" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyBranch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchTypeId" Type="tinyint" />
+          <Property Name="ParentBranchId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="CretedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CompanyLeaveTypeCount">
+          <Key>
+            <PropertyRef Name="LeaveCountId" />
+          </Key>
+          <Property Name="LeaveCountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+          <Property Name="LeaveCountByType" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CompanyWeekOffDay">
+          <Key>
+            <PropertyRef Name="WeekOffId" />
+          </Key>
+          <Property Name="WeekOffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="WeekOffDay" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAlternative" Type="bit" Nullable="false" />
+          <Property Name="AlternativeDay" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PageId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="EmployeeAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CurrAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="CurrCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrState" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrPincode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImergencyCntNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImergencyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="EmployeeBankDetails">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="BankAccountNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IFSCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeEducationDetails">
+          <Key>
+            <PropertyRef Name="EduId" />
+          </Key>
+          <Property Name="EduId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+          <Property Name="Institute" Type="nvarchar" MaxLength="100" />
+          <Property Name="University" Type="nvarchar" MaxLength="100" />
+          <Property Name="YearOfPassing" Type="int" />
+          <Property Name="GradeType" Type="tinyint" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="10" />
+          <Property Name="CourseType" Type="tinyint" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeFamily">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="10" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nchar" MaxLength="3" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="DOBFather" Type="datetime" />
+          <Property Name="DOBMother" Type="datetime" />
+          <Property Name="MaritalStatus" Type="int" />
+          <Property Name="AnniversaryDate" Type="datetime" />
+          <Property Name="SpouseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOBSpouse" Type="datetime" />
+          <Property Name="DegreeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="10" />
+          <Property Name="YearOfPassing" Type="int" />
+          <Property Name="DegreeDesc" Type="nvarchar" MaxLength="300" />
+          <Property Name="ProfileImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmpType" Type="int" />
+          <Property Name="ReportingPerson" Type="int" />
+          <Property Name="CompanyEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="BranchID" Type="int" />
+          <Property Name="CompanyJoinDate" Type="datetime" />
+          <Property Name="CompanyLeaveDate" Type="datetime" />
+          <Property Name="SalaryACNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="SalaryBank" Type="nvarchar" MaxLength="30" />
+          <Property Name="SalaryBankBranch" Type="nvarchar" MaxLength="30" />
+          <Property Name="SalaryBankIFSC" Type="nvarchar" MaxLength="16" />
+          <Property Name="PANNo" Type="nvarchar" MaxLength="11" />
+          <Property Name="AdharNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="DLNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="VoterID" Type="nvarchar" MaxLength="25" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeePersonalIDs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="IDType" Type="int" />
+          <Property Name="IDNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="imageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GroupAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="bigint" />
+          <Property Name="GroupAccessID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="GroupMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="HalfDay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveID" Type="int" Nullable="false" />
+          <Property Name="HalfDayDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayDate" Type="date" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+          <Property Name="LeaveFromDate" Type="datetime" Nullable="false" />
+          <Property Name="LeaveToDate" Type="datetime" Nullable="false" />
+          <Property Name="LeaveDays" Type="int" Nullable="false" />
+          <Property Name="WeekoffBetweenLeave" Type="int" Nullable="false" />
+          <Property Name="WeekoffId" Type="nvarchar" MaxLength="50" />
+          <Property Name="HolidayBetweenLeave" Type="int" Nullable="false" />
+          <Property Name="HolidayId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaveApprovalType">
+          <Key>
+            <PropertyRef Name="LeaveApprovalTypeId" />
+          </Key>
+          <Property Name="LeaveApprovalTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveApprovalTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeId" />
+          </Key>
+          <Property Name="LeaveTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShortForm" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LocationPin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="Lat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PinAddress" Type="text" Nullable="false" />
+          <Property Name="Long" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="LocationName" Type="varchar(max)" />
+          <Property Name="PlaceName" Type="varchar(max)" />
+          <Property Name="LocationImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BreakCategoryId" Type="int" />
+          <Property Name="TotalBreakCount" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MId" />
+          </Key>
+          <Property Name="MId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="varchar" MaxLength="50" />
+          <Property Name="FormName" Type="varchar" MaxLength="50" />
+          <Property Name="IconName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortNumber" Type="int" />
+          <Property Name="PMId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficialLeaves">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveFor" Type="tinyint" />
+          <Property Name="ObjectId" Type="bigint" />
+          <Property Name="ApplicableFromDate" Type="datetime" />
+          <Property Name="ApplicableToDate" Type="datetime" />
+          <Property Name="LeaveTypeId" Type="tinyint" />
+          <Property Name="LeaveTypeCount" Type="int" />
+          <Property Name="CarryForwarded" Type="int" />
+          <Property Name="LeavesTaken" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="int" />
+          <Property Name="CreatedBy" Type="datetime" />
+          <Property Name="UpdatedOn" Type="int" />
+          <Property Name="UpdatedBy" Type="datetime" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="PunchIn">
+          <Key>
+            <PropertyRef Name="PId" />
+          </Key>
+          <Property Name="PId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PunchinTime" Type="datetime" Nullable="false" />
+          <Property Name="PunchoutTime" Type="datetime" />
+          <Property Name="PunchinType" Type="bit" />
+          <Property Name="PILocationId" Type="int" />
+          <Property Name="PILatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="PunchoutType" Type="bit" />
+          <Property Name="POLocationId" Type="int" />
+          <Property Name="POLatitudeLongitude" Type="varchar" MaxLength="50" />
+          <Property Name="PunchinOutsideLocationReason" Type="varchar(max)" />
+          <Property Name="PunchoutOutsideLocationReason" Type="varchar(max)" />
+          <Property Name="SystemPunchout" Type="bit" Nullable="false" />
+          <Property Name="LatePunchin" Type="bit" Nullable="false" />
+          <Property Name="LatePunchinReason" Type="varchar(max)" />
+          <Property Name="EarlyPunchout" Type="bit" Nullable="false" />
+          <Property Name="EarlyPunchoutReason" Type="varchar(max)" />
+          <Property Name="PunchinDeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PunchoutDeviceId" Type="varchar" MaxLength="50" />
+          <Property Name="WorkHourReason" Type="varchar(max)" />
+          <Property Name="WorkingHour" Type="nvarchar" MaxLength="20" />
+          <Property Name="ExtraWorkingHour" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsHalfDay" Type="bit" Nullable="false" />
+          <Property Name="PunchinOnHoliday" Type="bit" Nullable="false" />
+          <Property Name="PunchinOnWeekoff" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="value" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="UserAccessID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="UserComponentRights">
+          <Key>
+            <PropertyRef Name="ComponentRightId" />
+          </Key>
+          <Property Name="ComponentRightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDevice">
+          <Key>
+            <PropertyRef Name="UDId" />
+          </Key>
+          <Property Name="UDId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DeviceId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeviceType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="AccessToken" Type="varchar(max)" />
+          <Property Name="ApprovedBy" Type="int" Nullable="false" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="150" />
+          <Property Name="OSVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="300" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserLeaveApproval">
+          <Key>
+            <PropertyRef Name="ApprovalId" />
+          </Key>
+          <Property Name="ApprovalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveId" Type="int" Nullable="false" />
+          <Property Name="IsApprovedFirst" Type="bit" Nullable="false" />
+          <Property Name="IsApprovedSecond" Type="bit" />
+          <Property Name="FirstApprovedBy" Type="int" Nullable="false" />
+          <Property Name="SecondApprovedBy" Type="int" />
+          <Property Name="FirstDescription" Type="nvarchar(max)" />
+          <Property Name="SecondDescription" Type="nvarchar(max)" />
+          <Property Name="FirstCreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="FirstUpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="SecondCreatedDate" Type="datetime" />
+          <Property Name="SecondUpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserLeaveTypeCount">
+          <Key>
+            <PropertyRef Name="LeaveCountId" />
+          </Key>
+          <Property Name="LeaveCountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+          <Property Name="LeaveCountByType" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLocation">
+          <Key>
+            <PropertyRef Name="ULId" />
+          </Key>
+          <Property Name="ULId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="UserDeviceId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRights">
+          <Key>
+            <PropertyRef Name="RightId" />
+          </Key>
+          <Property Name="RightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="TopId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GenderTypeId" Type="tinyint" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="ProfilePic" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="PunchinStatus" Type="bit" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailIDPer" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNoCmp" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNoPer" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeaveApprovalTypeId" Type="int" Nullable="false" />
+          <Property Name="LeaveApprovalSecondLevelId" Type="int" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersOTP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="OTP" Type="bigint" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceType" Type="nchar" MaxLength="10" />
+          <Property Name="LatLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="OTPSentTime" Type="datetime" Nullable="false" />
+          <Property Name="OTPSent" Type="bit" />
+          <Property Name="IsVerified" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserWeekOffDay">
+          <Key>
+            <PropertyRef Name="WeekOffId" />
+          </Key>
+          <Property Name="WeekOffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="WeekOffDay" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAlternative" Type="bit" Nullable="false" />
+          <Property Name="AlternativeDay" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VersionMaster">
+          <Key>
+            <PropertyRef Name="VersionId" />
+          </Key>
+          <Property Name="VersionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PCVersion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IOSVersion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AndroidVersion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WeeklyTimings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="TimingFor" Type="tinyint" />
+          <Property Name="ObjectId" Type="bigint" />
+          <Property Name="TimingType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day" Type="nvarchar" MaxLength="20" />
+          <Property Name="DayType" Type="tinyint" />
+          <Property Name="TimeFrom" Type="datetime" Nullable="false" />
+          <Property Name="TimeUpto" Type="datetime" Nullable="false" />
+          <Property Name="WorkingHours" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Edit" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_AppUserLeave_AppLeaveApprovedStatus">
+          <End Role="AppLeaveApprovedStatus" Type="Self.AppLeaveApprovedStatus" Multiplicity="1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppLeaveApprovedStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppLeaveApprovedStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppLeaveType">
+          <End Role="AppLeaveType" Type="Self.AppLeaveType" Multiplicity="1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppLeaveType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppLeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppMasterLeaveType">
+          <End Role="AppMasterLeaveType" Type="Self.AppMasterLeaveType" Multiplicity="1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppMasterLeaveType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppMasterLeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppUserLeave">
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="1" />
+          <End Role="AppUserLeave1" Type="Self.AppUserLeave" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserLeave">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="AppUserLeave" Type="Self.AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Fn_GetEmployeeHeirarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar(max)">
+          <Parameter Name="p_Command" Type="varchar" Mode="In" />
+          <Parameter Name="p_UserID" Type="int" Mode="In" />
+          <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeeHeirarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Command" Type="varchar" Mode="In" />
+          <Parameter Name="p_UserID" Type="int" Mode="In" />
+          <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeeHeirarchyBOTTOMTOTOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Command" Type="varchar" Mode="In" />
+          <Parameter Name="p_UserID" Type="int" Mode="In" />
+          <Parameter Name="p_CompanyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserHierarchyWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_UserId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="EmployeeLoginModelStoreContainer">
+          <EntitySet Name="AppCompanyLeaveManagement" EntityType="Self.AppCompanyLeaveManagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppLeaveApprovedStatus" EntityType="Self.AppLeaveApprovedStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppLeaveType" EntityType="Self.AppLeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppMasterLeaveType" EntityType="Self.AppMasterLeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUserLeave" EntityType="Self.AppUserLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchType" EntityType="Self.BranchType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Break" EntityType="Self.Break" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BreakCategory" EntityType="Self.BreakCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BreakType" EntityType="Self.BreakType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallIn" EntityType="Self.CallIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBranch" EntityType="Self.CompanyBranch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyLeaveTypeCount" EntityType="Self.CompanyLeaveTypeCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyWeekOffDay" EntityType="Self.CompanyWeekOffDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeAddress" EntityType="Self.EmployeeAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeBankDetails" EntityType="Self.EmployeeBankDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeEducationDetails" EntityType="Self.EmployeeEducationDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeFamily" EntityType="Self.EmployeeFamily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeMaster" EntityType="Self.EmployeeMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePersonalIDs" EntityType="Self.EmployeePersonalIDs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupAccess" EntityType="Self.GroupAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMaster" EntityType="Self.GroupMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HalfDay" EntityType="Self.HalfDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holiday" EntityType="Self.Holiday" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveApprovalType" EntityType="Self.LeaveApprovalType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationPin" EntityType="Self.LocationPin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficialLeaves" EntityType="Self.OfficialLeaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PunchIn" EntityType="Self.PunchIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccess" EntityType="Self.UserAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserComponentRights" EntityType="Self.UserComponentRights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLeaveApproval" EntityType="Self.UserLeaveApproval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLeaveTypeCount" EntityType="Self.UserLeaveTypeCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLocation" EntityType="Self.UserLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRights" EntityType="Self.UserRights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersOTP" EntityType="Self.UsersOTP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserWeekOffDay" EntityType="Self.UserWeekOffDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VersionMaster" EntityType="Self.VersionMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeeklyTimings" EntityType="Self.WeeklyTimings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AppUserLeave_AppLeaveApprovedStatus" Association="Self.FK_AppUserLeave_AppLeaveApprovedStatus">
+            <End Role="AppLeaveApprovedStatus" EntitySet="AppLeaveApprovedStatus" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppLeaveType" Association="Self.FK_AppUserLeave_AppLeaveType">
+            <End Role="AppLeaveType" EntitySet="AppLeaveType" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppMasterLeaveType" Association="Self.FK_AppUserLeave_AppMasterLeaveType">
+            <End Role="AppMasterLeaveType" EntitySet="AppMasterLeaveType" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppUserLeave" Association="Self.FK_AppUserLeave_AppUserLeave">
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+            <End Role="AppUserLeave1" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Company" Association="Self.FK_AppUserLeave_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Users" Association="Self.FK_AppUserLeave_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Users1" Association="Self.FK_AppUserLeave_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeave" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmployeeLoginEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetEmployeeHeirarchy" ReturnType="Collection(EmployeeLoginModel.GetEmployeeHeirarchy_Result)">
+            <Parameter Name="p_Command" Mode="In" Type="String" />
+            <Parameter Name="p_UserID" Mode="In" Type="Int32" />
+            <Parameter Name="p_CompanyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeeHeirarchyBOTTOMTOTOP" ReturnType="Collection(Int32)">
+            <Parameter Name="p_Command" Mode="In" Type="String" />
+            <Parameter Name="p_UserID" Mode="In" Type="Int32" />
+            <Parameter Name="p_CompanyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserHierarchyWise" ReturnType="Collection(EmployeeLoginModel.GetUserHierarchyWise_Result)">
+          <Parameter Name="p_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AppCompanyLeaveManagements" EntityType="EmployeeLoginModel.AppCompanyLeaveManagement" />
+          <EntitySet Name="AppLeaveApprovedStatus" EntityType="EmployeeLoginModel.AppLeaveApprovedStatu" />
+          <EntitySet Name="AppLeaveTypes" EntityType="EmployeeLoginModel.AppLeaveType" />
+          <EntitySet Name="AppMasterLeaveTypes" EntityType="EmployeeLoginModel.AppMasterLeaveType" />
+          <EntitySet Name="AppUserLeaves" EntityType="EmployeeLoginModel.AppUserLeave" />
+          <EntitySet Name="BranchTypes" EntityType="EmployeeLoginModel.BranchType" />
+          <EntitySet Name="Breaks" EntityType="EmployeeLoginModel.Break" />
+          <EntitySet Name="BreakCategories" EntityType="EmployeeLoginModel.BreakCategory" />
+          <EntitySet Name="BreakTypes" EntityType="EmployeeLoginModel.BreakType" />
+          <EntitySet Name="CallIns" EntityType="EmployeeLoginModel.CallIn" />
+          <EntitySet Name="Companies" EntityType="EmployeeLoginModel.Company" />
+          <EntitySet Name="CompanyBranches" EntityType="EmployeeLoginModel.CompanyBranch" />
+          <EntitySet Name="CompanyLeaveTypeCounts" EntityType="EmployeeLoginModel.CompanyLeaveTypeCount" />
+          <EntitySet Name="CompanyMasters" EntityType="EmployeeLoginModel.CompanyMaster" />
+          <EntitySet Name="CompanyWeekOffDays" EntityType="EmployeeLoginModel.CompanyWeekOffDay" />
+          <EntitySet Name="Components" EntityType="EmployeeLoginModel.Component" />
+          <EntitySet Name="EmployeeAddresses" EntityType="EmployeeLoginModel.EmployeeAddress" />
+          <EntitySet Name="EmployeeBankDetails" EntityType="EmployeeLoginModel.EmployeeBankDetail" />
+          <EntitySet Name="EmployeeEducationDetails" EntityType="EmployeeLoginModel.EmployeeEducationDetail" />
+          <EntitySet Name="EmployeeFamilies" EntityType="EmployeeLoginModel.EmployeeFamily" />
+          <EntitySet Name="EmployeeMasters" EntityType="EmployeeLoginModel.EmployeeMaster" />
+          <EntitySet Name="EmployeePersonalIDs" EntityType="EmployeeLoginModel.EmployeePersonalID" />
+          <EntitySet Name="GroupAccesses" EntityType="EmployeeLoginModel.GroupAccess" />
+          <EntitySet Name="GroupMasters" EntityType="EmployeeLoginModel.GroupMaster" />
+          <EntitySet Name="HalfDays" EntityType="EmployeeLoginModel.HalfDay" />
+          <EntitySet Name="Holidays" EntityType="EmployeeLoginModel.Holiday" />
+          <EntitySet Name="Leaves" EntityType="EmployeeLoginModel.Leave" />
+          <EntitySet Name="LeaveApprovalTypes" EntityType="EmployeeLoginModel.LeaveApprovalType" />
+          <EntitySet Name="LeaveTypes" EntityType="EmployeeLoginModel.LeaveType" />
+          <EntitySet Name="LocationPins" EntityType="EmployeeLoginModel.LocationPin" />
+          <EntitySet Name="Locations" EntityType="EmployeeLoginModel.Location" />
+          <EntitySet Name="Menus" EntityType="EmployeeLoginModel.Menu" />
+          <EntitySet Name="OfficialLeaves" EntityType="EmployeeLoginModel.OfficialLeaf" />
+          <EntitySet Name="Pages" EntityType="EmployeeLoginModel.Page" />
+          <EntitySet Name="PunchIns" EntityType="EmployeeLoginModel.PunchIn" />
+          <EntitySet Name="RoleMasters" EntityType="EmployeeLoginModel.RoleMaster" />
+          <EntitySet Name="SystemSettings" EntityType="EmployeeLoginModel.SystemSetting" />
+          <EntitySet Name="UserAccesses" EntityType="EmployeeLoginModel.UserAccess" />
+          <EntitySet Name="UserComponentRights" EntityType="EmployeeLoginModel.UserComponentRight" />
+          <EntitySet Name="UserDevices" EntityType="EmployeeLoginModel.UserDevice" />
+          <EntitySet Name="UserLeaveApprovals" EntityType="EmployeeLoginModel.UserLeaveApproval" />
+          <EntitySet Name="UserLeaveTypeCounts" EntityType="EmployeeLoginModel.UserLeaveTypeCount" />
+          <EntitySet Name="UserLocations" EntityType="EmployeeLoginModel.UserLocation" />
+          <EntitySet Name="UserRights" EntityType="EmployeeLoginModel.UserRight" />
+          <EntitySet Name="Users" EntityType="EmployeeLoginModel.User" />
+          <EntitySet Name="UsersOTPs" EntityType="EmployeeLoginModel.UsersOTP" />
+          <EntitySet Name="UserWeekOffDays" EntityType="EmployeeLoginModel.UserWeekOffDay" />
+          <EntitySet Name="VersionMasters" EntityType="EmployeeLoginModel.VersionMaster" />
+          <EntitySet Name="WeeklyTimings" EntityType="EmployeeLoginModel.WeeklyTiming" />
+          <AssociationSet Name="FK_AppUserLeave_AppLeaveApprovedStatus" Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus">
+            <End Role="AppLeaveApprovedStatu" EntitySet="AppLeaveApprovedStatus" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppLeaveType" Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType">
+            <End Role="AppLeaveType" EntitySet="AppLeaveTypes" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppMasterLeaveType" Association="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType">
+            <End Role="AppMasterLeaveType" EntitySet="AppMasterLeaveTypes" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_AppUserLeave" Association="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave">
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+            <End Role="AppUserLeave1" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Company" Association="EmployeeLoginModel.FK_AppUserLeave_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Users" Association="EmployeeLoginModel.FK_AppUserLeave_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUserLeave_Users1" Association="EmployeeLoginModel.FK_AppUserLeave_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="GetEmployeeHeirarchy_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUserHierarchyWise_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="103" />
+        </ComplexType>
+        <EntityType Name="AppCompanyLeaveManagement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="TotalYearlyLeaves" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="AppLeaveApprovedStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus" FromRole="AppLeaveApprovedStatu" ToRole="AppUserLeave" />
+        </EntityType>
+        <EntityType Name="AppLeaveType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType" FromRole="AppLeaveType" ToRole="AppUserLeave" />
+        </EntityType>
+        <EntityType Name="AppMasterLeaveType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType" FromRole="AppMasterLeaveType" ToRole="AppUserLeave" />
+        </EntityType>
+        <EntityType Name="AppUserLeave">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="AppMasterLeaveTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AppLeaveTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AppLeaveApprovedStatusId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="TotalDays" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IsPaidLeave" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AppLeaveApprovedStatu" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus" FromRole="AppUserLeave" ToRole="AppLeaveApprovedStatu" />
+          <NavigationProperty Name="AppLeaveType" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType" FromRole="AppUserLeave" ToRole="AppLeaveType" />
+          <NavigationProperty Name="AppMasterLeaveType" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType" FromRole="AppUserLeave" ToRole="AppMasterLeaveType" />
+          <NavigationProperty Name="AppUserLeave1" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave" FromRole="AppUserLeave" ToRole="AppUserLeave1" />
+          <NavigationProperty Name="AppUserLeave2" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave" FromRole="AppUserLeave1" ToRole="AppUserLeave" />
+          <NavigationProperty Name="Company" Relationship="EmployeeLoginModel.FK_AppUserLeave_Company" FromRole="AppUserLeave" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users" FromRole="AppUserLeave" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users1" FromRole="AppUserLeave" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BranchType">
+          <Key>
+            <PropertyRef Name="BranchTypeID" />
+          </Key>
+          <Property Name="BranchTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchType1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Break">
+          <Key>
+            <PropertyRef Name="BreakId" />
+          </Key>
+          <Property Name="BreakId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="BreakinTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BreakoutTime" Type="DateTime" Precision="3" />
+          <Property Name="BreakinType" Type="Boolean" />
+          <Property Name="BILocationId" Type="Int32" />
+          <Property Name="BILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BreakoutType" Type="Boolean" />
+          <Property Name="BOLocationId" Type="Int32" />
+          <Property Name="BOLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BreakinOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BreakoutOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SystemBreakout" Type="Boolean" Nullable="false" />
+          <Property Name="BreakinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BreakoutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BreakTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BreakCategory">
+          <Key>
+            <PropertyRef Name="BreakCategoryId" />
+          </Key>
+          <Property Name="BreakCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BreakCategoryName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HasTextbox" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="BreakType">
+          <Key>
+            <PropertyRef Name="BreakTypeId" />
+          </Key>
+          <Property Name="BreakTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BreakTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CallIn">
+          <Key>
+            <PropertyRef Name="CId" />
+          </Key>
+          <Property Name="CId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="CallinTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CalloutTime" Type="DateTime" Precision="3" />
+          <Property Name="CallTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CallinType" Type="Boolean" />
+          <Property Name="CILocationId" Type="Int32" />
+          <Property Name="CILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalloutType" Type="Boolean" />
+          <Property Name="COLocationId" Type="Int32" />
+          <Property Name="COLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SystemCallout" Type="Boolean" Nullable="false" />
+          <Property Name="CallTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CallinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalloutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CallConclusion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DefaultTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BreakCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="LunchTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LunchTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TeaTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TeaTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalBreakCount" Type="Int32" Nullable="false" />
+          <Property Name="UserLimit" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_Company" FromRole="Company" ToRole="AppUserLeave" />
+        </EntityType>
+        <EntityType Name="CompanyBranch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchTypeId" Type="Byte" />
+          <Property Name="ParentBranchId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CretedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CompanyLeaveTypeCount">
+          <Key>
+            <PropertyRef Name="LeaveCountId" />
+          </Key>
+          <Property Name="LeaveCountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveCountByType" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyWeekOffDay">
+          <Key>
+            <PropertyRef Name="WeekOffId" />
+          </Key>
+          <Property Name="WeekOffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="WeekOffDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAlternative" Type="Boolean" Nullable="false" />
+          <Property Name="AlternativeDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="EmployeeAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CurrAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CurrCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrPincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImergencyCntNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImergencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EmployeeBankDetail">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IFSCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmployeeEducationDetail">
+          <Key>
+            <PropertyRef Name="EduId" />
+          </Key>
+          <Property Name="EduId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Institute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="University" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="YearOfPassing" Type="Int32" />
+          <Property Name="GradeType" Type="Byte" />
+          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CourseType" Type="Byte" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmployeeFamily">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmployeeMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="DOBFather" Type="DateTime" Precision="3" />
+          <Property Name="DOBMother" Type="DateTime" Precision="3" />
+          <Property Name="MaritalStatus" Type="Int32" />
+          <Property Name="AnniversaryDate" Type="DateTime" Precision="3" />
+          <Property Name="SpouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOBSpouse" Type="DateTime" Precision="3" />
+          <Property Name="DegreeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="YearOfPassing" Type="Int32" />
+          <Property Name="DegreeDesc" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmpType" Type="Int32" />
+          <Property Name="ReportingPerson" Type="Int32" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="BranchID" Type="Int32" />
+          <Property Name="CompanyJoinDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyLeaveDate" Type="DateTime" Precision="3" />
+          <Property Name="SalaryACNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryBank" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryBankBranch" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryBankIFSC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PANNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="AdharNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DLNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="VoterID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EmployeePersonalID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="IDType" Type="Int32" />
+          <Property Name="IDNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="imageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GroupAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int64" />
+          <Property Name="GroupAccessID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="GroupMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HalfDay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveID" Type="Int32" Nullable="false" />
+          <Property Name="HalfDayDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveFromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LeaveToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LeaveDays" Type="Int32" Nullable="false" />
+          <Property Name="WeekoffBetweenLeave" Type="Int32" Nullable="false" />
+          <Property Name="WeekoffId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HolidayBetweenLeave" Type="Int32" Nullable="false" />
+          <Property Name="HolidayId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaveApprovalType">
+          <Key>
+            <PropertyRef Name="LeaveApprovalTypeId" />
+          </Key>
+          <Property Name="LeaveApprovalTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveApprovalTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeId" />
+          </Key>
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShortForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LocationPin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="Lat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PinAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Long" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="LocationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlaceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LocationImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BreakCategoryId" Type="Int32" />
+          <Property Name="TotalBreakCount" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MId" />
+          </Key>
+          <Property Name="MId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IconName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortNumber" Type="Int32" />
+          <Property Name="PMId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficialLeaf">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveFor" Type="Byte" />
+          <Property Name="ObjectId" Type="Int64" />
+          <Property Name="ApplicableFromDate" Type="DateTime" Precision="3" />
+          <Property Name="ApplicableToDate" Type="DateTime" Precision="3" />
+          <Property Name="LeaveTypeId" Type="Byte" />
+          <Property Name="LeaveTypeCount" Type="Int32" />
+          <Property Name="CarryForwarded" Type="Int32" />
+          <Property Name="LeavesTaken" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="Int32" />
+          <Property Name="CreatedBy" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="Int32" />
+          <Property Name="UpdatedBy" Type="DateTime" Precision="3" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PunchIn">
+          <Key>
+            <PropertyRef Name="PId" />
+          </Key>
+          <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PunchinTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PunchoutTime" Type="DateTime" Precision="3" />
+          <Property Name="PunchinType" Type="Boolean" />
+          <Property Name="PILocationId" Type="Int32" />
+          <Property Name="PILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PunchoutType" Type="Boolean" />
+          <Property Name="POLocationId" Type="Int32" />
+          <Property Name="POLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PunchinOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PunchoutOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SystemPunchout" Type="Boolean" Nullable="false" />
+          <Property Name="LatePunchin" Type="Boolean" Nullable="false" />
+          <Property Name="LatePunchinReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EarlyPunchout" Type="Boolean" Nullable="false" />
+          <Property Name="EarlyPunchoutReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PunchinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PunchoutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkHourReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingHour" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraWorkingHour" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsHalfDay" Type="Boolean" Nullable="false" />
+          <Property Name="PunchinOnHoliday" Type="Boolean" Nullable="false" />
+          <Property Name="PunchinOnWeekoff" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SystemSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="UserAccessID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="UserComponentRight">
+          <Key>
+            <PropertyRef Name="ComponentRightId" />
+          </Key>
+          <Property Name="ComponentRightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDevice">
+          <Key>
+            <PropertyRef Name="UDId" />
+          </Key>
+          <Property Name="UDId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DeviceId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AccessToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeviceName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="OSVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserLeaveApproval">
+          <Key>
+            <PropertyRef Name="ApprovalId" />
+          </Key>
+          <Property Name="ApprovalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveId" Type="Int32" Nullable="false" />
+          <Property Name="IsApprovedFirst" Type="Boolean" Nullable="false" />
+          <Property Name="IsApprovedSecond" Type="Boolean" />
+          <Property Name="FirstApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="SecondApprovedBy" Type="Int32" />
+          <Property Name="FirstDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstCreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirstUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SecondCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="SecondUpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserLeaveTypeCount">
+          <Key>
+            <PropertyRef Name="LeaveCountId" />
+          </Key>
+          <Property Name="LeaveCountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveCountByType" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserLocation">
+          <Key>
+            <PropertyRef Name="ULId" />
+          </Key>
+          <Property Name="ULId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="UserDeviceId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserRight">
+          <Key>
+            <PropertyRef Name="RightId" />
+          </Key>
+          <Property Name="RightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="TopId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderTypeId" Type="Byte" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="ProfilePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PunchinStatus" Type="Boolean" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailIDPer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNoCmp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNoPer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveApprovalTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveApprovalSecondLevelId" Type="Int32" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users" FromRole="User" ToRole="AppUserLeave" />
+          <NavigationProperty Name="AppUserLeaves1" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users1" FromRole="User" ToRole="AppUserLeave" />
+        </EntityType>
+        <EntityType Name="UsersOTP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="OTP" Type="Int64" Nullable="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OTPSentTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OTPSent" Type="Boolean" />
+          <Property Name="IsVerified" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserWeekOffDay">
+          <Key>
+            <PropertyRef Name="WeekOffId" />
+          </Key>
+          <Property Name="WeekOffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="WeekOffDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAlternative" Type="Boolean" Nullable="false" />
+          <Property Name="AlternativeDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VersionMaster">
+          <Key>
+            <PropertyRef Name="VersionId" />
+          </Key>
+          <Property Name="VersionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PCVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IOSVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AndroidVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WeeklyTiming">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="TimingFor" Type="Byte" />
+          <Property Name="ObjectId" Type="Int64" />
+          <Property Name="TimingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DayType" Type="Byte" />
+          <Property Name="TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeUpto" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkingHours" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Edit" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AppUserLeave_AppLeaveApprovedStatus">
+          <End Type="EmployeeLoginModel.AppLeaveApprovedStatu" Role="AppLeaveApprovedStatu" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppLeaveApprovedStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppLeaveApprovedStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppLeaveType">
+          <End Type="EmployeeLoginModel.AppLeaveType" Role="AppLeaveType" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppLeaveType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppLeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppMasterLeaveType">
+          <End Type="EmployeeLoginModel.AppMasterLeaveType" Role="AppMasterLeaveType" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppMasterLeaveType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="AppMasterLeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_AppUserLeave">
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserLeave">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserLeave1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Company">
+          <End Type="EmployeeLoginModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Users">
+          <End Type="EmployeeLoginModel.User" Role="User" Multiplicity="1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUserLeave_Users1">
+          <End Type="EmployeeLoginModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AppUserLeave">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeLoginModelStoreContainer" CdmEntityContainer="EmployeeLoginEntities">
+          <FunctionImportMapping FunctionImportName="GetEmployeeHeirarchy" FunctionName="EmployeeLoginModel.Store.GetEmployeeHeirarchy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLoginModel.GetEmployeeHeirarchy_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeHeirarchyBOTTOMTOTOP" FunctionName="EmployeeLoginModel.Store.GetEmployeeHeirarchyBOTTOMTOTOP" />
+          <FunctionImportMapping FunctionImportName="GetUserHierarchyWise" FunctionName="EmployeeLoginModel.Store.GetUserHierarchyWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLoginModel.GetUserHierarchyWise_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AppCompanyLeaveManagements">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppCompanyLeaveManagement">
+              <MappingFragment StoreEntitySet="AppCompanyLeaveManagement">
+                <ScalarProperty Name="TotalYearlyLeaves" ColumnName="TotalYearlyLeaves" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppLeaveApprovedStatus">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppLeaveApprovedStatu">
+              <MappingFragment StoreEntitySet="AppLeaveApprovedStatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppLeaveTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppLeaveType">
+              <MappingFragment StoreEntitySet="AppLeaveType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppMasterLeaveTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppMasterLeaveType">
+              <MappingFragment StoreEntitySet="AppMasterLeaveType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserLeaves">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppUserLeave">
+              <MappingFragment StoreEntitySet="AppUserLeave">
+                <ScalarProperty Name="IsPaidLeave" ColumnName="IsPaidLeave" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppLeaveApprovedStatusId" ColumnName="AppLeaveApprovedStatusId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AppLeaveTypeId" ColumnName="AppLeaveTypeId" />
+                <ScalarProperty Name="AppMasterLeaveTypeID" ColumnName="AppMasterLeaveTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BranchTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.BranchType">
+              <MappingFragment StoreEntitySet="BranchType">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchType1" ColumnName="BranchType" />
+                <ScalarProperty Name="BranchTypeID" ColumnName="BranchTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Breaks">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Break">
+              <MappingFragment StoreEntitySet="Break">
+                <ScalarProperty Name="BreakTypeId" ColumnName="BreakTypeId" />
+                <ScalarProperty Name="BreakoutDeviceId" ColumnName="BreakoutDeviceId" />
+                <ScalarProperty Name="BreakinDeviceId" ColumnName="BreakinDeviceId" />
+                <ScalarProperty Name="SystemBreakout" ColumnName="SystemBreakout" />
+                <ScalarProperty Name="BreakoutOutsideLocationReason" ColumnName="BreakoutOutsideLocationReason" />
+                <ScalarProperty Name="BreakinOutsideLocationReason" ColumnName="BreakinOutsideLocationReason" />
+                <ScalarProperty Name="BOLatitudeLongitude" ColumnName="BOLatitudeLongitude" />
+                <ScalarProperty Name="BOLocationId" ColumnName="BOLocationId" />
+                <ScalarProperty Name="BreakoutType" ColumnName="BreakoutType" />
+                <ScalarProperty Name="BILatitudeLongitude" ColumnName="BILatitudeLongitude" />
+                <ScalarProperty Name="BILocationId" ColumnName="BILocationId" />
+                <ScalarProperty Name="BreakinType" ColumnName="BreakinType" />
+                <ScalarProperty Name="BreakoutTime" ColumnName="BreakoutTime" />
+                <ScalarProperty Name="BreakinTime" ColumnName="BreakinTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BreakId" ColumnName="BreakId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BreakCategories">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.BreakCategory">
+              <MappingFragment StoreEntitySet="BreakCategory">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="HasTextbox" ColumnName="HasTextbox" />
+                <ScalarProperty Name="BreakCategoryName" ColumnName="BreakCategoryName" />
+                <ScalarProperty Name="BreakCategoryId" ColumnName="BreakCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BreakTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.BreakType">
+              <MappingFragment StoreEntitySet="BreakType">
+                <ScalarProperty Name="BreakTypeName" ColumnName="BreakTypeName" />
+                <ScalarProperty Name="BreakTypeId" ColumnName="BreakTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallIns">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.CallIn">
+              <MappingFragment StoreEntitySet="CallIn">
+                <ScalarProperty Name="CallConclusion" ColumnName="CallConclusion" />
+                <ScalarProperty Name="CalloutDeviceId" ColumnName="CalloutDeviceId" />
+                <ScalarProperty Name="CallinDeviceId" ColumnName="CallinDeviceId" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="SystemCallout" ColumnName="SystemCallout" />
+                <ScalarProperty Name="COLatitudeLongitude" ColumnName="COLatitudeLongitude" />
+                <ScalarProperty Name="COLocationId" ColumnName="COLocationId" />
+                <ScalarProperty Name="CalloutType" ColumnName="CalloutType" />
+                <ScalarProperty Name="CILatitudeLongitude" ColumnName="CILatitudeLongitude" />
+                <ScalarProperty Name="CILocationId" ColumnName="CILocationId" />
+                <ScalarProperty Name="CallinType" ColumnName="CallinType" />
+                <ScalarProperty Name="CallTitle" ColumnName="CallTitle" />
+                <ScalarProperty Name="CalloutTime" ColumnName="CalloutTime" />
+                <ScalarProperty Name="CallinTime" ColumnName="CallinTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CId" ColumnName="CId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserLimit" ColumnName="UserLimit" />
+                <ScalarProperty Name="TotalBreakCount" ColumnName="TotalBreakCount" />
+                <ScalarProperty Name="TeaTimeTo" ColumnName="TeaTimeTo" />
+                <ScalarProperty Name="TeaTimeFrom" ColumnName="TeaTimeFrom" />
+                <ScalarProperty Name="LunchTimeTo" ColumnName="LunchTimeTo" />
+                <ScalarProperty Name="LunchTimeFrom" ColumnName="LunchTimeFrom" />
+                <ScalarProperty Name="BreakCategoryId" ColumnName="BreakCategoryId" />
+                <ScalarProperty Name="DefaultTimeTo" ColumnName="DefaultTimeTo" />
+                <ScalarProperty Name="DefaultTimeFrom" ColumnName="DefaultTimeFrom" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyBranches">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.CompanyBranch">
+              <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CretedBy" ColumnName="CretedBy" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ParentBranchId" ColumnName="ParentBranchId" />
+                <ScalarProperty Name="BranchTypeId" ColumnName="BranchTypeId" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyLeaveTypeCounts">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.CompanyLeaveTypeCount">
+              <MappingFragment StoreEntitySet="CompanyLeaveTypeCount">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LeaveCountByType" ColumnName="LeaveCountByType" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LeaveCountId" ColumnName="LeaveCountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyMasters">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.CompanyMaster">
+              <MappingFragment StoreEntitySet="CompanyMaster">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyWeekOffDays">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.CompanyWeekOffDay">
+              <MappingFragment StoreEntitySet="CompanyWeekOffDay">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="AlternativeDay" ColumnName="AlternativeDay" />
+                <ScalarProperty Name="IsAlternative" ColumnName="IsAlternative" />
+                <ScalarProperty Name="WeekOffDay" ColumnName="WeekOffDay" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="WeekOffId" ColumnName="WeekOffId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Component">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeAddresses">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeeAddress">
+              <MappingFragment StoreEntitySet="EmployeeAddress">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ImergencyName" ColumnName="ImergencyName" />
+                <ScalarProperty Name="ImergencyCntNo" ColumnName="ImergencyCntNo" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CurrPincode" ColumnName="CurrPincode" />
+                <ScalarProperty Name="CurrState" ColumnName="CurrState" />
+                <ScalarProperty Name="CurrCity" ColumnName="CurrCity" />
+                <ScalarProperty Name="CurrAddress" ColumnName="CurrAddress" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeBankDetails">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeeBankDetail">
+              <MappingFragment StoreEntitySet="EmployeeBankDetails">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IFSCode" ColumnName="IFSCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeEducationDetails">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeeEducationDetail">
+              <MappingFragment StoreEntitySet="EmployeeEducationDetails">
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CourseType" ColumnName="CourseType" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="GradeType" ColumnName="GradeType" />
+                <ScalarProperty Name="YearOfPassing" ColumnName="YearOfPassing" />
+                <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EduId" ColumnName="EduId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeFamilies">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeeFamily">
+              <MappingFragment StoreEntitySet="EmployeeFamily">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeMasters">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeeMaster">
+              <MappingFragment StoreEntitySet="EmployeeMaster">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="VoterID" ColumnName="VoterID" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="DLNo" ColumnName="DLNo" />
+                <ScalarProperty Name="AdharNo" ColumnName="AdharNo" />
+                <ScalarProperty Name="PANNo" ColumnName="PANNo" />
+                <ScalarProperty Name="SalaryBankIFSC" ColumnName="SalaryBankIFSC" />
+                <ScalarProperty Name="SalaryBankBranch" ColumnName="SalaryBankBranch" />
+                <ScalarProperty Name="SalaryBank" ColumnName="SalaryBank" />
+                <ScalarProperty Name="SalaryACNumber" ColumnName="SalaryACNumber" />
+                <ScalarProperty Name="CompanyLeaveDate" ColumnName="CompanyLeaveDate" />
+                <ScalarProperty Name="CompanyJoinDate" ColumnName="CompanyJoinDate" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="ReportingPerson" ColumnName="ReportingPerson" />
+                <ScalarProperty Name="EmpType" ColumnName="EmpType" />
+                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
+                <ScalarProperty Name="DegreeDesc" ColumnName="DegreeDesc" />
+                <ScalarProperty Name="YearOfPassing" ColumnName="YearOfPassing" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="DegreeName" ColumnName="DegreeName" />
+                <ScalarProperty Name="DOBSpouse" ColumnName="DOBSpouse" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="AnniversaryDate" ColumnName="AnniversaryDate" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="DOBMother" ColumnName="DOBMother" />
+                <ScalarProperty Name="DOBFather" ColumnName="DOBFather" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePersonalIDs">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.EmployeePersonalID">
+              <MappingFragment StoreEntitySet="EmployeePersonalIDs">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupAccesses">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.GroupAccess">
+              <MappingFragment StoreEntitySet="GroupAccess">
+                <ScalarProperty Name="GroupAccessID" ColumnName="GroupAccessID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMasters">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.GroupMaster">
+              <MappingFragment StoreEntitySet="GroupMaster">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HalfDays">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.HalfDay">
+              <MappingFragment StoreEntitySet="HalfDay">
+                <ScalarProperty Name="HalfDayDate" ColumnName="HalfDayDate" />
+                <ScalarProperty Name="LeaveID" ColumnName="LeaveID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Holiday">
+              <MappingFragment StoreEntitySet="Holiday">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaves">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Leave">
+              <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HolidayId" ColumnName="HolidayId" />
+                <ScalarProperty Name="HolidayBetweenLeave" ColumnName="HolidayBetweenLeave" />
+                <ScalarProperty Name="WeekoffId" ColumnName="WeekoffId" />
+                <ScalarProperty Name="WeekoffBetweenLeave" ColumnName="WeekoffBetweenLeave" />
+                <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
+                <ScalarProperty Name="LeaveToDate" ColumnName="LeaveToDate" />
+                <ScalarProperty Name="LeaveFromDate" ColumnName="LeaveFromDate" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveApprovalTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.LeaveApprovalType">
+              <MappingFragment StoreEntitySet="LeaveApprovalType">
+                <ScalarProperty Name="LeaveApprovalTypeName" ColumnName="LeaveApprovalTypeName" />
+                <ScalarProperty Name="LeaveApprovalTypeId" ColumnName="LeaveApprovalTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveTypes">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.LeaveType">
+              <MappingFragment StoreEntitySet="LeaveType">
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationPins">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.LocationPin">
+              <MappingFragment StoreEntitySet="LocationPin">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="PinAddress" ColumnName="PinAddress" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TotalBreakCount" ColumnName="TotalBreakCount" />
+                <ScalarProperty Name="BreakCategoryId" ColumnName="BreakCategoryId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LocationImage" ColumnName="LocationImage" />
+                <ScalarProperty Name="PlaceName" ColumnName="PlaceName" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PMId" ColumnName="PMId" />
+                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+                <ScalarProperty Name="IconName" ColumnName="IconName" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MId" ColumnName="MId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficialLeaves">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.OfficialLeaf">
+              <MappingFragment StoreEntitySet="OfficialLeaves">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="LeavesTaken" ColumnName="LeavesTaken" />
+                <ScalarProperty Name="CarryForwarded" ColumnName="CarryForwarded" />
+                <ScalarProperty Name="LeaveTypeCount" ColumnName="LeaveTypeCount" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="ApplicableToDate" ColumnName="ApplicableToDate" />
+                <ScalarProperty Name="ApplicableFromDate" ColumnName="ApplicableFromDate" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="LeaveFor" ColumnName="LeaveFor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PunchIns">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.PunchIn">
+              <MappingFragment StoreEntitySet="PunchIn">
+                <ScalarProperty Name="PunchinOnWeekoff" ColumnName="PunchinOnWeekoff" />
+                <ScalarProperty Name="PunchinOnHoliday" ColumnName="PunchinOnHoliday" />
+                <ScalarProperty Name="IsHalfDay" ColumnName="IsHalfDay" />
+                <ScalarProperty Name="ExtraWorkingHour" ColumnName="ExtraWorkingHour" />
+                <ScalarProperty Name="WorkingHour" ColumnName="WorkingHour" />
+                <ScalarProperty Name="WorkHourReason" ColumnName="WorkHourReason" />
+                <ScalarProperty Name="PunchoutDeviceId" ColumnName="PunchoutDeviceId" />
+                <ScalarProperty Name="PunchinDeviceId" ColumnName="PunchinDeviceId" />
+                <ScalarProperty Name="EarlyPunchoutReason" ColumnName="EarlyPunchoutReason" />
+                <ScalarProperty Name="EarlyPunchout" ColumnName="EarlyPunchout" />
+                <ScalarProperty Name="LatePunchinReason" ColumnName="LatePunchinReason" />
+                <ScalarProperty Name="LatePunchin" ColumnName="LatePunchin" />
+                <ScalarProperty Name="SystemPunchout" ColumnName="SystemPunchout" />
+                <ScalarProperty Name="PunchoutOutsideLocationReason" ColumnName="PunchoutOutsideLocationReason" />
+                <ScalarProperty Name="PunchinOutsideLocationReason" ColumnName="PunchinOutsideLocationReason" />
+                <ScalarProperty Name="POLatitudeLongitude" ColumnName="POLatitudeLongitude" />
+                <ScalarProperty Name="POLocationId" ColumnName="POLocationId" />
+                <ScalarProperty Name="PunchoutType" ColumnName="PunchoutType" />
+                <ScalarProperty Name="PILatitudeLongitude" ColumnName="PILatitudeLongitude" />
+                <ScalarProperty Name="PILocationId" ColumnName="PILocationId" />
+                <ScalarProperty Name="PunchinType" ColumnName="PunchinType" />
+                <ScalarProperty Name="PunchoutTime" ColumnName="PunchoutTime" />
+                <ScalarProperty Name="PunchinTime" ColumnName="PunchinTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMaster">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemSettings">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.SystemSetting">
+              <MappingFragment StoreEntitySet="SystemSetting">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccesses">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserAccess">
+              <MappingFragment StoreEntitySet="UserAccess">
+                <ScalarProperty Name="UserAccessID" ColumnName="UserAccessID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComponentRights">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserComponentRight">
+              <MappingFragment StoreEntitySet="UserComponentRights">
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ComponentRightId" ColumnName="ComponentRightId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDevices">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserDevice">
+              <MappingFragment StoreEntitySet="UserDevice">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="OSVersion" ColumnName="OSVersion" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UDId" ColumnName="UDId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLeaveApprovals">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserLeaveApproval">
+              <MappingFragment StoreEntitySet="UserLeaveApproval">
+                <ScalarProperty Name="SecondUpdatedDate" ColumnName="SecondUpdatedDate" />
+                <ScalarProperty Name="SecondCreatedDate" ColumnName="SecondCreatedDate" />
+                <ScalarProperty Name="FirstUpdatedDate" ColumnName="FirstUpdatedDate" />
+                <ScalarProperty Name="FirstCreatedDate" ColumnName="FirstCreatedDate" />
+                <ScalarProperty Name="SecondDescription" ColumnName="SecondDescription" />
+                <ScalarProperty Name="FirstDescription" ColumnName="FirstDescription" />
+                <ScalarProperty Name="SecondApprovedBy" ColumnName="SecondApprovedBy" />
+                <ScalarProperty Name="FirstApprovedBy" ColumnName="FirstApprovedBy" />
+                <ScalarProperty Name="IsApprovedSecond" ColumnName="IsApprovedSecond" />
+                <ScalarProperty Name="IsApprovedFirst" ColumnName="IsApprovedFirst" />
+                <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+                <ScalarProperty Name="ApprovalId" ColumnName="ApprovalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLeaveTypeCounts">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserLeaveTypeCount">
+              <MappingFragment StoreEntitySet="UserLeaveTypeCount">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LeaveCountByType" ColumnName="LeaveCountByType" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeaveCountId" ColumnName="LeaveCountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLocations">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserLocation">
+              <MappingFragment StoreEntitySet="UserLocation">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UserDeviceId" ColumnName="UserDeviceId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ULId" ColumnName="ULId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRights">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserRight">
+              <MappingFragment StoreEntitySet="UserRights">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RightId" ColumnName="RightId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LeaveApprovalSecondLevelId" ColumnName="LeaveApprovalSecondLevelId" />
+                <ScalarProperty Name="LeaveApprovalTypeId" ColumnName="LeaveApprovalTypeId" />
+                <ScalarProperty Name="PhoneNoPer" ColumnName="PhoneNoPer" />
+                <ScalarProperty Name="MobileNoCmp" ColumnName="MobileNoCmp" />
+                <ScalarProperty Name="EmailIDPer" ColumnName="EmailIDPer" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="EmployeeTypeId" ColumnName="EmployeeTypeId" />
+                <ScalarProperty Name="PunchinStatus" ColumnName="PunchinStatus" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersOTPs">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UsersOTP">
+              <MappingFragment StoreEntitySet="UsersOTP">
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="OTPSent" ColumnName="OTPSent" />
+                <ScalarProperty Name="OTPSentTime" ColumnName="OTPSentTime" />
+                <ScalarProperty Name="LatLong" ColumnName="LatLong" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserWeekOffDays">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.UserWeekOffDay">
+              <MappingFragment StoreEntitySet="UserWeekOffDay">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="AlternativeDay" ColumnName="AlternativeDay" />
+                <ScalarProperty Name="IsAlternative" ColumnName="IsAlternative" />
+                <ScalarProperty Name="WeekOffDay" ColumnName="WeekOffDay" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="WeekOffId" ColumnName="WeekOffId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VersionMasters">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.VersionMaster">
+              <MappingFragment StoreEntitySet="VersionMaster">
+                <ScalarProperty Name="AndroidVersion" ColumnName="AndroidVersion" />
+                <ScalarProperty Name="IOSVersion" ColumnName="IOSVersion" />
+                <ScalarProperty Name="PCVersion" ColumnName="PCVersion" />
+                <ScalarProperty Name="VersionId" ColumnName="VersionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeeklyTimings">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.WeeklyTiming">
+              <MappingFragment StoreEntitySet="WeeklyTimings">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="TimeUpto" ColumnName="TimeUpto" />
+                <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+                <ScalarProperty Name="DayType" ColumnName="DayType" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="TimingType" ColumnName="TimingType" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="TimingFor" ColumnName="TimingFor" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

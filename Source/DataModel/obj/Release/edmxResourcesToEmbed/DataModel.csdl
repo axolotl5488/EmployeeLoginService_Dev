@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EmployeeLoginEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetEmployeeHeirarchy" ReturnType="Collection(EmployeeLoginModel.GetEmployeeHeirarchy_Result)">
+      <Parameter Name="p_Command" Mode="In" Type="String" />
+      <Parameter Name="p_UserID" Mode="In" Type="Int32" />
+      <Parameter Name="p_CompanyID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeeHeirarchyBOTTOMTOTOP" ReturnType="Collection(Int32)">
+      <Parameter Name="p_Command" Mode="In" Type="String" />
+      <Parameter Name="p_UserID" Mode="In" Type="Int32" />
+      <Parameter Name="p_CompanyID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserHierarchyWise" ReturnType="Collection(EmployeeLoginModel.GetUserHierarchyWise_Result)">
+      <Parameter Name="p_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="AppCompanyLeaveManagements" EntityType="EmployeeLoginModel.AppCompanyLeaveManagement" />
+    <EntitySet Name="AppLeaveApprovedStatus" EntityType="EmployeeLoginModel.AppLeaveApprovedStatu" />
+    <EntitySet Name="AppLeaveTypes" EntityType="EmployeeLoginModel.AppLeaveType" />
+    <EntitySet Name="AppMasterLeaveTypes" EntityType="EmployeeLoginModel.AppMasterLeaveType" />
+    <EntitySet Name="AppUserLeaves" EntityType="EmployeeLoginModel.AppUserLeave" />
+    <EntitySet Name="BranchTypes" EntityType="EmployeeLoginModel.BranchType" />
+    <EntitySet Name="Breaks" EntityType="EmployeeLoginModel.Break" />
+    <EntitySet Name="BreakCategories" EntityType="EmployeeLoginModel.BreakCategory" />
+    <EntitySet Name="BreakTypes" EntityType="EmployeeLoginModel.BreakType" />
+    <EntitySet Name="CallIns" EntityType="EmployeeLoginModel.CallIn" />
+    <EntitySet Name="Companies" EntityType="EmployeeLoginModel.Company" />
+    <EntitySet Name="CompanyBranches" EntityType="EmployeeLoginModel.CompanyBranch" />
+    <EntitySet Name="CompanyLeaveTypeCounts" EntityType="EmployeeLoginModel.CompanyLeaveTypeCount" />
+    <EntitySet Name="CompanyMasters" EntityType="EmployeeLoginModel.CompanyMaster" />
+    <EntitySet Name="CompanyWeekOffDays" EntityType="EmployeeLoginModel.CompanyWeekOffDay" />
+    <EntitySet Name="Components" EntityType="EmployeeLoginModel.Component" />
+    <EntitySet Name="EmployeeAddresses" EntityType="EmployeeLoginModel.EmployeeAddress" />
+    <EntitySet Name="EmployeeBankDetails" EntityType="EmployeeLoginModel.EmployeeBankDetail" />
+    <EntitySet Name="EmployeeEducationDetails" EntityType="EmployeeLoginModel.EmployeeEducationDetail" />
+    <EntitySet Name="EmployeeFamilies" EntityType="EmployeeLoginModel.EmployeeFamily" />
+    <EntitySet Name="EmployeeMasters" EntityType="EmployeeLoginModel.EmployeeMaster" />
+    <EntitySet Name="EmployeePersonalIDs" EntityType="EmployeeLoginModel.EmployeePersonalID" />
+    <EntitySet Name="GroupAccesses" EntityType="EmployeeLoginModel.GroupAccess" />
+    <EntitySet Name="GroupMasters" EntityType="EmployeeLoginModel.GroupMaster" />
+    <EntitySet Name="HalfDays" EntityType="EmployeeLoginModel.HalfDay" />
+    <EntitySet Name="Holidays" EntityType="EmployeeLoginModel.Holiday" />
+    <EntitySet Name="Leaves" EntityType="EmployeeLoginModel.Leave" />
+    <EntitySet Name="LeaveApprovalTypes" EntityType="EmployeeLoginModel.LeaveApprovalType" />
+    <EntitySet Name="LeaveTypes" EntityType="EmployeeLoginModel.LeaveType" />
+    <EntitySet Name="LocationPins" EntityType="EmployeeLoginModel.LocationPin" />
+    <EntitySet Name="Locations" EntityType="EmployeeLoginModel.Location" />
+    <EntitySet Name="Menus" EntityType="EmployeeLoginModel.Menu" />
+    <EntitySet Name="OfficialLeaves" EntityType="EmployeeLoginModel.OfficialLeaf" />
+    <EntitySet Name="Pages" EntityType="EmployeeLoginModel.Page" />
+    <EntitySet Name="PunchIns" EntityType="EmployeeLoginModel.PunchIn" />
+    <EntitySet Name="RoleMasters" EntityType="EmployeeLoginModel.RoleMaster" />
+    <EntitySet Name="SystemSettings" EntityType="EmployeeLoginModel.SystemSetting" />
+    <EntitySet Name="UserAccesses" EntityType="EmployeeLoginModel.UserAccess" />
+    <EntitySet Name="UserComponentRights" EntityType="EmployeeLoginModel.UserComponentRight" />
+    <EntitySet Name="UserDevices" EntityType="EmployeeLoginModel.UserDevice" />
+    <EntitySet Name="UserLeaveApprovals" EntityType="EmployeeLoginModel.UserLeaveApproval" />
+    <EntitySet Name="UserLeaveTypeCounts" EntityType="EmployeeLoginModel.UserLeaveTypeCount" />
+    <EntitySet Name="UserLocations" EntityType="EmployeeLoginModel.UserLocation" />
+    <EntitySet Name="UserRights" EntityType="EmployeeLoginModel.UserRight" />
+    <EntitySet Name="Users" EntityType="EmployeeLoginModel.User" />
+    <EntitySet Name="UsersOTPs" EntityType="EmployeeLoginModel.UsersOTP" />
+    <EntitySet Name="UserWeekOffDays" EntityType="EmployeeLoginModel.UserWeekOffDay" />
+    <EntitySet Name="VersionMasters" EntityType="EmployeeLoginModel.VersionMaster" />
+    <EntitySet Name="WeeklyTimings" EntityType="EmployeeLoginModel.WeeklyTiming" />
+    <AssociationSet Name="FK_AppUserLeave_AppLeaveApprovedStatus" Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus">
+      <End Role="AppLeaveApprovedStatu" EntitySet="AppLeaveApprovedStatus" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppLeaveType" Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType">
+      <End Role="AppLeaveType" EntitySet="AppLeaveTypes" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppMasterLeaveType" Association="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType">
+      <End Role="AppMasterLeaveType" EntitySet="AppMasterLeaveTypes" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_AppUserLeave" Association="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave">
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+      <End Role="AppUserLeave1" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Company" Association="EmployeeLoginModel.FK_AppUserLeave_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Users" Association="EmployeeLoginModel.FK_AppUserLeave_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppUserLeave_Users1" Association="EmployeeLoginModel.FK_AppUserLeave_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetEmployeeHeirarchy_Result">
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetUserHierarchyWise_Result">
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="103" />
+  </ComplexType>
+  <EntityType Name="AppCompanyLeaveManagement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="TotalYearlyLeaves" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="AppLeaveApprovedStatu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus" FromRole="AppLeaveApprovedStatu" ToRole="AppUserLeave" />
+  </EntityType>
+  <EntityType Name="AppLeaveType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType" FromRole="AppLeaveType" ToRole="AppUserLeave" />
+  </EntityType>
+  <EntityType Name="AppMasterLeaveType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType" FromRole="AppMasterLeaveType" ToRole="AppUserLeave" />
+  </EntityType>
+  <EntityType Name="AppUserLeave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="AppMasterLeaveTypeID" Type="Int32" Nullable="false" />
+    <Property Name="AppLeaveTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AppLeaveApprovedStatusId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="TotalDays" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IsPaidLeave" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AppLeaveApprovedStatu" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus" FromRole="AppUserLeave" ToRole="AppLeaveApprovedStatu" />
+    <NavigationProperty Name="AppLeaveType" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType" FromRole="AppUserLeave" ToRole="AppLeaveType" />
+    <NavigationProperty Name="AppMasterLeaveType" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType" FromRole="AppUserLeave" ToRole="AppMasterLeaveType" />
+    <NavigationProperty Name="AppUserLeave1" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave" FromRole="AppUserLeave" ToRole="AppUserLeave1" />
+    <NavigationProperty Name="AppUserLeave2" Relationship="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave" FromRole="AppUserLeave1" ToRole="AppUserLeave" />
+    <NavigationProperty Name="Company" Relationship="EmployeeLoginModel.FK_AppUserLeave_Company" FromRole="AppUserLeave" ToRole="Company" />
+    <NavigationProperty Name="User" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users" FromRole="AppUserLeave" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users1" FromRole="AppUserLeave" ToRole="User" />
+  </EntityType>
+  <EntityType Name="BranchType">
+    <Key>
+      <PropertyRef Name="BranchTypeID" />
+    </Key>
+    <Property Name="BranchTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchType1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Break">
+    <Key>
+      <PropertyRef Name="BreakId" />
+    </Key>
+    <Property Name="BreakId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="BreakinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BreakoutTime" Type="DateTime" Precision="3" />
+    <Property Name="BreakinType" Type="Boolean" />
+    <Property Name="BILocationId" Type="Int32" />
+    <Property Name="BILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BreakoutType" Type="Boolean" />
+    <Property Name="BOLocationId" Type="Int32" />
+    <Property Name="BOLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BreakinOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="BreakoutOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SystemBreakout" Type="Boolean" Nullable="false" />
+    <Property Name="BreakinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BreakoutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BreakTypeId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BreakCategory">
+    <Key>
+      <PropertyRef Name="BreakCategoryId" />
+    </Key>
+    <Property Name="BreakCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BreakCategoryName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="HasTextbox" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BreakType">
+    <Key>
+      <PropertyRef Name="BreakTypeId" />
+    </Key>
+    <Property Name="BreakTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BreakTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CallIn">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="CallinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CalloutTime" Type="DateTime" Precision="3" />
+    <Property Name="CallTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CallinType" Type="Boolean" />
+    <Property Name="CILocationId" Type="Int32" />
+    <Property Name="CILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CalloutType" Type="Boolean" />
+    <Property Name="COLocationId" Type="Int32" />
+    <Property Name="COLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SystemCallout" Type="Boolean" Nullable="false" />
+    <Property Name="CallTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CallinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CalloutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CallConclusion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="DefaultTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DefaultTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BreakCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="LunchTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LunchTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TeaTimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TeaTimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalBreakCount" Type="Int32" Nullable="false" />
+    <Property Name="UserLimit" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_Company" FromRole="Company" ToRole="AppUserLeave" />
+  </EntityType>
+  <EntityType Name="CompanyBranch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BranchAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BranchTypeId" Type="Byte" />
+    <Property Name="ParentBranchId" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CretedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CompanyLeaveTypeCount">
+    <Key>
+      <PropertyRef Name="LeaveCountId" />
+    </Key>
+    <Property Name="LeaveCountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveCountByType" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="CompanyMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CompanyWeekOffDay">
+    <Key>
+      <PropertyRef Name="WeekOffId" />
+    </Key>
+    <Property Name="WeekOffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="WeekOffDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsAlternative" Type="Boolean" Nullable="false" />
+    <Property Name="AlternativeDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Component">
+    <Key>
+      <PropertyRef Name="ComponentId" />
+    </Key>
+    <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComponentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PageId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="EmployeeAddress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CurrAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CurrCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrPincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImergencyCntNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImergencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EmployeeBankDetail">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IFSCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EmployeeEducationDetail">
+    <Key>
+      <PropertyRef Name="EduId" />
+    </Key>
+    <Property Name="EduId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Institute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="University" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfPassing" Type="Int32" />
+    <Property Name="GradeType" Type="Byte" />
+    <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CourseType" Type="Byte" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EmployeeFamily">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EmployeeMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="DOBFather" Type="DateTime" Precision="3" />
+    <Property Name="DOBMother" Type="DateTime" Precision="3" />
+    <Property Name="MaritalStatus" Type="Int32" />
+    <Property Name="AnniversaryDate" Type="DateTime" Precision="3" />
+    <Property Name="SpouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DOBSpouse" Type="DateTime" Precision="3" />
+    <Property Name="DegreeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfPassing" Type="Int32" />
+    <Property Name="DegreeDesc" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmpType" Type="Int32" />
+    <Property Name="ReportingPerson" Type="Int32" />
+    <Property Name="CompanyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CompanyJoinDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyLeaveDate" Type="DateTime" Precision="3" />
+    <Property Name="SalaryACNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SalaryBank" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SalaryBankBranch" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SalaryBankIFSC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="PANNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="AdharNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="DLNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PassportNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VoterID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="EmployeePersonalID">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="IDType" Type="Int32" />
+    <Property Name="IDNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="imageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GroupAccess">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupID" Type="Int64" />
+    <Property Name="GroupAccessID" Type="Int64" />
+  </EntityType>
+  <EntityType Name="GroupMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="HalfDay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveID" Type="Int32" Nullable="false" />
+    <Property Name="HalfDayDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Holiday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="LeaveId" />
+    </Key>
+    <Property Name="LeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveFromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LeaveToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LeaveDays" Type="Int32" Nullable="false" />
+    <Property Name="WeekoffBetweenLeave" Type="Int32" Nullable="false" />
+    <Property Name="WeekoffId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HolidayBetweenLeave" Type="Int32" Nullable="false" />
+    <Property Name="HolidayId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LeaveApprovalType">
+    <Key>
+      <PropertyRef Name="LeaveApprovalTypeId" />
+    </Key>
+    <Property Name="LeaveApprovalTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveApprovalTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeId" />
+    </Key>
+    <Property Name="LeaveTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ShortForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LocationPin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="Lat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PinAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Long" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="LocationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PlaceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LocationImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="BreakCategoryId" Type="Int32" />
+    <Property Name="TotalBreakCount" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MId" />
+    </Key>
+    <Property Name="MId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IconName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SortNumber" Type="Int32" />
+    <Property Name="PMId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OfficialLeaf">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveFor" Type="Byte" />
+    <Property Name="ObjectId" Type="Int64" />
+    <Property Name="ApplicableFromDate" Type="DateTime" Precision="3" />
+    <Property Name="ApplicableToDate" Type="DateTime" Precision="3" />
+    <Property Name="LeaveTypeId" Type="Byte" />
+    <Property Name="LeaveTypeCount" Type="Int32" />
+    <Property Name="CarryForwarded" Type="Int32" />
+    <Property Name="LeavesTaken" Type="Int32" />
+    <Property Name="Balance" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="Int32" />
+    <Property Name="CreatedBy" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedOn" Type="Int32" />
+    <Property Name="UpdatedBy" Type="DateTime" Precision="3" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Page">
+    <Key>
+      <PropertyRef Name="PageId" />
+    </Key>
+    <Property Name="PageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="PunchIn">
+    <Key>
+      <PropertyRef Name="PId" />
+    </Key>
+    <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PunchinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PunchoutTime" Type="DateTime" Precision="3" />
+    <Property Name="PunchinType" Type="Boolean" />
+    <Property Name="PILocationId" Type="Int32" />
+    <Property Name="PILatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PunchoutType" Type="Boolean" />
+    <Property Name="POLocationId" Type="Int32" />
+    <Property Name="POLatitudeLongitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PunchinOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PunchoutOutsideLocationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SystemPunchout" Type="Boolean" Nullable="false" />
+    <Property Name="LatePunchin" Type="Boolean" Nullable="false" />
+    <Property Name="LatePunchinReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="EarlyPunchout" Type="Boolean" Nullable="false" />
+    <Property Name="EarlyPunchoutReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PunchinDeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PunchoutDeviceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkHourReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="WorkingHour" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ExtraWorkingHour" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsHalfDay" Type="Boolean" Nullable="false" />
+    <Property Name="PunchinOnHoliday" Type="Boolean" Nullable="false" />
+    <Property Name="PunchinOnWeekoff" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleMaster">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KeyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserAccess">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="UserAccessID" Type="Int64" />
+  </EntityType>
+  <EntityType Name="UserComponentRight">
+    <Key>
+      <PropertyRef Name="ComponentRightId" />
+    </Key>
+    <Property Name="ComponentRightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ComponentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="UDId" />
+    </Key>
+    <Property Name="UDId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="DeviceId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AccessToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedBy" Type="Int32" Nullable="false" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeviceName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="OSVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocationName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserLeaveApproval">
+    <Key>
+      <PropertyRef Name="ApprovalId" />
+    </Key>
+    <Property Name="ApprovalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveId" Type="Int32" Nullable="false" />
+    <Property Name="IsApprovedFirst" Type="Boolean" Nullable="false" />
+    <Property Name="IsApprovedSecond" Type="Boolean" />
+    <Property Name="FirstApprovedBy" Type="Int32" Nullable="false" />
+    <Property Name="SecondApprovedBy" Type="Int32" />
+    <Property Name="FirstDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecondDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstCreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FirstUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SecondCreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="SecondUpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserLeaveTypeCount">
+    <Key>
+      <PropertyRef Name="LeaveCountId" />
+    </Key>
+    <Property Name="LeaveCountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveCountByType" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserLocation">
+    <Key>
+      <PropertyRef Name="ULId" />
+    </Key>
+    <Property Name="ULId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <Property Name="UserDeviceId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserRight">
+    <Key>
+      <PropertyRef Name="RightId" />
+    </Key>
+    <Property Name="RightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="MenuId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="GroupID" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="TopId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GenderTypeId" Type="Byte" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="ProfilePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PunchinStatus" Type="Boolean" Nullable="false" />
+    <Property Name="EmployeeTypeId" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailIDPer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNoCmp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNoPer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeaveApprovalTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LeaveApprovalSecondLevelId" Type="Int32" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AppUserLeaves" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users" FromRole="User" ToRole="AppUserLeave" />
+    <NavigationProperty Name="AppUserLeaves1" Relationship="EmployeeLoginModel.FK_AppUserLeave_Users1" FromRole="User" ToRole="AppUserLeave" />
+  </EntityType>
+  <EntityType Name="UsersOTP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="OTP" Type="Int64" Nullable="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OTPSentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OTPSent" Type="Boolean" />
+    <Property Name="IsVerified" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="UserWeekOffDay">
+    <Key>
+      <PropertyRef Name="WeekOffId" />
+    </Key>
+    <Property Name="WeekOffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="WeekOffDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsAlternative" Type="Boolean" Nullable="false" />
+    <Property Name="AlternativeDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="VersionMaster">
+    <Key>
+      <PropertyRef Name="VersionId" />
+    </Key>
+    <Property Name="VersionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PCVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IOSVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AndroidVersion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="WeeklyTiming">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="TimingFor" Type="Byte" />
+    <Property Name="ObjectId" Type="Int64" />
+    <Property Name="TimingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DayType" Type="Byte" />
+    <Property Name="TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TimeUpto" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="WorkingHours" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_AppUserLeave_AppLeaveApprovedStatus">
+    <End Type="EmployeeLoginModel.AppLeaveApprovedStatu" Role="AppLeaveApprovedStatu" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppLeaveApprovedStatu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppLeaveApprovedStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppLeaveType">
+    <End Type="EmployeeLoginModel.AppLeaveType" Role="AppLeaveType" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppLeaveType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppLeaveTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppMasterLeaveType">
+    <End Type="EmployeeLoginModel.AppMasterLeaveType" Role="AppMasterLeaveType" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppMasterLeaveType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="AppMasterLeaveTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_AppUserLeave">
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AppUserLeave">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AppUserLeave1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Company">
+    <End Type="EmployeeLoginModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Users">
+    <End Type="EmployeeLoginModel.User" Role="User" Multiplicity="1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppUserLeave_Users1">
+    <End Type="EmployeeLoginModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EmployeeLoginModel.AppUserLeave" Role="AppUserLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AppUserLeave">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

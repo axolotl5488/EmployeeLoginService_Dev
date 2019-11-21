@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 27, 29.75" name="ELDB">
+  <DataContextMoniker Name="/ELDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1e0b3356-1d17-4376-a557-cfe7c63eb69b" absoluteBounds="0.75, 0.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/ELDBDataContext/BranchType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="71743e92-42bf-49f4-9979-33c2217c950a" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b114f8ee-eadc-44a0-8f72-f50c00f61485" absoluteBounds="3.75, 0.75, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/ELDBDataContext/WeeklyTiming" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50cc4a72-1fb3-4e31-990a-a8a0deba0345" absoluteBounds="3.765, 1.21, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe54aa8f-0f23-48d4-88d3-01966931ae67" absoluteBounds="0.625, 6.5, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ELDBDataContext/Break" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b09c30bb-670a-4452-968c-a1c303231aad" absoluteBounds="0.64, 6.96, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8bd6e6a2-2eae-4d3b-9ba7-f6359250ae9d" absoluteBounds="3.75, 5.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ELDBDataContext/BreakCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d90bd213-b1bb-458a-8ecf-81d64a6aedfc" absoluteBounds="3.765, 6.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a80b7f76-d446-4fcb-bc3f-3980a6327bcc" absoluteBounds="6.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ELDBDataContext/BreakType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eba3aa97-650f-4419-8856-8ecb7b8bc64c" absoluteBounds="6.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c437660c-ca95-41c1-8916-9f351a442965" absoluteBounds="6.75, 2.75, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ELDBDataContext/CallIn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77ac80a6-e980-4c25-a108-28a907fc0c0b" absoluteBounds="6.765, 3.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e3fa985b-8073-4cf0-a9e4-4a36c8db150c" absoluteBounds="6.75, 7.75, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ELDBDataContext/Company" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0e798b29-52fe-47b3-8dde-104f96551ddd" absoluteBounds="6.765, 8.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="af309fc4-6d0f-416d-b945-9566c42a5ddf" absoluteBounds="9.75, 0.75, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/ELDBDataContext/CompanyBranch" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c700fd50-2e81-41a0-9aa4-5d415651e767" absoluteBounds="9.765, 1.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f3912b1-2bd1-4d7a-a2c9-6650ad192794" absoluteBounds="9.75, 6.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ELDBDataContext/CompanyLeaveTypeCount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82ca0070-8934-4c0a-8b6e-30cf5c340644" absoluteBounds="9.765, 7.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="719025db-b1ea-434b-a5d7-9f68a88c3c01" absoluteBounds="0.75, 10.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ELDBDataContext/CompanyMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b72af3fb-2a9d-44c5-a42b-6fd931574a0f" absoluteBounds="0.765, 11.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ed78dcef-c294-405d-aeb1-46fdd748fe9e" absoluteBounds="9.75, 10.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ELDBDataContext/CompanyWeekOffDay" />
+      <nestedChildShapes>
+        <elementListCompartment Id="30b940c3-6be7-4798-b93a-434ae1da106e" absoluteBounds="9.765, 11.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3788f3c4-5dff-4829-adf4-5718e3539e5c" absoluteBounds="12.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ELDBDataContext/Component" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d19c4405-3b71-46c4-89bc-4d598bec856a" absoluteBounds="12.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3afd9e82-3e5c-41fc-a9a8-feb01bf2914c" absoluteBounds="12.75, 3.75, 2, 3.6939111328124992">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeeAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aadd9c61-542b-4ce8-bcc8-9642da551264" absoluteBounds="12.765, 4.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="360dc367-b76f-4f56-9672-c8377fbeafb7" absoluteBounds="3.75, 12.75, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeeBankDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b9d30ea1-a2eb-4358-9502-ad7220b9a397" absoluteBounds="3.765, 13.21, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d51683a2-c9f5-47f0-a967-7839c02a246f" absoluteBounds="12.75, 8.75, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeeEducationDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="473beefd-959c-4e32-9ebb-4db5a94b0a5e" absoluteBounds="12.765, 9.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f66b5cb5-7258-4e5d-9f5b-7be722d8929e" absoluteBounds="12.75, 13.75, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeeFamily" />
+      <nestedChildShapes>
+        <elementListCompartment Id="339dd4e2-8030-43c2-97f2-c541b4555509" absoluteBounds="12.765, 14.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="792cc9fa-b279-4657-b8c4-d5a34809e538" absoluteBounds="6.75, 14.75, 2, 8.3091455078125023">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeeMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="de254a80-3f38-4126-ac2d-ffefc7c8ab16" absoluteBounds="6.765, 15.21, 1.9700000000000002, 7.7491455078125009" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="30484ca1-41b5-44ae-b95e-1c7b4521792a" absoluteBounds="15.75, 0.75, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/ELDBDataContext/EmployeePersonalID" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9141fac9-9ef4-4bb4-baa7-5d99c91bf323" absoluteBounds="15.765, 1.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2f29f31a-9457-4389-81d6-a63a65bd1bfc" absoluteBounds="15.75, 4.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ELDBDataContext/GroupAccess" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5216fc22-8704-4637-8496-3861a024bdca" absoluteBounds="15.765, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1da74085-25ae-4350-873a-b483d103b5e4" absoluteBounds="15.75, 7.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ELDBDataContext/GroupMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c8c613d-5722-4dfa-9e5b-29e1d34ac2a6" absoluteBounds="15.765, 8.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="afc11aaa-7dd1-4e50-97c6-35da39683fc5" absoluteBounds="15.75, 11.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ELDBDataContext/HalfDay" />
+      <nestedChildShapes>
+        <elementListCompartment Id="954cfd62-cc08-47dc-8a96-b03ea85bb820" absoluteBounds="15.765, 12.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="83eb4769-834c-4474-b0dc-b1ebd9de433f" absoluteBounds="15.75, 14.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ELDBDataContext/Holiday" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e0f7291-4525-4802-b42e-38709b66bc5e" absoluteBounds="15.765, 15.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b27ab648-4a03-4d5c-9a52-b3248610f33c" absoluteBounds="0.75, 17.75, 2, 3.6939111328125023">
+      <DataClassMoniker Name="/ELDBDataContext/Leave" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f050e067-d759-4041-8a3f-044e7f9a1753" absoluteBounds="0.765, 18.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="113ca0d1-e5bd-496a-ae28-4483ca0e3db3" absoluteBounds="9.75, 17.75, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ELDBDataContext/LeaveApprovalType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbaa1d0c-7195-45d3-9857-a958b75cdf14" absoluteBounds="9.765, 18.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3d29908d-9656-4cf7-9b63-b13afe8a9316" absoluteBounds="18.75, 0.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ELDBDataContext/LeaveType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="788d8c2c-34be-4d0a-a737-b5b2b49c5043" absoluteBounds="18.765, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aa34ea15-7bf8-4647-a974-f1109ca4e9d9" absoluteBounds="18.75, 4.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ELDBDataContext/LocationPin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f022ee3c-02d8-4837-804b-c6b3b7ba5908" absoluteBounds="18.765, 5.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e99fbf6b-fd35-4e06-b675-ab1fd1c2e9b3" absoluteBounds="18.75, 7.75, 2, 3.5016097005208318">
+      <DataClassMoniker Name="/ELDBDataContext/Location" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b8ac7730-ab21-42e4-a217-2c5c25604926" absoluteBounds="18.765, 8.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f35ba419-61f3-428c-98c7-516643510f21" absoluteBounds="18.75, 12.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ELDBDataContext/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b467337-0678-4d02-b145-d1bb257016ec" absoluteBounds="18.765, 13.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1668b0d3-814c-4ab6-a29b-9ce105d4a99e" absoluteBounds="12.75, 18.75, 2, 4.0785139973958309">
+      <DataClassMoniker Name="/ELDBDataContext/OfficialLeave" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa886080-f293-4b3e-b7c3-0eb474c910aa" absoluteBounds="12.765, 19.21, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe54691b-fd81-4c87-b676-1d6f72df937f" absoluteBounds="18.75, 15.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ELDBDataContext/Page" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c1dddc1d-7bfe-43a1-92ab-0023a381d2e3" absoluteBounds="18.765, 16.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="525e8f9e-62c2-4de4-a63a-d9185f9df97b" absoluteBounds="15.75, 18.75, 2, 5.6169254557291666">
+      <DataClassMoniker Name="/ELDBDataContext/PunchIn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b7593447-9306-4f6b-8963-7c43c5801639" absoluteBounds="15.765, 19.21, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ea9adc9d-50e2-48be-be88-d7e4bf8e201b" absoluteBounds="18.75, 18.75, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ELDBDataContext/RoleMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bf43f04c-8af4-4725-841b-ae10e88a95db" absoluteBounds="18.765, 19.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="031fc913-7984-488b-baaa-44faadcb321f" absoluteBounds="18.75, 20.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ELDBDataContext/SystemSetting" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ed1b3a8c-dd1a-4741-98e9-9e410555a973" absoluteBounds="18.765, 21.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5ba0e000-32bc-4e5f-b168-58cff987b289" absoluteBounds="21.75, 0.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/ELDBDataContext/UserAccess" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ac91991-90c7-48cf-848a-208b7909e7eb" absoluteBounds="21.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b72e29b6-4470-48cf-b985-bf69951e7326" absoluteBounds="21.75, 3.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ELDBDataContext/UserComponentRight" />
+      <nestedChildShapes>
+        <elementListCompartment Id="238dc2f0-6599-40cf-80b1-4163639f806e" absoluteBounds="21.765, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4be161d0-b28d-4f4d-9d5c-6fcf53adc6e7" absoluteBounds="21.75, 6.75, 2, 3.6939111328124987">
+      <DataClassMoniker Name="/ELDBDataContext/UserDevice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a01950f1-0fae-416f-a96a-d990af1c515a" absoluteBounds="21.765, 7.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="582088ac-edd0-4737-9348-9cf2fd748599" absoluteBounds="21.75, 11.75, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/ELDBDataContext/UserLeaveApproval" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9cc77e8f-bfce-4e8d-a15a-ff657ff04be8" absoluteBounds="21.765, 12.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b7682e8a-0a6b-4011-86d0-ce385ace5980" absoluteBounds="21.75, 15.75, 2, 2.3478011067708326">
+      <DataClassMoniker Name="/ELDBDataContext/UserLeaveTypeCount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d51dee2-f0b3-4428-b415-68e1af6fd9c8" absoluteBounds="21.765, 16.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3b3d1bcc-47ee-4792-a730-8edfede5f76e" absoluteBounds="21.75, 19.75, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/ELDBDataContext/UserLocation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9730125-e522-445d-bbfd-901d4ba8f152" absoluteBounds="21.765, 20.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="00beac6a-5119-43d4-bb5f-dbc062382e22" absoluteBounds="0.75, 22.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ELDBDataContext/UserRight" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7b086384-7ac2-4ef1-b027-bfd0ccc9ccd4" absoluteBounds="0.765, 23.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66f89478-4f8b-437d-bd89-9affc9c43474" absoluteBounds="21.75, 22.75, 2, 6.7707340494791666">
+      <DataClassMoniker Name="/ELDBDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50d08e3a-b89d-42c6-af87-e47c3557a117" absoluteBounds="21.765, 23.21, 1.9700000000000002, 6.2107340494791661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4578de1e-4206-4951-8a67-495bca47491e" absoluteBounds="9.75, 23.75, 2, 2.3478011067708309">
+      <DataClassMoniker Name="/ELDBDataContext/UserWeekOffDay" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2a94ec25-c8a1-440a-9c19-1f56da6484a6" absoluteBounds="9.765, 24.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="06c36a4e-e64f-4313-b9d9-05e60fc94fe1" absoluteBounds="24.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ELDBDataContext/VersionMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a91bde81-2680-4816-bd39-76b1992ead7c" absoluteBounds="24.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd147958-e285-46cd-9d12-307df0b67e92" absoluteBounds="0.75, 3.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ELDBDataContext/UsersOTP" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6102be2-72da-411c-8996-6c347c58bd6c" absoluteBounds="0.76500000000000012, 3.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

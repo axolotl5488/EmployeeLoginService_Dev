@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dcd660b6ea024cfda18494736af7ef57" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppCompanyLeaveManagement" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppLeaveApprovedStatu" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppLeaveType" Width="1.5" PointX="0.75" PointY="15.5" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppMasterLeaveType" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppUserLeave" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.BranchType" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Break" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.BreakCategory" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.BreakType" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.CallIn" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Company" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.CompanyBranch" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.CompanyLeaveTypeCount" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.CompanyMaster" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.CompanyWeekOffDay" Width="1.5" PointX="8.75" PointY="10.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Component" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeeAddress" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeeBankDetail" Width="1.5" PointX="11.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeeEducationDetail" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeeFamily" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeeMaster" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.EmployeePersonalID" Width="1.5" PointX="4.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.GroupAccess" Width="1.5" PointX="13.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.GroupMaster" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.HalfDay" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Holiday" Width="1.5" PointX="8.75" PointY="14.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Leave" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.LeaveApprovalType" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.LeaveType" Width="1.5" PointX="15.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.LocationPin" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Location" Width="1.5" PointX="16.75" PointY="7.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Menu" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.OfficialLeaf" Width="1.5" PointX="12.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.Page" Width="1.5" PointX="14.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.PunchIn" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.RoleMaster" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.SystemSetting" Width="1.5" PointX="17.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserAccess" Width="1.5" PointX="4.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserComponentRight" Width="1.5" PointX="18.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserDevice" Width="1.5" PointX="6.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserLeaveApproval" Width="1.5" PointX="8.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserLeaveTypeCount" Width="1.5" PointX="18.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserLocation" Width="1.5" PointX="18.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserRight" Width="1.5" PointX="18.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.User" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UsersOTP" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.UserWeekOffDay" Width="1.5" PointX="18.75" PointY="19.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.VersionMaster" Width="1.5" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.WeeklyTiming" Width="1.5" PointX="20.75" PointY="7.75" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveApprovedStatus" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_AppLeaveType" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_AppMasterLeaveType" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_AppUserLeave" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Company" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Users" />
+        <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Users1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

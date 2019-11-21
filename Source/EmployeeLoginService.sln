@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeLoginService", "EmployeeLoginService\EmployeeLoginService.csproj", "{5AAD4213-1357-4112-BD60-0FC79C6A23D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeLoginAPI", "EmployeeLoginAPI\EmployeeLoginAPI.csproj", "{AE266B2D-72C7-4911-8803-6E49BDE02C47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeLoginAPI.Tests", "EmployeeLoginAPI.Tests\EmployeeLoginAPI.Tests.csproj", "{DEECBDF4-4167-482A-8F19-C9B4A90608CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{4DE81893-953F-4A21-B139-3C55489AD441}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAModel", "BAModel\BAModel.csproj", "{4E07A7B3-E73B-4D21-A396-DBF043558406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeePunchService", "EmployeePunchService\EmployeePunchService.csproj", "{EDA1F5F7-75B0-44E4-84DC-96DF7D15CD66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webportal", "Webportal\Webportal.csproj", "{6153F57C-3568-4A4C-AEA3-F56EB1A38D4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AAD4213-1357-4112-BD60-0FC79C6A23D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AAD4213-1357-4112-BD60-0FC79C6A23D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AAD4213-1357-4112-BD60-0FC79C6A23D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AAD4213-1357-4112-BD60-0FC79C6A23D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE266B2D-72C7-4911-8803-6E49BDE02C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE266B2D-72C7-4911-8803-6E49BDE02C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE266B2D-72C7-4911-8803-6E49BDE02C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE266B2D-72C7-4911-8803-6E49BDE02C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEECBDF4-4167-482A-8F19-C9B4A90608CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEECBDF4-4167-482A-8F19-C9B4A90608CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEECBDF4-4167-482A-8F19-C9B4A90608CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEECBDF4-4167-482A-8F19-C9B4A90608CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE81893-953F-4A21-B139-3C55489AD441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE81893-953F-4A21-B139-3C55489AD441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE81893-953F-4A21-B139-3C55489AD441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE81893-953F-4A21-B139-3C55489AD441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E07A7B3-E73B-4D21-A396-DBF043558406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E07A7B3-E73B-4D21-A396-DBF043558406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E07A7B3-E73B-4D21-A396-DBF043558406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E07A7B3-E73B-4D21-A396-DBF043558406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA1F5F7-75B0-44E4-84DC-96DF7D15CD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA1F5F7-75B0-44E4-84DC-96DF7D15CD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA1F5F7-75B0-44E4-84DC-96DF7D15CD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA1F5F7-75B0-44E4-84DC-96DF7D15CD66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6153F57C-3568-4A4C-AEA3-F56EB1A38D4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6153F57C-3568-4A4C-AEA3-F56EB1A38D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6153F57C-3568-4A4C-AEA3-F56EB1A38D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6153F57C-3568-4A4C-AEA3-F56EB1A38D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {102C29CE-A607-4448-8D0C-E1EDE6B9A21D}
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
