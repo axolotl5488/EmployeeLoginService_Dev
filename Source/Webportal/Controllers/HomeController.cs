@@ -62,7 +62,6 @@ namespace Webportal.Controllers
             model.TotalLateIn = model.records.Where(x => x.record != null && x.record.LatePunchin == true).Count();
             model.TotalOut = model.records.Where(x => x.record != null && x.record.PunchoutTime != null && x.record.SystemPunchout == false).Count();
             model.TotalOutLocation = model.records.Where(x => x.record != null && x.record.PunchoutType == true).Count();
-
             model.TotalOutType = model.records.Where(x => x.record != null && x.record.PunchoutType == true).Count();
             model.TotalSystemOut = model.records.Where(x => x.record != null && x.record.SystemPunchout == true).Count();
 
@@ -71,7 +70,6 @@ namespace Webportal.Controllers
             string name = "EmployeeDailyReport_" + DateTime.Now.ToString("MMddyyyhhmmss") + ".xlsx";
             return File(bytes, "application/excel", name);
         }
-
 
         public byte[] DailyReport(DailyUserReport_Model model, List<AppUserLeave> leaves)
         {
@@ -399,7 +397,7 @@ namespace Webportal.Controllers
                                 if (userleave == null)
                                 {
                                     xlSheet.Cells[miRow, 2 + padding].Value = obj.record.PunchinTime.ToString("hh:mm tt");
-                                    xlSheet.Cells[miRow, 3 + padding].Value = obj.record.PunchoutTime == null ? " - " : obj.record.PunchoutTime.Value.ToString("hh:mm tt");
+                                    xlSheet.Cells[miRow, 3 + padding].Value = obj.record.PunchoutTime == null ? " - " : obj.record.PunchoutTime.Value.ToString("hh:mm:ss tt");
                                     xlSheet.Cells[miRow, 4 + padding].Value = Convert.ToBoolean(obj.record.PunchinType) ? "Inside" : "Outside";
                                     xlSheet.Cells[miRow, 5 + padding].Value = obj.record.PILocationId;
                                     xlSheet.Cells[miRow, 6 + padding].Value = obj.record.LatePunchin ? "Yes" : "No";

@@ -65,6 +65,18 @@
           <Property Name="TotalDays" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IsPaidLeave" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="AppVersionHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="VersionName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="IsMustUpdate" Type="bit" Nullable="false" />
+          <Property Name="DeviceType" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BranchType">
           <Key>
             <PropertyRef Name="BranchTypeID" />
@@ -858,6 +870,7 @@
           <EntitySet Name="AppLeaveType" EntityType="Self.AppLeaveType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppMasterLeaveType" EntityType="Self.AppMasterLeaveType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppUserLeave" EntityType="Self.AppUserLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppVersionHistory" EntityType="Self.AppVersionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BranchType" EntityType="Self.BranchType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Break" EntityType="Self.Break" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BreakCategory" EntityType="Self.BreakCategory" Schema="dbo" store:Type="Tables" />
@@ -1026,6 +1039,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
           </AssociationSet>
+          <EntitySet Name="AppVersionHistories" EntityType="EmployeeLoginModel.AppVersionHistory" />
           </EntityContainer>
         <ComplexType Name="GetEmployeeHeirarchy_Result">
           <Property Type="Int32" Name="UserId" Nullable="true" />
@@ -1878,6 +1892,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AppVersionHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VersionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="IsMustUpdate" Type="Boolean" Nullable="false" />
+          <Property Name="DeviceType" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2691,6 +2717,19 @@
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="TimingFor" ColumnName="TimingFor" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppVersionHistories">
+            <EntityTypeMapping TypeName="EmployeeLoginModel.AppVersionHistory">
+              <MappingFragment StoreEntitySet="AppVersionHistory">
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="IsMustUpdate" ColumnName="IsMustUpdate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

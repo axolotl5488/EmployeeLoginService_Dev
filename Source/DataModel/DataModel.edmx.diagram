@@ -61,6 +61,7 @@
         <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Company" />
         <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Users" />
         <AssociationConnector Association="EmployeeLoginModel.FK_AppUserLeave_Users1" />
+        <EntityTypeShape EntityType="EmployeeLoginModel.AppVersionHistory" Width="1.5" PointX="21.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

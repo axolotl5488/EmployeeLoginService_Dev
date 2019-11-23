@@ -76,6 +76,7 @@ namespace DataModel
         public virtual DbSet<UserWeekOffDay> UserWeekOffDays { get; set; }
         public virtual DbSet<VersionMaster> VersionMasters { get; set; }
         public virtual DbSet<WeeklyTiming> WeeklyTimings { get; set; }
+        public virtual DbSet<AppVersionHistory> AppVersionHistories { get; set; }
     
         public virtual ObjectResult<GetEmployeeHeirarchy_Result> GetEmployeeHeirarchy(string p_Command, Nullable<int> p_UserID, Nullable<int> p_CompanyID)
         {

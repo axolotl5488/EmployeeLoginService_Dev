@@ -8514,6 +8514,39 @@ namespace EmployeeLoginService
         #region ~Leave Management 
 
         [WebMethod]
+        public string CheckAppVersion(string VersionName, int VersionID, int DeviceType)
+        {
+            CheckAppVersion_Model result = new CheckAppVersion_Model();
+            try
+            {
+                result = BAModel.BAModel.CheckAppVersion(VersionName, VersionID, DeviceType);
+                if (result.response.status == false)
+                {
+                    LD.ReturnType = "failure";
+                    LD.FailureReason = result.response.message;
+                    LD.ReturnResult = "Server Is Not Responding..." + result.response.message;
+                }
+
+            }
+            catch (Exception e)
+            {
+                LD.ReturnType = "failure";
+                LD.ReturnResult = "Server Is Not Responding..." + e.ToString();
+                LD.FailureReason = "";
+            }
+            var FinalResult = new
+            {
+                records = result.record,
+                type = LD.ReturnType,
+                reason = LD.FailureReason,
+                msg = LD.ReturnResult,
+            };
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            return jss.Serialize(FinalResult);
+        }
+
+        [WebMethod]
         public string ManageLeave(string UserName, string Password, string DeviceId, string DeviceType, int CompanyID, int UserID, long LeaveId, int LeaveTypeId, string Descirption, string StartDate, string EndDate, int MasterLeaveTypeId)
         {
 
@@ -8742,7 +8775,7 @@ namespace EmployeeLoginService
         }
 
         [WebMethod]
-        public string SendEmployeePunchReport(string UserName, string Password, string DeviceId, string DeviceType, List<int> UserIDs,string StartDate,string EndDate,string SendEmailTo,string SendEmailCC)
+        public string SendEmployeePunchReport(string UserName, string Password, string DeviceId, string DeviceType, List<int> UserIDs, string StartDate, string EndDate, string SendEmailTo, string SendEmailCC)
         {
             ResultStatusModel result = new ResultStatusModel();
             try
@@ -8751,9 +8784,9 @@ namespace EmployeeLoginService
 
                 if (LD.ReturnType == "success")
                 {
-                    result = BAModel.BAModel.SendEmployeePunchReport(UserIDs, StartDate, EndDate, SendEmailTo,SendEmailCC);
+                    result = BAModel.BAModel.SendEmployeePunchReport(UserIDs, StartDate, EndDate, SendEmailTo, SendEmailCC);
 
-                    if(result.status)
+                    if (result.status)
                     {
                         LD.ReturnType = "success";
                         LD.ReturnResult = "report send successfully!";
@@ -8785,7 +8818,53 @@ namespace EmployeeLoginService
             return jss.Serialize(FinalResult);
         }
 
-        #endregion 
+        #endregion
+
+        #region Common Service by Milan
+        [WebMethod]
+        public string ListUsersByGroupId(string UserName, string Password, string DeviceId, string DeviceType, int CompanyId, int GroupID, string AppVersion)
+        {
+            ListUsersByGroupId_Result_Model result = new ListUsersByGroupId_Result_Model();
+            try
+            {
+                LD = GF.CheckValidUser(UserName, Password, DeviceId, DeviceType);
+
+                if (LD.ReturnType == "success")
+                {
+                    result = BAModel.BAModel.ListUsersByGroupId(GroupID);
+
+                    if (result.response.status)
+                    {
+                        LD.ReturnType = "success";
+                        LD.ReturnResult = "report send successfully!";
+                        LD.FailureReason = "";
+                    }
+                    else
+                    {
+                        LD.ReturnType = "success";
+                        LD.ReturnResult = "";
+                        LD.FailureReason = "something went wrong!";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                LD.ReturnType = "failure";
+                LD.ReturnResult = "Server Is Not Responding..." + e.ToString();
+                LD.FailureReason = "";
+            }
+            var FinalResult = new
+            {
+                records = result.records,
+                type = LD.ReturnType,
+                reason = LD.FailureReason,
+                msg = LD.ReturnResult,
+            };
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            return jss.Serialize(FinalResult);
+        }
+        #endregion
 
     }
 }

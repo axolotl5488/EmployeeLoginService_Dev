@@ -91,6 +91,7 @@
       <End Role="User" EntitySet="Users" />
       <End Role="AppUserLeave" EntitySet="AppUserLeaves" />
     </AssociationSet>
+    <EntitySet Name="AppVersionHistories" EntityType="EmployeeLoginModel.AppVersionHistory" />
   </EntityContainer>
   <ComplexType Name="GetEmployeeHeirarchy_Result">
     <Property Type="Int32" Name="UserId" Nullable="true" />
@@ -943,4 +944,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="AppVersionHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VersionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="VersionID" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="IsMustUpdate" Type="Boolean" Nullable="false" />
+    <Property Name="DeviceType" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

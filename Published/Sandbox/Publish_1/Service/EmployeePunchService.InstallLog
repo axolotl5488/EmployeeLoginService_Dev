@@ -1,0 +1,63 @@
+﻿Installing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 
+Installing service NKTPLEmployeePunchService...
+Service NKTPLEmployeePunchService has been successfully installed.
+Creating EventLog source NKTPLEmployeePunchService in log Application...
+Committing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 
+Uninstalling assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+Removing EventLog source NKTPLEmployeePunchService.
+Service NKTPLEmployeePunchService is being removed from the system...
+Service NKTPLEmployeePunchService was successfully removed from the system.
+Attempt to stop service NKTPLEmployeePunchService.
+Installing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 
+Installing service axolotl...
+Service axolotl has been successfully installed.
+Creating EventLog source axolotl in log Application...
+Committing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 
+Uninstalling assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+Removing EventLog source axolotl.
+Service axolotl is being removed from the system...
+Service axolotl was successfully removed from the system.
+Attempt to stop service axolotl.
+Installing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 
+Installing service axolotl...
+Service axolotl has been successfully installed.
+Creating EventLog source axolotl in log Application...
+Committing assembly 'D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe'.
+Affected parameters are:
+   i = 
+   logfile = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.InstallLog
+   assemblypath = D:\Milan\BatchScript\NKTPLEmployeePunchService\EmployeePunchService.exe
+   logtoconsole = 

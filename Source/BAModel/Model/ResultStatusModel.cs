@@ -13,6 +13,47 @@ namespace BAModel.Model
         public string message { get; set; }
     }
 
+    public class ListUsersByGroupId_Result_Model
+    {
+        public ResultStatusModel response { get; set; }
+
+        public List<ListUsersByGroupId_Model> records { get; set; }
+
+        public ListUsersByGroupId_Result_Model()
+        {
+            response = new ResultStatusModel();
+            records = new List<ListUsersByGroupId_Model>();
+        }
+    }
+
+    public class ListUsersByGroupId_Model
+    {
+        public int UserID { get; set; }
+
+        public string UserName { get; set; }
+    }
+
+        public class CheckAppVersion_Detail_Model
+    {
+        public bool MustUpdate { get; set; }
+        public bool ShouldUpdate { get; set; }
+        public string message { get; set; }
+
+    }
+
+    public class CheckAppVersion_Model
+    {
+        public CheckAppVersion_Detail_Model record { get; set; }
+
+        public ResultStatusModel response{ get;set; }
+
+        public CheckAppVersion_Model()
+        {
+            response = new ResultStatusModel();
+            record = new CheckAppVersion_Detail_Model();
+        }
+    }
+
     public class GetLeavesListByUser_Model
     {
         public List<GetLeaveList_detail_Model> records { get; set; }

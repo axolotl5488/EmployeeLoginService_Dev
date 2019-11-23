@@ -9,3 +9,14 @@ D:\Milan\EmployeeLogin\DataModel\obj\Release\DataModel.csprojAssemblyReference.c
 D:\Milan\EmployeeLogin\DataModel\obj\Release\DataModel.csproj.CopyComplete
 D:\Milan\EmployeeLogin\DataModel\obj\Release\DataModel.dll
 D:\Milan\EmployeeLogin\DataModel\obj\Release\DataModel.pdb
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\DataModel.dll.config
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\DataModel.dll
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\DataModel.pdb
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\EntityFramework.dll
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\EntityFramework.SqlServer.dll
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\EntityFramework.xml
+D:\Milan\NKTPL_GIT\Source\DataModel\bin\Release\EntityFramework.SqlServer.xml
+D:\Milan\NKTPL_GIT\Source\DataModel\obj\Release\DataModel.csprojAssemblyReference.cache
+D:\Milan\NKTPL_GIT\Source\DataModel\obj\Release\DataModel.csproj.CopyComplete
+D:\Milan\NKTPL_GIT\Source\DataModel\obj\Release\DataModel.dll
+D:\Milan\NKTPL_GIT\Source\DataModel\obj\Release\DataModel.pdb

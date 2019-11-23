@@ -1,0 +1,3 @@
+D:\Milan\NKTPL_GIT\Source\Web\obj\Debug\Web.vbprojAssemblyReference.cache
+D:\Milan\NKTPL_GIT\Source\Web\obj\Debug\Web.Resources.resources
+D:\Milan\NKTPL_GIT\Source\Web\obj\Debug\Web.vbproj.GenerateResource.cache

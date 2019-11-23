@@ -21,7 +21,7 @@ namespace EmployeePunchService
             };
             ServiceBase.Run(ServicesToRun);
 
-            //new Service1().test();
+            new Service1().test();
         }
     }
 }

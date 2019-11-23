@@ -66,6 +66,9 @@
     <Compile Include="AppUserLeave.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppVersionHistory.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BranchType.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

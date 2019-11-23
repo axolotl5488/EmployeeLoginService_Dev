@@ -67,6 +67,38 @@ namespace EmployeePunchService
                     Trace.TraceInformation("TimerOneMinute_Tick Process Start:: Datetime::" + DateTime.Now);
                     BAModel.BAModel.CheckAndSetEmployeePunchOutAsSystem();
                 }
+
+
+                // Send Employee Half Day Report
+                string DailyReportEmail_To = ConfigurationManager.AppSettings["DailyReportEmail_To"];
+                string DailyReportEmail_CC = ConfigurationManager.AppSettings["DailyReportEmail_CC"];
+                string halfdaytime = currentDatetime.ToString("HH:mm");
+
+                // first half
+                if (ConfigurationManager.AppSettings["Firsthalf_DailyPunchReport_Time"] == halfdaytime)
+                {
+                    string subject = "EmployeePunch First half's Report_" + currentDatetime.ToString("dd_MMM_yy");
+                    BAModel.BAModel.DailyEmployeePunchReport(currentDatetime, DailyReportEmail_To, DailyReportEmail_CC, subject);
+                    Trace.TraceInformation("Daily First Half Report Sent:: Datetime::" + DateTime.Now);
+                }
+
+                // Second half
+                if (ConfigurationManager.AppSettings["Secondhalf_DailyPunchReport_Time"] == halfdaytime)
+                {
+                    string subject = "EmployeePunch Second half's Report_" + currentDatetime.ToString("dd_MMM_yy");
+                    BAModel.BAModel.DailyEmployeePunchReport(currentDatetime, DailyReportEmail_To, DailyReportEmail_CC, subject);
+                    Trace.TraceInformation("Daily Second Half Report Sent:: Datetime::" + DateTime.Now);
+                }
+
+
+                // Send Employee Full Day Report
+                string fulldaytime = currentDatetime.ToString("HH:mm");
+                if (ConfigurationManager.AppSettings["DailyPunchReport_Time"] == fulldaytime)
+                {
+                    string subject = "EmployeePunch Yesterday's Report_" + currentDatetime.AddDays(-1).ToString("dd_MMM_yy");
+                    BAModel.BAModel.DailyEmployeePunchReport(currentDatetime.AddDays(-1), DailyReportEmail_To, DailyReportEmail_CC, subject);
+                    Trace.TraceInformation("Daily Punch Report Sent:: Datetime::" + DateTime.Now);
+                }
             }
             catch (Exception ex)
             {

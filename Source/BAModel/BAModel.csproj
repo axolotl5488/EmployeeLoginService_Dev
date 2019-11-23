@@ -64,6 +64,7 @@
     <Compile Include="Common\Config.cs" />
     <Compile Include="Model\EmployeePunchModel.cs" />
     <Compile Include="Model\ResultStatusModel.cs" />
+    <Compile Include="Model\WindowService_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

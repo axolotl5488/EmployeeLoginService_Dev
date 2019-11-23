@@ -60,6 +60,18 @@
     <Property Name="TotalDays" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="IsPaidLeave" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="AppVersionHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="VersionName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VersionID" Type="int" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="IsMustUpdate" Type="bit" Nullable="false" />
+    <Property Name="DeviceType" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="BranchType">
     <Key>
       <PropertyRef Name="BranchTypeID" />
@@ -853,6 +865,7 @@
     <EntitySet Name="AppLeaveType" EntityType="Self.AppLeaveType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AppMasterLeaveType" EntityType="Self.AppMasterLeaveType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AppUserLeave" EntityType="Self.AppUserLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppVersionHistory" EntityType="Self.AppVersionHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BranchType" EntityType="Self.BranchType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Break" EntityType="Self.Break" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BreakCategory" EntityType="Self.BreakCategory" Schema="dbo" store:Type="Tables" />

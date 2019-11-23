@@ -31,9 +31,6 @@ namespace Webportal.Models
         public int UserID { get; set; }
         public string UserName { get; set; }
         public PunchIn record { get; set; }
-
-       
-
         public DailyUserReport_Detail_Model()
         {
             record = new PunchIn();

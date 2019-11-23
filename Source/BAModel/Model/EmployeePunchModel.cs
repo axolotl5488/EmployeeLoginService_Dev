@@ -62,4 +62,52 @@ namespace BAModel.Model
             records = new List<PunchIn>();
         }
     }
+
+
+    public class AllEmployeeReport_Model
+    {
+        public double TotalWorkingHours { get; set; }
+        public string TotalAverageWorkingHorus { get; set; }
+        public int TotalWorkingDays { get; set; }
+        public int TotalWeekOff { get; set; }
+        public int TotalLeaves { get; set; }
+        public int TotalHalfLeaves { get; set; }
+        public int TotalSystemPunchOut { get; set; }
+        public int TotalLatePunchIn { get; set; }
+        public int TotalEarlyPunchOut { get; set; }
+        public int TotalOutSidePunchIn { get; set; }
+        public int TotalOutSidePunchOut { get; set; }
+
+        public List<AllEmployeeReport_Detail_Model> recodrs { get; set; }
+
+        public AllEmployeeReport_Model()
+        {
+            recodrs = new List<AllEmployeeReport_Detail_Model>();
+        }
+    }
+
+    public class AllEmployeeReport_Detail_Model
+    {
+        public int TotalWeekOffDays { get; set; }
+        public int TotalWorkingDays { get; set; }
+        public int TotalAbsentDays { get; set; }
+        public int TotalFullLeaves { get; set; }
+        public int TotalHalfLeaves { get; set; }
+
+        public double TotalWorkedHours { get; set; }
+        public string AverageWorkedHours { get; set; }
+
+        public int TotalIn_Late { get; set; }
+        public int TotalIn_InsideLocation { get; set; }
+        public int TotalIn_OutsideLocation { get; set; }
+
+        public int TotalOut_Early { get; set; }
+        public int TotalOut_InsideLocation { get; set; }
+        public int TotalOut_OutsideLocation { get; set; }
+        public int TotalSystemPunch_Out { get; set; }
+
+        public string UserName { get; set; }
+
+
+    }
 }
