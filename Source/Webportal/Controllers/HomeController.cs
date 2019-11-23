@@ -10,6 +10,8 @@ using BAModel.Common;
 using System.Data.Entity;
 using System.Net.Mail;
 using System.IO;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace Webportal.Controllers
 {
@@ -17,7 +19,443 @@ namespace Webportal.Controllers
     {
         public ActionResult Index()
         {
-          
+
+            DailyUserReport_Model model = new DailyUserReport_Model();
+
+            EmployeeLoginEntities db = new EmployeeLoginEntities();
+            List<User> users = db.Users.ToList();
+
+            DateTime currentdate = DateTime.Now.AddDays(-1);
+            List<PunchIn> records = db.PunchIns.Where(x=> DbFunctions.TruncateTime(x.PunchinTime) == DbFunctions.TruncateTime(currentdate)).ToList();
+
+            List<AppUserLeave> leaves = new List<AppUserLeave>();
+            try
+            {
+                 leaves = db.AppUserLeaves.Where(x => DbFunctions.TruncateTime(x.StartDate) >= DbFunctions.TruncateTime(currentdate)
+                && DbFunctions.TruncateTime(x.EndDate) <= DbFunctions.TruncateTime(currentdate)).ToList();
+            }
+            catch
+            {
+                leaves = new List<AppUserLeave>();
+            }
+
+            foreach (User obj in users)
+            {
+                DailyUserReport_Detail_Model map = new DailyUserReport_Detail_Model();
+                map.UserID = obj.UserId;
+                map.UserName = obj.FirstName + " " + obj.LastName;
+                PunchIn record = records.FirstOrDefault(x => x.UserId == obj.UserId);
+                map.record = record;
+                model.records.Add(map);
+            }
+
+
+            List<DailyUserReport_Detail_Model> notnullablerecords = model.records.Where(x => x.record != null).OrderBy(x => x.UserName).ToList();
+            List<DailyUserReport_Detail_Model> nullablerecords = model.records.Where(x => x.record == null).OrderBy(x => x.UserName).ToList();
+            model.records = notnullablerecords;
+            model.records.AddRange(nullablerecords);
+
+            model.TotalEarlyOut = model.records.Where(x => x.record != null && x.record.EarlyPunchout == true).Count();
+            model.TotalIn = model.records.Where(x => x.record != null).Count();
+            model.TotalInLocation = model.records.Where(x => x.record != null && x.record.PunchinType == true).Count();
+            model.TotalInType = model.records.Where(x => x.record != null && x.record.PunchinType != null && x.record.PunchinType == true).Count();
+            model.TotalLateIn = model.records.Where(x => x.record != null && x.record.LatePunchin == true).Count();
+            model.TotalOut = model.records.Where(x => x.record != null && x.record.PunchoutTime != null && x.record.SystemPunchout == false).Count();
+            model.TotalOutLocation = model.records.Where(x => x.record != null && x.record.PunchoutType == true).Count();
+
+            model.TotalOutType = model.records.Where(x => x.record != null && x.record.PunchoutType == true).Count();
+            model.TotalSystemOut = model.records.Where(x => x.record != null && x.record.SystemPunchout == true).Count();
+
+            byte[] bytes = DailyReport(model, leaves);
+
+            string name = "EmployeeDailyReport_" + DateTime.Now.ToString("MMddyyyhhmmss") + ".xlsx";
+            return File(bytes, "application/excel", name);
+        }
+
+
+        public byte[] DailyReport(DailyUserReport_Model model, List<AppUserLeave> leaves)
+        {
+
+            try
+            {
+
+
+                string pageHeader = "Axolotl - Employee Daily Report";
+                using (ExcelPackage pckExport = new ExcelPackage())
+                {
+
+                    #region Attractions List
+                    ExcelWorksheet xlSheet = pckExport.Workbook.Worksheets.Add(pageHeader);
+                    try
+                    {
+                        xlSheet.PrinterSettings.LeftMargin = 0.57M;
+                        xlSheet.PrinterSettings.RightMargin = 0.41M;
+                        xlSheet.PrinterSettings.HeaderMargin = 0.28M;
+                        xlSheet.PrinterSettings.TopMargin = 1.28M;
+                        xlSheet.PrinterSettings.BottomMargin = 0.7M;
+                        xlSheet.PrinterSettings.FooterMargin = 0.3M;
+                        xlSheet.PrinterSettings.Orientation = eOrientation.Portrait;
+                        int padding = 1;
+                        int miRow = 1 + padding;
+                        int MinCol = 1 + padding;
+                        int MaxCol = 13 + padding;
+                        int TotalSearchColumn = 12;
+                        int MaxColWithSearchCriteria = 11 + TotalSearchColumn + padding;
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Value = "Daily REPORT";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Merge = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#0070C0"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 12;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+
+                        miRow = miRow + 1;
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Value = "[Name of Report Here]";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Merge = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 24;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+
+                        miRow = miRow + 1;
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Value = "Report generated on " + (DateTime.Now).ToString("MM/dd/yyyy") + " at " + (DateTime.Now).ToString("HH:mm tt").ToLower();
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Merge = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 14;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = false;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#525252"));
+
+                        miRow = miRow + 1;
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Value = "Powered by Axolotl";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Merge = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#0070C0"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 14;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+
+                        miRow = miRow + 1;
+
+
+
+                        int k = 0;
+                        // Add Time Range Search Filter - Tilte
+                        for (int c = 0; c <= TotalSearchColumn;)
+                        {
+
+
+                            if (c == 0)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Average Working Hours";
+                            else if (c == 2)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee";
+                            else if (c == 4)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee on Leave";
+                            else if (c == 6)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee Punche In";
+                            else if (c == 8)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee Punch Out";
+                            else if (c == 10)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee Late In";
+                            else if (c == 12)
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = "Total Employee Ealry Out";
+
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Merge = true;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3D3D3"));
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Name = "Sitka Text";
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Size = 12;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Bold = true;
+
+
+                            c = c + 2;
+                        }
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3D3D3"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 12;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+
+                        miRow = miRow + 1;
+
+                        k = 0;
+
+                        TimeSpan tp = TimeSpan.FromHours(model.records.Where(x => x.record != null && x.record.PunchoutTime != null).Average(x => x.record.PunchoutTime.Value.Subtract(x.record.PunchinTime).TotalHours));
+                        // Add Time Range Search Filter - Data
+                        for (int c = 0; c <= TotalSearchColumn;)
+                        {
+
+                            if (c == 0) // Time Range
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = tp.Hours + ":" + tp.Minutes + ":" + tp.Seconds;
+                            else if (c == 2) // Type
+                            {
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = model.records.Count;
+                            }
+                            else if (c == 4) // Operators
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = leaves.Count;
+                            else if (c == 6) // Operators
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = model.TotalIn;
+                            else if (c == 8) // Operators
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = model.TotalOut;
+                            else if (c == 10) // Operators
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = model.TotalLateIn;
+                            else if (c == 12) // Operators
+                                xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Value = model.TotalEarlyOut;
+
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Merge = true;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3D3D3"));
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Name = "Sitka Text";
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Size = 12;
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+                            xlSheet.Cells[miRow, MinCol + c, miRow, MinCol + c + 1].Style.Font.Bold = false;
+
+
+                            c = c + 2;
+                        }
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3D3D3"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 12;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = false;
+
+                        #region Columns and Sheet Config
+
+                        for (int i = 1 + padding; i <= MaxCol; i++)
+                        {
+                            xlSheet.Column(i).Width = 25.83;
+                        }
+
+                        miRow += 1;
+
+                        //'header alignment
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                        //'border
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+
+                        //Font Bold
+                        //xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+
+                        //'Background Color
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#0070C0"));
+
+
+                        //Font Name
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+
+
+                        //Font Size
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 14;
+
+                        //Font Color
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+                        xlSheet.Cells[miRow, 1 + padding].Value = "Employees";
+                        xlSheet.Cells[miRow, 2 + padding].Value = "Puncn In";
+                        xlSheet.Cells[miRow, 3 + padding].Value = "Puncn Out";
+                        xlSheet.Cells[miRow, 4 + padding].Value = "In Type";
+                        xlSheet.Cells[miRow, 5 + padding].Value = "In Location";
+                        xlSheet.Cells[miRow, 6 + padding].Value = "Late In";
+                        xlSheet.Cells[miRow, 7 + padding].Value = "Late In Reason";
+                        xlSheet.Cells[miRow, 8 + padding].Value = "Out Type";
+                        xlSheet.Cells[miRow, 9 + padding].Value = "Out Location";
+                        xlSheet.Cells[miRow, 10 + padding].Value = "Early Out";
+                        xlSheet.Cells[miRow, 11 + padding].Value = "Early Out Reason";
+                        xlSheet.Cells[miRow, 12 + padding].Value = "System Punch Out";
+
+                        miRow += 1;
+
+                        #endregion
+
+                        #region Bind Data
+
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFF8E5"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Size = 18;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Bold = true;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#BD6427"));
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                        xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
+                        xlSheet.Cells[miRow, 1 + padding].Style.Font.Size = 11;
+                        xlSheet.Cells[miRow, 1 + padding].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        xlSheet.Cells[miRow, 1 + padding].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        xlSheet.Cells[miRow, 1 + padding].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#000000"));
+                        xlSheet.Cells[miRow, 1 + padding].Value = "TOTALS";
+
+                        xlSheet.Cells[miRow, 2 + padding].Value = model.TotalIn;
+                        xlSheet.Cells[miRow, 3 + padding].Value = model.TotalOut+"/"+ model.TotalIn;
+                        xlSheet.Cells[miRow, 4 + padding].Value = model.TotalInType+"/"+ model.TotalIn;
+                        xlSheet.Cells[miRow, 5 + padding].Value = model.TotalInLocation + "/" + model.TotalIn;
+                        xlSheet.Cells[miRow, 6 + padding].Value = model.TotalLateIn + "/" + model.TotalIn;
+                        xlSheet.Cells[miRow, 7 + padding].Value = " - ";
+                        xlSheet.Cells[miRow, 8 + padding].Value = model.TotalOutType + "/" + model.TotalIn; 
+                        xlSheet.Cells[miRow, 9 + padding].Value = model.TotalOutLocation + "/" + model.TotalIn; 
+                        xlSheet.Cells[miRow, 10 + padding].Value =model.TotalEarlyOut + "/" + model.TotalIn;
+                        xlSheet.Cells[miRow, 11 + padding].Value =" - ";
+                        xlSheet.Cells[miRow, 12 + padding].Value = model.TotalSystemOut + "/" + model.TotalIn;
+
+                        miRow += 1;
+
+                        foreach (DailyUserReport_Detail_Model obj in model.records)
+                        {
+
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.Font.Name = "Sitka Text";
+                            xlSheet.Cells[miRow, MinCol, miRow, MaxCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                            xlSheet.Cells[miRow, 1 + padding].Style.Font.Bold = true;
+                            xlSheet.Cells[miRow, 1 + padding].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#0070C0"));
+                            xlSheet.Cells[miRow, 1 + padding].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                            xlSheet.Cells[miRow, 1 + padding].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+
+                            xlSheet.Cells[miRow, 1 + padding].Value = obj.UserName;
+
+                            if (obj.record != null)
+                            {
+                                AppUserLeave userleave = leaves.FirstOrDefault(x => x.UserID == obj.UserID);
+                                if (userleave == null)
+                                {
+                                    xlSheet.Cells[miRow, 2 + padding].Value = obj.record.PunchinTime.ToString("hh:mm tt");
+                                    xlSheet.Cells[miRow, 3 + padding].Value = obj.record.PunchoutTime == null ? " - " : obj.record.PunchoutTime.Value.ToString("hh:mm tt");
+                                    xlSheet.Cells[miRow, 4 + padding].Value = Convert.ToBoolean(obj.record.PunchinType) ? "Inside" : "Outside";
+                                    xlSheet.Cells[miRow, 5 + padding].Value = obj.record.PILocationId;
+                                    xlSheet.Cells[miRow, 6 + padding].Value = obj.record.LatePunchin ? "Yes" : "No";
+
+                                    xlSheet.Cells[miRow, 7 + padding].Style.WrapText = true;
+                                    xlSheet.Cells[miRow, 7 + padding].Value = obj.record.LatePunchinReason;
+
+                                    xlSheet.Cells[miRow, 8 + padding].Value = Convert.ToBoolean(obj.record.PunchoutType) ? "Inside" : "Outside";
+                                    xlSheet.Cells[miRow, 9 + padding].Value = obj.record.POLocationId;
+                                    xlSheet.Cells[miRow, 10 + padding].Value = obj.record.EarlyPunchout ? "Yes" : "No";
+                                    xlSheet.Cells[miRow, 11 + padding].Value = obj.record.EarlyPunchoutReason;
+                                    xlSheet.Cells[miRow, 11 + padding].Value = obj.record.SystemPunchout ? "Yes" : "No";
+                                }
+                                else
+                                {
+                                    xlSheet.Cells[miRow, MinCol + 1, miRow, MaxCol].Merge = true;
+                                    xlSheet.Cells[miRow, MinCol + 1, miRow, MaxCol].Value = "Employee on Leave";
+                                }
+                            }
+                            else
+                            {
+                                xlSheet.Cells[miRow, MinCol+1, miRow, MaxCol].Merge = true;
+                                xlSheet.Cells[miRow, MinCol+1, miRow, MaxCol].Value = "No Records";
+                            }
+
+                            miRow += 1;
+                        }
+
+                        xlSheet.Cells.AutoFitColumns();
+
+                        byte[] bytes = pckExport.GetAsByteArray();
+
+                        return bytes;
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                    #endregion
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+              
+            }
+            return null;
+
+        }
+
+
+        public ActionResult Index1()
+        {
+
             DateTime MonthDate = DateTime.Now;
             DateTime startdateOfMonth = new DateTime(MonthDate.Year, MonthDate.Month, 1, 0, 0, 0);
             DateTime enddateOfMonth = startdateOfMonth.AddDays(7);
@@ -400,7 +838,7 @@ namespace Webportal.Controllers
                         if (j == 0)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Puncn In";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 PunchIn obj = model.records.FirstOrDefault(x => x.PunchinTime.Day == startdateOfMonth.AddDays(i).Day);
@@ -439,7 +877,7 @@ namespace Webportal.Controllers
                         if (j == 1)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Puncn Out";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
 
@@ -480,7 +918,7 @@ namespace Webportal.Controllers
                         if (j == 2)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "In Type";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -524,7 +962,7 @@ namespace Webportal.Controllers
                         if (j == 3)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "In Location";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -570,7 +1008,7 @@ namespace Webportal.Controllers
                         if (j == 4)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Late In";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -615,7 +1053,7 @@ namespace Webportal.Controllers
                         if (j == 5)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Late In Reason";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -646,7 +1084,7 @@ namespace Webportal.Controllers
                         if (j == 6)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Out Type";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -690,7 +1128,7 @@ namespace Webportal.Controllers
                         if (j == 7)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Out Location";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -736,7 +1174,7 @@ namespace Webportal.Controllers
                         if (j == 8)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Early Out";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -781,7 +1219,7 @@ namespace Webportal.Controllers
                         if (j == 9)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "Early Out Reason";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -828,7 +1266,7 @@ namespace Webportal.Controllers
                         if (j == 10)
                         {
                             xlSheet.Cells[miRow, 1 + padding].Value = "System Punch Out";
-                            
+
                             for (int i = 0; i < TotalWorkingDaysOfmonth; i++)
                             {
                                 xlSheet.Cells[miRow, i + 2 + padding].Style.Font.Size = 8;
@@ -871,9 +1309,9 @@ namespace Webportal.Controllers
                     }
 
                     ///Set Autofil columns
-                  
 
-                    
+
+
                     #endregion
                     xlSheet.Cells.AutoFitColumns();
 
@@ -1753,7 +2191,7 @@ namespace Webportal.Controllers
             return model;
         }
 
-        private void SendEmail(Byte[] bytes,string filename)
+        private void SendEmail(Byte[] bytes, string filename)
         {
             try
             {
