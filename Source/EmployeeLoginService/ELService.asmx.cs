@@ -4873,7 +4873,6 @@ namespace EmployeeLoginService
                         PreviousUDetail.EarlyPounchoutCount = EarlyPounchoutPre;
                         #endregion
 
-
                         #region TeamAvailiblity
                         TeamDetail = (from u in context.Users
                                       join ua in context.Users on u.GroupID equals ua.GroupID
@@ -4893,21 +4892,46 @@ namespace EmployeeLoginService
                                       }).ToList();
 
 
-                        TeamDetail.AddRange((from u in context.Users
-                                             join ua in context.UserAccesses on u.UserId equals ua.UserID
-                                             where ua.UserID == userID
-                                             select new TeamAvailability()
-                                             {
-                                                 UserName = (from us in context.Users where us.UserId == ua.UserAccessID select us.FirstName + " " + us.LastName).FirstOrDefault(),
-                                                 IsPunchin = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.UserId).Count() != 0 ? true : false,
-                                                 LatePunchinReason = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.LatePunchinReason).FirstOrDefault(),
-                                                 OutLocationReason = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinOutsideLocationReason).FirstOrDefault(),
-                                                 PunchinTime = Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinTime).FirstOrDefault()),
-                                                 PunchoutTime = Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchoutTime).FirstOrDefault()),
-                                                 Latlong = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PILatitudeLongitude).FirstOrDefault(),
-                                                 DepartmentName = (from g in context.GroupMasters where g.ID == ((from uaa in context.Users where uaa.UserId == ua.UserAccessID select uaa.GroupID).FirstOrDefault()) select g.GroupName).FirstOrDefault(),
-                                                 MobileNo = (from us in context.Users where us.UserId == ua.UserAccessID select us.MobileNoCmp).FirstOrDefault(),
-                                             }).ToList());
+                        //TeamDetail.AddRange((from u in context.Users
+                        //                     join ua in context.UserAccesses on u.UserId equals ua.UserID
+                        //                     where ua.UserID == userID
+                        //                     select Map_TeamAvailability(context, ua)).ToList());
+
+                        List<UserAccess> records = (from u in context.Users
+                                                    join ua in context.UserAccesses on u.UserId equals ua.UserID
+                                                    where ua.UserID == userID
+                                                    select ua).ToList();
+
+                        List<long> userIDs = records.Where(x => x.UserAccessID != null).Select(x => x.UserAccessID.Value).ToList();
+                        List<User> userrecords = context.Users.Where(x => userIDs.Contains(x.UserId)).ToList();
+                        List<PunchIn> punchRecords = (from p in context.PunchIns where userIDs.Contains(p.UserId) && p.PunchinTime.Date == DateTime.Now.Date select p).ToList();
+
+                        List<int> groupMasterIds = userrecords.Where(x => x.GroupID != null).Select(x => x.GroupID.Value).ToList();
+                        List<GroupMaster> GroupMasters = context.GroupMasters.Where(x => groupMasterIds.Contains(x.ID)).ToList();
+                        foreach (UserAccess obj in records)
+                        {
+                            TeamDetail.Add(Map_TeamAvailability(context, obj, userrecords, punchRecords, GroupMasters));
+                        }
+
+                        //TeamDetail.AddRange((from u in context.Users
+                        //                     join ua in context.UserAccesses on u.UserId equals ua.UserID
+                        //                     where ua.UserID == userID
+                        //                     select new TeamAvailability()
+                        //                     {
+                        //                         UserName = (from us in context.Users where us.UserId == ua.UserAccessID select us.FirstName + " " + us.LastName).FirstOrDefault(),
+                        //                         IsPunchin = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.UserId).Count() != 0 ? true : false,
+                        //                         LatePunchinReason = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.LatePunchinReason).FirstOrDefault(),
+                        //                         EarlyPunchoutReason = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.EarlyPunchoutReason).FirstOrDefault(),
+                        //                         OutLocationReason = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinOutsideLocationReason).FirstOrDefault(),
+                        //                         PunchinTime = Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinTime).FirstOrDefault()),
+                        //                         PunchoutTime = Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchoutTime).FirstOrDefault()),
+                        //                         Latlong = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PILatitudeLongitude).FirstOrDefault(),
+                        //                         DepartmentName = (from g in context.GroupMasters where g.ID == ((from uaa in context.Users where uaa.UserId == ua.UserAccessID select uaa.GroupID).FirstOrDefault()) select g.GroupName).FirstOrDefault(),
+                        //                         MobileNo = (from us in context.Users where us.UserId == ua.UserAccessID select us.MobileNoCmp).FirstOrDefault(),
+                        //                         OutLatlong = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.POLatitudeLongitude).FirstOrDefault(),
+                        //                         OutLocationReason_PunchOut = (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchoutOutsideLocationReason).FirstOrDefault(),
+
+                        //                     }).ToList());
 
                         #endregion
 
@@ -4969,6 +4993,61 @@ namespace EmployeeLoginService
             return jss.Serialize(FinalResult);
         }
 
+        public TeamAvailability Map_TeamAvailability(ELDBDataContext context, UserAccess ua, List<User> userrecords, List<PunchIn> punchrecords, List<GroupMaster> GroupMasters)
+        {
+            PunchIn obj_Punchin = (from p in punchrecords where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p).FirstOrDefault();
+
+
+            TeamAvailability map = new TeamAvailability();
+
+            if (obj_Punchin != null && obj_Punchin.PILocationId != null)
+            {
+                Location obo_location = context.Locations.FirstOrDefault(x => x.LocationId == obj_Punchin.PILocationId);
+                if (obo_location != null)
+                {
+                    map.In_Latlong_Image = obo_location.LocationImage;
+                    map.InLocation_Name = obo_location.PlaceName;
+                }
+            }
+
+            if (obj_Punchin != null && obj_Punchin.POLocationId != null)
+            {
+                Location obo_location = context.Locations.FirstOrDefault(x => x.LocationId == obj_Punchin.POLocationId);
+                if (obo_location != null)
+                {
+                    map.Out_Latlong_Image = obo_location.LocationImage;
+                    map.OutLocation_Name = obo_location.PlaceName;
+                }
+            }
+
+            try
+            {
+                User user = (from us in userrecords where us.UserId == ua.UserAccessID select us).FirstOrDefault();
+                map.UserName = user.FirstName + " " + user.LastName;// (from us in context.Users where us.UserId == ua.UserAccessID select us.FirstName + " " + us.LastName).FirstOrDefault();
+                map.DepartmentName = (from g in GroupMasters where g.ID == (user.GroupID) select g.GroupName).FirstOrDefault();
+                map.MobileNo = user.MobileNoCmp;// (from us in context.Users where us.UserId == ua.UserAccessID select us.MobileNoCmp).FirstOrDefault();
+
+                if (obj_Punchin != null)
+                {
+                    map.IsPunchin = true;// (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.UserId).Count() != 0 ? true : false;
+                    map.LatePunchinReason = obj_Punchin.LatePunchinReason;// (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.LatePunchinReason).FirstOrDefault();
+                    map.EarlyPunchoutReason = obj_Punchin.EarlyPunchoutReason;// (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.EarlyPunchoutReason).FirstOrDefault();
+                    map.OutLocationReason = obj_Punchin.PunchinOutsideLocationReason; //(from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinOutsideLocationReason).FirstOrDefault();
+                    map.PunchinTime = Convert.ToString(obj_Punchin.PunchinTime); //Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchinTime).FirstOrDefault());
+                    map.PunchoutTime = Convert.ToString(obj_Punchin.PunchoutTime); //Convert.ToString((from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchoutTime).FirstOrDefault());
+                    map.Latlong = obj_Punchin.PILatitudeLongitude;// (from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PILatitudeLongitude).FirstOrDefault();
+                    map.OutLatlong = obj_Punchin.POLatitudeLongitude; //(from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.POLatitudeLongitude).FirstOrDefault();
+                    map.OutLocationReason_PunchOut = obj_Punchin.PunchoutOutsideLocationReason; //(from p in context.PunchIns where p.UserId == ua.UserAccessID && p.PunchinTime.Date == DateTime.Now.Date select p.PunchoutOutsideLocationReason).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                map = new TeamAvailability();
+            }
+
+
+            return map;
+        }
         #endregion
 
         #region ~Test
@@ -8265,7 +8344,7 @@ namespace EmployeeLoginService
                 {
                     using (var context = new ELDBDataContext())
                     {
-                        var EIDdetail = (from wt in context.Users where wt.UserName == UserName select wt).FirstOrDefault();
+                        var EIDdetail = (from wt in context.Users where wt.UserId == UserID select wt).FirstOrDefault();
                         EIDdetail.Password = NewPassword;
                         context.SubmitChanges();
                         LD.ReturnResult = "Password has been Updated sucessfully.";
@@ -8297,9 +8376,6 @@ namespace EmployeeLoginService
             try
             {
                 //check Username Password with device
-
-
-
                 using (var context = new ELDBDataContext())
                 {
 
@@ -8796,7 +8872,7 @@ namespace EmployeeLoginService
                     {
                         LD.ReturnType = "success";
                         LD.ReturnResult = "";
-                        LD.FailureReason = "something went wrong!";
+                        LD.FailureReason = "something went wrong!" + result.message;
                     }
                 }
             }
