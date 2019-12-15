@@ -6011,8 +6011,14 @@ namespace EmployeeLoginService
                                                 TotalWorkHour = "Total Working Hour - " + PD.WorkingHour.Hours + ":" + PD.WorkingHour.Minutes + ":" + PD.WorkingHour.Seconds;
                                             }
 
-                                            if (TempWorkHour < new TimeSpan(context.WeeklyTimings.Where(w => w.ObjectId == LD.UserId && w.TimingFor == 3 && w.Day == Convert.ToString(DateTime.Now.DayOfWeek)).FirstOrDefault().WorkingHours.Ticks / 2))
-                                                PODetail.IsHalfDay = true;
+                                            WeeklyTiming obj_weeklytimming =  context.WeeklyTimings.Where(w => w.ObjectId == LD.UserId && w.TimingFor == 3 && w.Day == Convert.ToString(DateTime.Now.DayOfWeek)).FirstOrDefault();
+
+                                            if (obj_weeklytimming != null)
+                                            {
+                                                if (TempWorkHour < new TimeSpan(context.WeeklyTimings.Where(w => w.ObjectId == LD.UserId && w.TimingFor == 3 && w.Day == Convert.ToString(DateTime.Now.DayOfWeek)).FirstOrDefault().WorkingHours.Ticks / 2))
+                                                    PODetail.IsHalfDay = true;
+                                            }
+
                                             PODetail.WorkingHour = Convert.ToString(TempWorkHour).Split('.')[0];
                                             PODetail.ExtraWorkingHour = Convert.ToString(new TimeSpan(TempWorkHour.Ticks - UserWorkHour.Ticks)).Split('.')[0];
 

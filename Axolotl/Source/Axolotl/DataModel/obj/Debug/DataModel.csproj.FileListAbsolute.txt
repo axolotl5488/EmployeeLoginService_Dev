@@ -1,0 +1,10 @@
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\DataModel.dll.config
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\DataModel.dll
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\DataModel.pdb
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.dll
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.xml
+D:\Milan\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\Milan\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csproj.CopyComplete
+D:\Milan\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.dll
+D:\Milan\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.pdb

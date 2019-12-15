@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AxolotlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AxolotlEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="AxolotlModel.C__MigrationHistory" />
+    <EntitySet Name="APILogActivities" EntityType="AxolotlModel.APILogActivity" />
+    <EntitySet Name="AspNetRoles" EntityType="AxolotlModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="AxolotlModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="AxolotlModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="AxolotlModel.AspNetUser" />
+    <EntitySet Name="Companies" EntityType="AxolotlModel.Company" />
+    <EntitySet Name="EmployeePunches" EntityType="AxolotlModel.EmployeePunch" />
+    <EntitySet Name="EmployeeTasks" EntityType="AxolotlModel.EmployeeTask" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Company" Association="AxolotlModel.FK_AspNetUsers_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeePunches_AspNetUsers" Association="AxolotlModel.FK_EmployeePunches_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="EmployeePunch" EntitySet="EmployeePunches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeTasks_AspNetUsers" Association="AxolotlModel.FK_EmployeeTasks_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="EmployeeTask" EntitySet="EmployeeTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeTasks_EmployeePunches" Association="AxolotlModel.FK_EmployeeTasks_EmployeePunches">
+      <End Role="EmployeePunch" EntitySet="EmployeePunches" />
+      <End Role="EmployeeTask" EntitySet="EmployeeTasks" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="AxolotlModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="APILogActivity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StarteTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="API" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Request" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AxolotlModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShouldSendNotification" Type="Boolean" Nullable="false" />
+    <Property Name="DeviceType" Type="Int32" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserPhotoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="OfficeShiftType" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="DeviceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="Decimal" Precision="18" Scale="18" />
+    <Property Name="Longitude" Type="Decimal" Precision="18" Scale="18" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
+    <NavigationProperty Name="EmployeePunches" Relationship="AxolotlModel.FK_EmployeePunches_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeePunch" />
+    <NavigationProperty Name="EmployeeTasks" Relationship="AxolotlModel.FK_EmployeeTasks_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeeTask" />
+    <NavigationProperty Name="AspNetRoles" Relationship="AxolotlModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FlexibleBufferMinutes" Type="Int32" Nullable="false" />
+    <Property Name="NoOfWeekOffDays" Type="Int32" Nullable="false" />
+    <Property Name="WorkingHoursInMinutes" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AxolotlModel.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="EmployeePunch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="ClockInTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ClockOutTime" Type="DateTime" Precision="3" />
+    <Property Name="ClockInLatitude" Type="Decimal" Nullable="false" Precision="18" Scale="18" />
+    <Property Name="ClockInLongitude" Type="Decimal" Nullable="false" Precision="18" Scale="18" />
+    <Property Name="LateComer" Type="Boolean" Nullable="false" />
+    <Property Name="EarlyOuter" Type="Boolean" Nullable="false" />
+    <Property Name="LateComerReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="EarlyOuterReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsSystemClockOut" Type="Boolean" Nullable="false" />
+    <Property Name="ClockOutLatitude" Type="Decimal" Precision="18" Scale="18" />
+    <Property Name="ClockOutLongitude" Type="Decimal" Precision="18" Scale="18" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeePunches_AspNetUsers" FromRole="EmployeePunch" ToRole="AspNetUser" />
+    <NavigationProperty Name="EmployeeTasks" Relationship="AxolotlModel.FK_EmployeeTasks_EmployeePunches" FromRole="EmployeePunch" ToRole="EmployeeTask" />
+  </EntityType>
+  <EntityType Name="EmployeeTask">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="EmployeePunchID" Type="Int64" Nullable="false" />
+    <Property Name="Task" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeeTasks_AspNetUsers" FromRole="EmployeeTask" ToRole="AspNetUser" />
+    <NavigationProperty Name="EmployeePunch" Relationship="AxolotlModel.FK_EmployeeTasks_EmployeePunches" FromRole="EmployeeTask" ToRole="EmployeePunch" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AxolotlModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AxolotlModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Company">
+    <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeePunches_AspNetUsers">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeePunch" Role="EmployeePunch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeePunch">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeTasks_AspNetUsers">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeTask" Role="EmployeeTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeTask">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeTasks_EmployeePunches">
+    <End Type="AxolotlModel.EmployeePunch" Role="EmployeePunch" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeTask" Role="EmployeeTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePunch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EmployeeTask">
+        <PropertyRef Name="EmployeePunchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="AxolotlModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

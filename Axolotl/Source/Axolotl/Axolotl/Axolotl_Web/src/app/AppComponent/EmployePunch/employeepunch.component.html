@@ -1,0 +1,44 @@
+
+<div class="header-location-content">
+  <div class=" spacer-top-20 spacer-bottom-20">
+    <table class="table table-theme">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Date</th>
+          <th>In Time</th>
+          <th>Out Time</th>
+          <th>Total Tasks</th>
+          <th>Total Hours</th>
+          <th>Late Commer</th>
+          <th>Early Out</th>
+          <th>System Punch Out</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="model && model.records">
+        <tr *ngFor="let obj of model.records">
+          <td>{{obj.username}}</td>
+          <td>{{obj.date}}</td>
+          <td>{{obj.clockintime}}</td>
+          <td>{{obj.clockouttime}}</td>
+          <td>{{obj.totaltasks}}</td>
+          <td>{{obj.workinghours}}</td>
+          <td style="text-align:center;"><b class="text text-danger">{{obj.latecomer}}</b></td>
+          <td style="text-align:center;"><b class="text text-primary">{{obj.earlyouter}}</b></td>
+          <td style="text-align:center;"><b class="text text-success">{{obj.issystemclockout}}</b></td>
+          <td style="text-align:center;">
+            <!--<a href="javascript:void(0)" class="fa fa-edit"
+               style="width:20px!important;"></a>
+            <a href="javascript:void(0)" class="fa fa-remove"
+               style="width:20px!important;"></a>-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+

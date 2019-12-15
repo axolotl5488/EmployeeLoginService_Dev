@@ -1,0 +1,35 @@
+.select {
+    width: 100% !important;
+}
+.has-error {
+color:red !important;
+}
+.modal-theme .modal-dialog .modal-content .modal-body {
+   
+    overflow: auto;
+    max-height: 500px;
+}
+.modal-dialog {
+    border: 1px solid grey !important;
+    box-shadow: 0 0 10px !important;
+}
+
+.template-group {
+    padding: 0px !important;
+}
+.rightside-btn-margin {
+    
+    margin-top: 10px;
+}
+.table-theme .fa {
+width:33% !important
+}
+
+.required{
+       border: 1px solid red;
+}
+.doc-attached {
+    color: green !important;
+    font-weight: 800 !important;
+    font-size: 15px !important;
+}

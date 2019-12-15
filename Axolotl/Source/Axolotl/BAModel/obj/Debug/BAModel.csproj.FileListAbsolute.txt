@@ -1,0 +1,16 @@
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\BAModel.dll.config
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\BAModel.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\BAModel.pdb
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\DataModel.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\EntityFramework.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\Newtonsoft.Json.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\DataModel.pdb
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\DataModel.dll.config
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\EntityFramework.xml
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\Milan\Axolotl\Source\Axolotl\BAModel\bin\Debug\Newtonsoft.Json.xml
+D:\Milan\Axolotl\Source\Axolotl\BAModel\obj\Debug\BAModel.csprojAssemblyReference.cache
+D:\Milan\Axolotl\Source\Axolotl\BAModel\obj\Debug\BAModel.csproj.CopyComplete
+D:\Milan\Axolotl\Source\Axolotl\BAModel\obj\Debug\BAModel.dll
+D:\Milan\Axolotl\Source\Axolotl\BAModel\obj\Debug\BAModel.pdb
