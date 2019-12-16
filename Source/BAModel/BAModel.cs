@@ -1048,7 +1048,7 @@ namespace BAModel
                                     xlSheet.Cells[miRow, 9 + padding].Value = Out_Location != null ? Out_Location.PlaceName : " - "; ;
                                     xlSheet.Cells[miRow, 10 + padding].Value = obj.record.EarlyPunchout ? "Yes" : "No";
                                     xlSheet.Cells[miRow, 11 + padding].Value = obj.record.EarlyPunchoutReason;
-                                    xlSheet.Cells[miRow, 11 + padding].Value = obj.record.SystemPunchout ? "Yes" : "No";
+                                    xlSheet.Cells[miRow, 12 + padding].Value = obj.record.SystemPunchout ? "Yes" : "No";
                                 }
                                 else
                                 {

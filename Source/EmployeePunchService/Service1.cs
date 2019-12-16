@@ -62,7 +62,7 @@ namespace EmployeePunchService
             try
             {
                 DateTime currentDatetime = DateTime.Now;
-                if (currentDatetime.Hour == 12 && currentDatetime.Minute == 30)
+                if (currentDatetime.Hour == 0 && currentDatetime.Minute == 05)
                 {
                     Trace.TraceInformation("TimerOneMinute_Tick Process Start:: Datetime::" + DateTime.Now);
                     BAModel.BAModel.CheckAndSetEmployeePunchOutAsSystem();
