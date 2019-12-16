@@ -1,0 +1,140 @@
+<div class="col-xs-11 col-sm-11 col-md-11 col-lg-12">
+  <div class="tab-opia">
+    <ul class="nav nav-tabs" *ngIf="this.model.id > 0">
+      <li [ngClass]="this.activeTab == 1?'active':''">
+        <a data-toggle="tab" (click)="ChangeTab(1)">Detail</a>
+      </li>
+      <li [ngClass]="this.activeTab == 2?'active':''">
+        <a data-toggle="tab" (click)="ChangeTab(2)">Employee</a>
+      </li>
+      <li [ngClass]="this.activeTab == 3?'active':''">
+        <a data-toggle="tab" (click)="ChangeTab(3)">Employee Punches</a>
+      </li>
+      <li style="float:right">
+        <button type="button" [routerLink]="['/company']" class="btn btn-theme btn-sm pull-right"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Back</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" style="border-top:none;" *ngIf="this.activeTab == 1">
+      <div id="tab-general" class="tab-pane fade in active">
+        <div class="area-form">
+          <form id="manageform" #manageform="ngForm" (submit)="ManageCompany()">
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Name *</div>
+                <input type="text"
+                       class="form-control" id="name" name="name"
+                       #name="ngModel"
+                       [(ngModel)]="model.name"
+                       [class.required]="name.touched && name.invalid"
+                       required />
+              </div>
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Number *</div>
+                <input type="text"
+                       class="form-control" id="mobile" name="mobile"
+                       #mobile="ngModel"
+                       [(ngModel)]="model.mobile"
+                       [class.required]="mobile.touched && mobile.invalid"
+                       required />
+              </div>
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">No of Week Days *</div>
+                <input type="number"
+                       class="form-control" id="noofweekOffdays" name="noofweekOffdays"
+                       #noofweekOffdays="ngModel"
+                       [(ngModel)]="model.noofweekOffdays"
+                       [class.required]="noofweekOffdays.touched && noofweekOffdays.invalid"
+                       required />
+              </div>
+            </div>
+
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Working Hours (in minutes) *</div>
+                <input type="number"
+                       class="form-control" id="workinghours" name="workinghours"
+                       #workinghours="ngModel"
+                       [(ngModel)]="model.workinghours"
+                       [class.required]="workinghours.touched && workinghours.invalid"
+                       required />
+              </div>
+            </div>
+
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Flexible Buffer Minutes *</div>
+                <input type="number"
+                       class="form-control" id="flexiblebufferminutes" name="flexiblebufferminutes"
+                       #flexiblebufferminutes="ngModel"
+                       [(ngModel)]="model.flexiblebufferminutes"
+                       [class.required]="flexiblebufferminutes.touched && flexiblebufferminutes.invalid"
+                       required />
+              </div>
+            </div>
+
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Address</div>
+                <input type="text"
+                       class="form-control" id="address" name="address"
+                       #address="ngModel"
+                       [(ngModel)]="model.address"
+                        />
+              </div>
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">State</div>
+                <input type="text"
+                       class="form-control" id="state" name="state"
+                       #state="ngModel"
+                       [(ngModel)]="model.state"
+                        />
+              </div>
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">City</div>
+                <input type="text"
+                       class="form-control" id="city" name="city"
+                       #city="ngModel"
+                       [(ngModel)]="model.city"
+                        />
+              </div>
+            </div>
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label">Zipcode</div>
+                <input type="text"
+                       class="form-control" id="zipcode" name="zipcode"
+                       #zipcode="ngModel"
+                       [(ngModel)]="model.zipcode"
+                        />
+              </div>
+            </div>
+
+
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
+              <div class="form-group form-group-theme">
+                <div class="label" style="float: left;">&nbsp;</div>
+                <div class="rightside-btn1 spacer-bottom-10" style="float:left;">
+                  <a [routerLink]="['/company']" class="btn btn-theme btn-sm pull-right" style="margin-right: 5px;">Cancel</a>
+                  <button type="submit" class="btn btn-theme btn-sm pull-right" style="margin-right: 5px;"
+                          [disabled]="manageform.invalid">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
