@@ -16,4 +16,11 @@ namespace BAModel.Model
 
         public string message { get; set; }
     }
+    
+
+    public class Dropdown_Model
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
 }

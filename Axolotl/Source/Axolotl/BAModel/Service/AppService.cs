@@ -250,7 +250,7 @@ namespace BAModel.Service
                     if (request.punchtype == (int)AppEnum.PunchTypeEnum.In)
                     {
                         obj = new EmployeePunch();
-                        obj.ClockInLatitude = request.in_lat;
+                        obj.ClockInLatitude =  request.in_lat;
                         obj.ClockInLongitude = request.in_lng;
                         obj.EarlyOuterReason = request.earlyoutouterreason;
                         obj.ClockInTime = Common.Common.GetDateTimeFromTimeStamp(request.in_datetime_timestamp);

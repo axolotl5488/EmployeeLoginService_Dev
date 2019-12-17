@@ -1,5 +1,10 @@
 
 <div class="header-location-content">
+  <div style="margin-top:10px">
+    <div class=" spacer-bottom-10" style="float:right;">
+      <a class="btn btn-secondary " [routerLink]="['/manageuser',0]">+ New User</a>
+    </div>
+  </div>
   <div class=" spacer-top-20 spacer-bottom-20">
     <table class="table table-theme">
       <thead>
@@ -24,10 +29,10 @@
           <td style="text-align:center;"><b class="text text-primary">{{obj.totalearlyout}}</b></td>
           <td style="text-align:center;"><b class="text text-success">{{obj.officeshifttype}}</b></td>
           <td style="text-align:center;">
-            <!--<a href="javascript:void(0)" class="fa fa-edit"
-               style="width:20px!important;"></a>
+            <a href="javascript:void(0)" class="fa fa-edit"
+               style="width:20px!important;"  [routerLink]="['/manageuser',obj.id]"></a>
             <a href="javascript:void(0)" class="fa fa-remove"
-               style="width:20px!important;"></a>-->
+               style="width:20px!important;"></a>
           </td>
         </tr>
       </tbody>

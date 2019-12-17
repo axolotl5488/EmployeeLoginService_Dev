@@ -7,8 +7,10 @@ import { AppCompanyComponent } from './AppComponent/Company/company.component';
 import { AppUserComponent } from './AppComponent/User/user.component';
 import { AppEmployeePunchComponent } from './AppComponent/EmployePunch/employeepunch.component';
 import { AppManageCompanyComponent } from './AppComponent/ManageCompany/managecompany.component';
+import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
 
 const routes: Routes = [
+  { path: 'manageuser/:id', component: AppManageUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] }, 
     { path: 'user', component: AppUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] },
     { path: 'managecompany/:id', component: AppManageCompanyComponent, canActivate: [AppRoutingServiceService], data: ['company'] },
     { path: 'company', component: AppCompanyComponent, canActivate: [AppRoutingServiceService], data: ['company'] },

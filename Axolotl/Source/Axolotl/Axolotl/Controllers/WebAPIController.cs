@@ -82,7 +82,7 @@ namespace Axolotl.Controllers
                 user.DateModified = DateTime.UtcNow;
                 user.PhoneNumberConfirmed = true;
                 user.ShouldSendNotification = true;
-                user.OfficeShiftType = Common.GetShiftTimeByType((int)AppEnum.OfficeShiftEnum.Shift_1);
+                user.OfficeShiftType = Common.GetShiftTimeByType(request.Shifttype);
                 user.CompanyID = request.companyid;
                 IdentityResult result = await UserManager.CreateAsync(user, request.password);
                 if (result.Succeeded)
@@ -94,7 +94,7 @@ namespace Axolotl.Controllers
                 else
                 {
                     response.result.status = false;
-                    response.result.message = "something went wrong!";
+                    response.result.message = result.Errors.FirstOrDefault();
                 }
                 Common.AddAPIActivityLog("SignUp", DateTime.UtcNow, DateTime.UtcNow,JsonConvert.SerializeObject(request), JsonConvert.SerializeObject(response),null, true);
             }
@@ -137,6 +137,14 @@ namespace Axolotl.Controllers
         public async Task<HttpResponseMessage> GetCompanyDetail([FromBody]GetCompanyDetail_Request model)
         {
             return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyDetail(model));
+        }
+        #endregion
+
+        #region Global App
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyList_drp()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, GlobalService.GetCompanyList_drp());
         }
         #endregion 
     }

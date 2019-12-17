@@ -83,8 +83,7 @@
                 <input type="text"
                        class="form-control" id="address" name="address"
                        #address="ngModel"
-                       [(ngModel)]="model.address"
-                        />
+                       [(ngModel)]="model.address" />
               </div>
             </div>
             <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
@@ -93,8 +92,7 @@
                 <input type="text"
                        class="form-control" id="state" name="state"
                        #state="ngModel"
-                       [(ngModel)]="model.state"
-                        />
+                       [(ngModel)]="model.state" />
               </div>
             </div>
             <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
@@ -103,8 +101,7 @@
                 <input type="text"
                        class="form-control" id="city" name="city"
                        #city="ngModel"
-                       [(ngModel)]="model.city"
-                        />
+                       [(ngModel)]="model.city" />
               </div>
             </div>
             <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
@@ -113,8 +110,7 @@
                 <input type="text"
                        class="form-control" id="zipcode" name="zipcode"
                        #zipcode="ngModel"
-                       [(ngModel)]="model.zipcode"
-                        />
+                       [(ngModel)]="model.zipcode" />
               </div>
             </div>
 
@@ -133,6 +129,46 @@
             </div>
           </form>
         </div>
+      </div>
+    </div>
+
+    <div class="tab-content" style="border-top:none;" *ngIf="this.activeTab == 2">
+      <div class="header-location-content">
+        <div class=" spacer-top-20 spacer-bottom-20">
+          <table class="table table-theme">
+            <thead>
+              <tr>
+                <th style="text-align:center">Employees</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center">coming soon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tab-content" style="border-top:none;" *ngIf="this.activeTab == 3">
+      <div class="header-location-content">
+        <div class=" spacer-top-20 spacer-bottom-20">
+          <table class="table table-theme">
+            <thead>
+              <tr>
+                <th style="text-align:center">Employee Punches</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center">coming soon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
 

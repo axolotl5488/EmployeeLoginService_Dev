@@ -10,3 +10,8 @@ export class ResultStatus {
 
     message: string;
 }
+
+export class Dropdown_Model {
+  id: number;
+   name: string;
+    }

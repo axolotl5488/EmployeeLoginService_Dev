@@ -15,8 +15,8 @@ namespace BAModel.Model
         public string phonenumber { get; set; }
         public string password { get; set; }
         public int companyid { get; set; }
-
-
+        public int Shifttype { get; set; }
+        public int id { get; set; }
     }
 
     public class SignUp_response

@@ -56,6 +56,7 @@ export class AppManageCompanyComponent implements OnInit {
 
     ChangeTab(tabid: number): void {
 
+      this.activeTab = tabid;
     }
     
 }

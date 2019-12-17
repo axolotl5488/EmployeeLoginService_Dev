@@ -246,6 +246,7 @@
     <Content Include="Axolotl_Web\src\app\AppComponent\employee-punch\employee-punch.component.html" />
     <Content Include="Axolotl_Web\src\app\AppComponent\EmployePunch\employeepunch.component.html" />
     <Content Include="Axolotl_Web\src\app\AppComponent\ManageCompany\managecompany.component.html" />
+    <Content Include="Axolotl_Web\src\app\AppComponent\ManageUser\manageuser.component.html" />
     <Content Include="Axolotl_Web\src\app\AppComponent\User\user.component.html" />
     <Content Include="Axolotl_Web\src\assets\.gitkeep" />
     <Content Include="Axolotl_Web\src\assets\css\bootstrap.min.css" />
@@ -1127,6 +1128,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppComponent\ManageCompany\managecompany.component.ts" />
+    <TypeScriptCompile Include="Axolotl_Web\src\app\AppComponent\ManageUser\manageuser.component.ts" />
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppComponent\User\user.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -1137,6 +1139,7 @@
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppModel\EmployePunch_Model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Axolotl_Web\src\app\AppModel\Global_Models.ts" />
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppModel\User_Models.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -1148,6 +1151,7 @@
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\EmployePunch_Service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\Global_Service.ts" />
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\User_Service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
