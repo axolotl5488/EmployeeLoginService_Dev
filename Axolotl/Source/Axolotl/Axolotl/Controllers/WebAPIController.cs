@@ -122,9 +122,9 @@ namespace Axolotl.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> EmployeePunchList()
+        public async Task<HttpResponseMessage> EmployeePunchList(EmployeePunchList_Request model)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, WebService.EmployeePunchList());
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.EmployeePunchList(model));
         }
 
         [HttpPost]
@@ -182,7 +182,37 @@ namespace Axolotl.Controllers
         {
             return Request.CreateResponse(HttpStatusCode.OK, WebService.GetEmployeePunchDetail(model));
         }
-        //GetEmployeePunchDetail
+
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageCompanyHolidays([FromBody]MangeCompantHolidays_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageCompanyHolidays(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyHolidayDetail([FromBody]GetCompanyHolidayDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyHolidayDetail(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyHolidayList([FromBody]GetCompanyHolidayList_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyHolidayList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ActiveInActiveCompanyHolidays([FromBody]GetCompanyHolidayDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ActiveInActiveCompanyHolidays(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> EmployeeLeaveList(EmployeeleaveList_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.EmployeeLeaveList(model));
+        }
         #endregion 
 
         #region Global App

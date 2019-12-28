@@ -7,6 +7,9 @@
       <li [ngClass]="this.activeTab == 2?'active':''">
         <a data-toggle="tab" (click)="ChangeTab(2)">Employee Punches</a>
       </li>
+      <li [ngClass]="this.activeTab == 3?'active':''">
+        <a data-toggle="tab" (click)="ChangeTab(3)">Employee Leaves</a>
+      </li>
       <li style="float:right">
         <button type="button" [routerLink]="['/user']" class="btn btn-theme btn-sm pull-right"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Back</button>
       </li>
@@ -82,7 +85,7 @@
             <div class="col-xs-11 col-sm-11 col-md-11 col-lg-4">
               <div class="form-group form-group-theme">
                 <div class="label">Shift *</div>
-                <select class="form-control select" 
+                <select class="form-control select"
                         id="Shifttype"
                         name="Shifttype"
                         #Shifttype="ngModel"
@@ -121,12 +124,29 @@
           <table class="table table-theme">
             <thead>
               <tr>
-                <th style="text-align:center">Employees</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>In Time</th>
+                <th>Out Time</th>
+                <th>Total Tasks</th>
+                <th>Total Hours</th>
+                <th style="text-align:center;">Late Commer</th>
+                <th style="text-align:center;">Early Out</th>
+                <th style="text-align:center;">System Punch Out</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td style="text-align:center">coming soon</td>
+            <tbody *ngIf="model_employeepunchelist && model_employeepunchelist.records">
+              <tr *ngFor="let obj of model_employeepunchelist.records">
+                <td>{{obj.username}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.clockintime}}</td>
+                <td>{{obj.clockouttime}}</td>
+                <td>{{obj.totaltasks}}</td>
+                <td>{{obj.workinghours}}</td>
+                <td style="text-align:center;"><b class="text text-danger">{{obj.latecomer}}</b></td>
+                <td style="text-align:center;"><b class="text text-primary">{{obj.earlyouter}}</b></td>
+                <td style="text-align:center;"><b class="text text-success">{{obj.issystemclockout}}</b></td>
+
               </tr>
             </tbody>
           </table>
@@ -141,12 +161,43 @@
           <table class="table table-theme">
             <thead>
               <tr>
-                <th style="text-align:center">Employee Punches</th>
+                <th>Employee</th>
+                <th>Company</th>
+                <th>From</th>
+                <th>To</th>
+                <th style="text-align:center;">Days</th>
+                <th style="text-align:center;">Day Type</th>
+                <th style="text-align:center;">Leave Type</th>
+                <th style="text-align:center;">Leave Status</th>
+                <th style="text-align:center;">Paid Leave?</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td style="text-align:center">coming soon</td>
+            <tbody *ngIf="model_employeeleaveslist && model_employeeleaveslist.records">
+              <tr *ngFor="let obj of model_employeeleaveslist.records">
+                <td>{{obj.username}}</td>
+                <td>{{obj.companyname}}</td>
+                <td>{{obj.fromdate}}</td>
+                <td>{{obj.todate}}</td>
+
+                <td style="text-align:center;"><b class="text text-success">{{obj.totaldays}}</b></td>
+                <td style="text-align:center;">{{obj.daytype}}</td>
+                <td style="text-align:center;">{{obj.leavetype}}</td>
+                <td style="text-align:center;">
+                  <ng-container *ngIf="obj.leavestatus == 'Pending'">
+                    <b class="text text-success">{{obj.leavestatus}}</b>
+                  </ng-container>
+                  <ng-container *ngIf="obj.leavestatus != 'Pending'">
+                    <b class="text text-default">{{obj.leavestatus}}</b>
+                  </ng-container>
+                </td>
+                <td style="text-align:center;">
+                  <ng-container *ngIf="obj.ispaidleave">
+                    <b class="text text-success">{{obj.totaldays}}</b>
+                  </ng-container>
+                  <ng-container *ngIf="!obj.ispaidleave">
+                    <b class="text text-danger">{{obj.totaldays}}</b>
+                  </ng-container>
+                </td>
               </tr>
             </tbody>
           </table>

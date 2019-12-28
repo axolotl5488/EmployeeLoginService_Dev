@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResultStatus } from '../../AppModel/appmodel_Model';
 import { EmployeePunch_Service } from '../../AppService/EmployePunch_Service';
 import {
-  EmployeePunchList_Response, EmployeePunchList_Detail, GetEmployeePunchDetailWeb_request, GetEmployeePunchDetailWeb_response, PunchTask_Model
+    EmployeePunchList_Response, EmployeePunchList_Detail, GetEmployeePunchDetailWeb_request, GetEmployeePunchDetailWeb_response, PunchTask_Model, EmployeePunchList_Request
 } from '../../AppModel/EmployePunch_Model'
 
 import 'bootstrap/dist/js/bootstrap.js';
@@ -38,7 +38,10 @@ export class AppEmployeePunchComponent implements OnInit {
     }
 
     EmployeePunchList(): void {
-        this._EmployeePunch_Service.EmployeePunchList().subscribe(x => {
+        let request: EmployeePunchList_Request = new EmployeePunchList_Request();
+        request.companyid = 0;
+        request.userid = 0;
+        this._EmployeePunch_Service.EmployeePunchList(request).subscribe(x => {
             this.model = x;
         })
   }

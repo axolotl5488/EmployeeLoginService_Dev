@@ -21,3 +21,14 @@ E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Release\DataM
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.csproj.CopyComplete
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.dll
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.pdb
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\DataModel.dll.config
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\DataModel.dll
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\DataModel.pdb
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\EntityFramework.dll
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\EntityFramework.SqlServer.dll
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\EntityFramework.xml
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\bin\Release\EntityFramework.SqlServer.xml
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.csprojAssemblyReference.cache
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.csproj.CopyComplete
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.dll
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Release\DataModel.pdb

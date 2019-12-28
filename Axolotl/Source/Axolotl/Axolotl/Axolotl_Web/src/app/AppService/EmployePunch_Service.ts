@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { ResultStatus } from '../AppModel/appmodel_Model'
 import { AppCommon } from '../AppCommon/AppCommon'
 import {
-  EmployeePunchList_Response, EmployeePunchList_Detail, GetEmployeePunchDetailWeb_request, GetEmployeePunchDetailWeb_response, PunchTask_Model
+  EmployeePunchList_Response, EmployeePunchList_Detail, GetEmployeePunchDetailWeb_request, GetEmployeePunchDetailWeb_response, PunchTask_Model,EmployeePunchList_Request
 } from '../AppModel/EmployePunch_Model'
 
 
@@ -15,8 +15,8 @@ import {
 export class EmployeePunch_Service {
     constructor(private _HttpClient: HttpClient) { }
 
-    EmployeePunchList(): Observable<EmployeePunchList_Response> {
-        return this._HttpClient.post(AppCommon.APIURL + "/EmployeePunchList", null).map(x => <EmployeePunchList_Response>x).catch(this.httperrorHandle);
+    EmployeePunchList(model: EmployeePunchList_Request): Observable<EmployeePunchList_Response> {
+        return this._HttpClient.post(AppCommon.APIURL + "/EmployeePunchList", model).map(x => <EmployeePunchList_Response>x).catch(this.httperrorHandle);
   }
 
   GetEmployeePunchDetail(model: GetEmployeePunchDetailWeb_request): Observable<GetEmployeePunchDetailWeb_response> {

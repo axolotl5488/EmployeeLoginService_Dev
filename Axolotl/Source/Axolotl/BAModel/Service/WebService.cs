@@ -14,6 +14,7 @@ namespace BAModel.Service
 {
     public static class WebService
     {
+        #region Sprint 1
         public static GetCompany_Response GetCompanyList()
         {
             GetCompany_Response response = new GetCompany_Response();
@@ -86,13 +87,20 @@ namespace BAModel.Service
             return response;
         }
 
-        public static EmployeePunchList_Response EmployeePunchList()
+        public static EmployeePunchList_Response EmployeePunchList(EmployeePunchList_Request model)
         {
             EmployeePunchList_Response response = new EmployeePunchList_Response();
             try
             {
                 AxolotlEntities db = new AxolotlEntities();
-                List<EmployeePunch> records = db.EmployeePunches.Include(x => x.AspNetUser).OrderByDescending(x => x.ID).ToList();
+                List<EmployeePunch> records = db.EmployeePunches
+                    .Where(x=> (model.userid == 0 || x.UserID == model.userid))
+                    .Include(x => x.AspNetUser).OrderByDescending(x => x.ID).ToList();
+
+                if(model.companyid > 0)
+                {
+                    records = records.Where(x => x.AspNetUser.CompanyID == model.companyid).ToList();
+                }
 
                 foreach (EmployeePunch obj in records)
                 {
@@ -218,7 +226,7 @@ namespace BAModel.Service
 
                 AxolotlEntities db = new AxolotlEntities();
                 Company obj = db.Companies.Find(model.id);
-                if(obj != null)
+                if (obj != null)
                 {
                     ManageCompany_Request map = new ManageCompany_Request();
                     map.address = obj.Address;
@@ -334,6 +342,7 @@ namespace BAModel.Service
             }
             return response;
         }
+        #endregion 
 
         #region Sprint 2
         public static GetCompanyLocaitonList_response GetCompanyLocaitonList(GetCompanyLocaitonList_request model)
@@ -343,7 +352,7 @@ namespace BAModel.Service
             {
 
                 AxolotlEntities db = new AxolotlEntities();
-                List<CompanyLocation> records = db.CompanyLocations.OrderByDescending(x => x.ID).ToList();
+                List<CompanyLocation> records = db.CompanyLocations.Where(x => x.CompanyID == model.companyid).OrderByDescending(x => x.ID).ToList();
                 foreach (CompanyLocation obj in records)
                 {
                     GetCompanyLocaitonList_Detail map = new GetCompanyLocaitonList_Detail();
@@ -377,7 +386,7 @@ namespace BAModel.Service
 
                 AxolotlEntities db = new AxolotlEntities();
 
-                if(model.id == 0)
+                if (model.id == 0)
                 {
                     CompanyLocation obj = new CompanyLocation();
                     obj.Address = model.address;
@@ -465,8 +474,8 @@ namespace BAModel.Service
             {
                 AxolotlEntities db = new AxolotlEntities();
                 CompanyLocation obj = db.CompanyLocations.Find(model.locationid);
-               
-                if(obj != null)
+
+                if (obj != null)
                 {
                     obj.IsDeleted = !obj.IsDeleted;
                     obj.DateModified = DateTime.UtcNow;
@@ -522,7 +531,7 @@ namespace BAModel.Service
                         map.workinghours = new DateTime(tp.Ticks).ToString("HH:mm");
                     }
 
-                    foreach(EmployeeTask taskobj in obj.EmployeeTasks)
+                    foreach (EmployeeTask taskobj in obj.EmployeeTasks)
                     {
                         PunchTask_Model maptask = new PunchTask_Model();
                         maptask.Task = taskobj.Task;
@@ -544,6 +553,210 @@ namespace BAModel.Service
             }
             return response;
         }
-        #endregion 
+
+        public static AppCommonResponse ManageCompanyHolidays(MangeCompantHolidays_request model)
+        {
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+
+                DateTime holidaydate = Convert.ToDateTime(model.date);
+                if (!db.CompanyHolidays.Any(x => x.Date == holidaydate && x.CompanyID == model.companyid && x.ID != model.id))
+                {
+                    CompanyHoliday obj = new CompanyHoliday();
+                    if (model.id == 0)
+                    {
+                        obj.CompanyID = model.companyid;
+                        obj.Date = holidaydate;
+                        obj.DateCreated = DateTime.UtcNow;
+                        obj.DateModified = DateTime.UtcNow;
+                        obj.Description = model.description;
+                        obj.IsActive = true;
+                        obj.Name = model.Name;
+
+                        db.CompanyHolidays.Add(obj);
+                    }
+                    else
+                    {
+                        obj = db.CompanyHolidays.Find(model.id);
+                        obj.CompanyID = model.companyid;
+                        obj.Date = holidaydate;
+                        obj.DateCreated = DateTime.UtcNow;
+                        obj.DateModified = DateTime.UtcNow;
+                        obj.Description = model.description;
+                        obj.IsActive = true;
+                        obj.Name = model.Name;
+                    }
+                    db.SaveChanges();
+                    response.result.status = true;
+                    response.result.message = "";
+                }
+                else
+                {
+                    response.result.status = false;
+                    response.result.message = "Same date holiday is exists!";
+                }
+
+               
+
+            }
+            catch (Exception ex)
+            {
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+            }
+            return response;
+        }
+
+        public static GetCompanyHolidayDetail_response GetCompanyHolidayDetail(GetCompanyHolidayDetail_request model)
+        {
+            GetCompanyHolidayDetail_response response = new GetCompanyHolidayDetail_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                CompanyHoliday obj = db.CompanyHolidays.Find(model.id);
+                response.record.companyid = obj.CompanyID;
+                response.record.date = obj.Date.ToString("dd/MM/yyyy");
+                response.record.description = obj.Description;
+                response.record.Name = obj.Name;
+
+                response.result.status = true;
+                response.result.message = "";
+
+            }
+            catch (Exception ex)
+            {
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+            }
+            return response;
+        }
+
+        public static GetCompanyHolidayList_response GetCompanyHolidayList(GetCompanyHolidayList_request model)
+        {
+            GetCompanyHolidayList_response response = new GetCompanyHolidayList_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<CompanyHoliday> holidays = db.CompanyHolidays.Where(x => x.CompanyID == model.companyid).ToList();
+
+                List<DateTime> holidaysgroupbyyear = holidays.GroupBy(x => x.Date.Year).Select(x => x.First().Date).ToList();
+
+                foreach (DateTime year in holidaysgroupbyyear)
+                {
+                    GetCompanyHolidayList_yeardetail record = new GetCompanyHolidayList_yeardetail();
+                    record.year = year.Year.ToString();
+                    foreach (CompanyHoliday obj in holidays.Where(x=>x.Date.Year == year.Year))
+                    {
+                        GetCompanyHolidayList_detail item = new GetCompanyHolidayList_detail();
+                        item.companyid = obj.CompanyID;
+                        item.companyname = obj.Company.Name;
+                        item.date = obj.Date.ToString("dd/MM/yyyy");
+                        item.description = obj.Description;
+                        item.id = obj.ID;
+                        item.isactive = obj.IsActive;
+                        item.Name = obj.Name;
+                        item.year = obj.Date.ToString("yyyy");
+
+                        record.records.Add(item);
+                    }
+
+                    response.records.Add(record);
+                }
+                response.result.status = true;
+                response.result.message = "";
+
+            }
+            catch (Exception ex)
+            {
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+            }
+            return response;
+        }
+
+        public static AppCommonResponse ActiveInActiveCompanyHolidays(GetCompanyHolidayDetail_request model)
+        {
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                CompanyHoliday obj = db.CompanyHolidays.Find(model.id);
+
+                if (obj != null)
+                {
+                    obj.IsActive = !obj.IsActive;
+                    obj.DateModified = DateTime.UtcNow;
+                    db.SaveChanges();
+                }
+
+                response.result.status = true;
+                response.result.message = "";
+
+            }
+            catch (Exception ex)
+            {
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+            }
+            return response;
+        }
+
+
+        public static EmployeeleaveList_Response EmployeeLeaveList(EmployeeleaveList_request model)
+        {
+            EmployeeleaveList_Response response = new EmployeeleaveList_Response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<EmployeeLeaf> records = db.EmployeeLeaves.Where(x=>
+                    (model.companyid ==0 || x.CompanyID== model.companyid) && (model.userid == 0 || x.UserID == model.userid)
+                    ).Include(x => x.AspNetUser).OrderByDescending(x => x.ID).ToList();
+
+                foreach (EmployeeLeaf obj in records)
+                {
+                    EmployeeleaveList_Detail map = new EmployeeleaveList_Detail();
+
+                    map.approvalremarks = obj.ApprovaRemarks;
+                    map.companyid = obj.CompanyID;
+                    map.companyname = obj.Company.Name;
+                    map.daytype = GetEnumDescription((AppEnum.DayTypeEnum)obj.DayTypeID);
+                    map.daytypeid = obj.DayTypeID;
+                    map.fromdate = obj.FromDate.ToString("dd/MM/yyyy");
+                    map.id = obj.ID;
+                    map.ispaidleave = obj.IsPaidLeave;
+                    map.leavestatus = GetEnumDescription((AppEnum.LeaveStatusEnum)obj.LeaveStatus);
+                    map.leavestatusid = obj.LeaveStatus;
+                    map.leavetype = GetEnumDescription((AppEnum.LeaveTypeEnum)obj.LeaveTypeID);
+                    map.leavetypeid = obj.LeaveTypeID;
+                    map.todate = obj.ToDate.ToString("dd/MM/yyyy");
+                    map.userid = obj.UserID;
+                    map.username = obj.AspNetUser.FirstName + " " + obj.AspNetUser.LastName;
+                    map.userremarkd = obj.ApplyRemarks;
+
+                    double daydiff = obj.ToDate.Subtract(obj.FromDate).TotalDays;
+                    if (map.daytypeid == (int)AppEnum.DayTypeEnum.HalfLeave)
+                    {
+                            map.totaldays = 0.5;
+                    }
+                    else
+                    {
+                        map.totaldays = daydiff;
+                    }
+                    response.records.Add(map);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+            }
+            return response;
+        }
+        #endregion
+
+
     }
 }

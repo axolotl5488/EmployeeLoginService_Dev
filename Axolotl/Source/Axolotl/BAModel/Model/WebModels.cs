@@ -178,6 +178,12 @@ namespace BAModel.Model
         public string officeshifttype { get; set; }
     }
 
+    public class EmployeePunchList_Request
+    {
+        public int companyid { get; set; }
+
+        public int userid { get; set; }
+    }
     public class EmployeePunchList_Response
     {
         public List<EmployeePunchList_Detail> records { get; set; }
@@ -285,4 +291,126 @@ namespace BAModel.Model
     }
     #endregion 
 
+    public class MangeCompantHolidays_request
+    {
+        public long id { get; set; }
+
+        public int companyid { get; set; }
+
+        public string date { get; set; }
+
+        public string Name { get; set; }
+
+        public string description { get; set; }
+
+    }
+
+    public class GetCompanyHolidayDetail_request
+    {
+        public long id { get; set; }
+    }
+
+
+    public class GetCompanyHolidayDetail_response
+    {
+        public MangeCompantHolidays_request record { get; set; }
+
+        public ResultStatus result { get; set; }
+
+        public GetCompanyHolidayDetail_response()
+        {
+            result = new ResultStatus();
+            record = new MangeCompantHolidays_request();
+        }
+    }
+
+    public class GetCompanyHolidayList_request
+    {
+        public int companyid { get; set; }
+    }
+
+    public class GetCompanyHolidayList_response
+    {
+        public ResultStatus result { get; set; }
+
+        public List<GetCompanyHolidayList_yeardetail> records { get; set; }
+
+        public GetCompanyHolidayList_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetCompanyHolidayList_yeardetail>();
+        }
+    }
+    public class GetCompanyHolidayList_yeardetail
+    {
+        public string year { get; set; }
+
+        public List<GetCompanyHolidayList_detail> records { get; set; }
+
+        public GetCompanyHolidayList_yeardetail()
+        {
+            records = new List<GetCompanyHolidayList_detail>();
+        }
+    }
+
+    public class GetCompanyHolidayList_detail
+    {
+        public long id { get; set; }
+
+        public int companyid { get; set; }
+
+        public string companyname { get; set; }
+
+        public string date { get; set; }
+
+
+        public string year { get; set; }
+        public string Name { get; set; }
+
+        public string description { get; set; }
+
+        public bool isactive { get; set; }
+    }
+
+    public class EmployeeleaveList_request
+    {
+        public int companyid { get; set; }
+
+        public long userid { get; set; }
+    }
+
+    public class EmployeeleaveList_Response
+    {
+        public List<EmployeeleaveList_Detail> records { get; set; }
+        public ResultStatus result { get; set; }
+
+        public EmployeeleaveList_Response()
+        {
+            result = new ResultStatus();
+            records = new List<EmployeeleaveList_Detail>();
+        }
+    }
+
+    public class EmployeeleaveList_Detail
+    {
+        public long id { get; set; }
+
+        public string companyname { get; set; }
+        public int companyid { get; set; }
+        public string fromdate { get; set; }
+        public string todate { get; set; }
+        public long userid { get; set; }
+        public string username { get; set; }
+        public int leavetypeid { get; set; }
+        public string leavetype { get; set; }
+        public int daytypeid { get; set; }
+        public string daytype { get; set; }
+        public int leavestatusid { get; set; }
+        public string leavestatus { get; set; }
+        public bool ispaidleave { get; set; }
+        public string userremarkd { get; set; }
+        public string approvalremarks { get; set; }
+        public double totaldays { get; set; }
+
+    }
 }

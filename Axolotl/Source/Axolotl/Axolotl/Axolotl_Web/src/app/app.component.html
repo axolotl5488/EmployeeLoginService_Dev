@@ -31,6 +31,7 @@
             <li [ngClass]="(this._AppRoutingServiceService.appMmodel.activeTab == 'company'  )?'active':''"><a data-toggle="tab" [routerLink]="['/company']">Company</a></li>
             <li [ngClass]="(this._AppRoutingServiceService.appMmodel.activeTab == 'user'  )?'active':''"><a data-toggle="tab" [routerLink]="['/user']">Employees</a></li>
             <li [ngClass]="(this._AppRoutingServiceService.appMmodel.activeTab == 'employeepunch'  )?'active':''"><a data-toggle="tab" [routerLink]="['/employeepunch']">Employee Punches</a></li>
+            <li [ngClass]="(this._AppRoutingServiceService.appMmodel.activeTab == 'employeeleaves'  )?'active':''"><a data-toggle="tab" [routerLink]="['/employeeleaves']">Employee Leaves</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane fade in active">

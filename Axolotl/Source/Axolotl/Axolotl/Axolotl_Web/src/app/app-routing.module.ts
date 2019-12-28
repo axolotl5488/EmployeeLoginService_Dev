@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutingServiceService } from './AppService/app-routing-service.service';
-import { EmployeePunchComponent } from './AppComponent/employee-punch/employee-punch.component';
 import { AppCompanyComponent } from './AppComponent/Company/company.component';
 import { AppUserComponent } from './AppComponent/User/user.component';
 import { AppEmployeePunchComponent } from './AppComponent/EmployePunch/employeepunch.component';
 import { AppManageCompanyComponent } from './AppComponent/ManageCompany/managecompany.component';
 import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
+import { AppEmployeeLeaveComponent } from './AppComponent/EmployeeLeaves/EmployeeLeaves.component';
 
 const routes: Routes = [
-  { path: 'manageuser/:id', component: AppManageUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] }, 
+    { path: 'employeeleaves', component: AppEmployeeLeaveComponent, canActivate: [AppRoutingServiceService], data: ['employeeleaves'] },
+    { path: 'manageuser/:id', component: AppManageUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] }, 
     { path: 'user', component: AppUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] },
     { path: 'managecompany/:id', component: AppManageCompanyComponent, canActivate: [AppRoutingServiceService], data: ['company'] },
     { path: 'company', component: AppCompanyComponent, canActivate: [AppRoutingServiceService], data: ['company'] },

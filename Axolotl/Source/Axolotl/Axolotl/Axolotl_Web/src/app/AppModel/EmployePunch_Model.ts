@@ -1,5 +1,9 @@
-import { ResultStatus } from '../AppModel/appmodel_Model'
+import { ResultStatus, AppCommonResponse } from '../AppModel/appmodel_Model'
 
+export class EmployeePunchList_Request {
+    companyid: number;
+    userid: number;
+}
 export class EmployeePunchList_Response {
   records: EmployeePunchList_Detail[];
   result: ResultStatus;
