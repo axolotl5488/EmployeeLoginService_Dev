@@ -10,6 +10,16 @@ namespace BAModel.Model
     {
     }
 
+    public class AppCommonResponse
+    {
+        public ResultStatus result { get; set; }
+
+        public AppCommonResponse()
+        {
+            result = new ResultStatus();
+        }
+    }
+
     public class ResultStatus
     {
         public bool status { get; set; }

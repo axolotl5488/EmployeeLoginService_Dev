@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { ResultStatus } from '../AppModel/appmodel_Model'
 import { AppCommon } from '../AppCommon/AppCommon'
 import {
-  GetUserList_Response, GetUserList_Detail, SignUp_request, SignUp_response
+  GetUserList_Response, GetUserList_Detail, SignUp_request, SignUp_response,
+  GetUserDetail_Request, GetUserDetail_Response
 } from '../AppModel/User_Models'
 
 
@@ -21,6 +22,14 @@ export class User_Service {
 
   SignUp(model: SignUp_request): Observable<SignUp_response> {
     return this._HttpClient.post(AppCommon.APIURL + "/SignUp", model).map(x => <SignUp_response>x).catch(this.httperrorHandle);
+  }
+
+  GetUserDetail(model: GetUserDetail_Request): Observable<GetUserDetail_Response> {
+    return this._HttpClient.post(AppCommon.APIURL + "/GetUserDetail", model).map(x => <GetUserDetail_Response>x).catch(this.httperrorHandle);
+  }
+
+  UpdateUserDetail(model: SignUp_request): Observable<ResultStatus> {
+    return this._HttpClient.post(AppCommon.APIURL + "/UpdateUserDetail", model).map(x => <ResultStatus>x).catch(this.httperrorHandle);
   }
 
   httperrorHandle(error: HttpErrorResponse) {

@@ -5,11 +5,11 @@ import * as $ from 'jquery';
 export class AppCommon {
 
     // Local
-    public static APIURL: string = "https://localhost:44324/API/WebAPI/";
+    //public static APIURL: string = "https://localhost:44324/API/WebAPI/";
 
     // Server
-    // ng build --prod --base-href 
-    //public static APIURL: string = "http://nktpl.co.uk/API/WebAPI/";
+    // ng build --prod --base-href /axolotl_web/
+   public static APIURL: string = "http://nktpl.co.uk/API/WebAPI/";
 
     static SuccessNotify(message: string): void {
         $.notify(message, 'success');

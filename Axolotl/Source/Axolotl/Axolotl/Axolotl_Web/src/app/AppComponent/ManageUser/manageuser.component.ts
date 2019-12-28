@@ -4,7 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppCommon } from '../../AppCommon/AppCommon';
 import { User_Service } from '../../AppService/User_Service';
 import { Global_Service } from '../../AppService/Global_Service';
-import { SignUp_request, SignUp_response } from '../../AppModel/User_Models';
+import {
+  SignUp_request, SignUp_response, GetUserDetail_Request, GetUserDetail_Response,
+  GetUserList_Detail, GetUserList_Response
+} from '../../AppModel/User_Models';
 import { GetCompanyList_drp_response } from '../../AppModel/Global_Models'
 
 
@@ -29,6 +32,11 @@ export class AppManageUserComponent implements OnInit {
     this.GetCompanyList_drp();
     if (this.model.id > 0) {
 
+      let request: GetUserDetail_Request = new GetUserDetail_Request();
+      request.id = this.model.id;
+      this._User_Service.GetUserDetail(request).subscribe(x => {
+        this.model = x.record;
+      })
     }
     else {
       this.model.companyid = undefined;
@@ -56,7 +64,17 @@ export class AppManageUserComponent implements OnInit {
       })
     }
     else {
+      this.model.username = this.model.phonenumber;
 
+      this._User_Service.UpdateUserDetail(this.model).subscribe(x => {
+        if (x.status) {
+          AppCommon.SuccessNotify("record updated successfully!")
+          this._Router.navigate(["/user"])
+        }
+        else {
+          AppCommon.DangerNotify(x.message)
+        }
+      })
     }
   }
 

@@ -5,20 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="19d7626102b6412e898b6485bce61bd4" Name="Diagram1" >
-        <EntityTypeShape EntityType="AxolotlModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AxolotlModel.APILogActivity" Width="1.5" PointX="7.75" PointY="7.75" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetRole" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="6.5" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="9.25" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUser" Width="1.5" PointX="3" PointY="2.5" />
-        <EntityTypeShape EntityType="AxolotlModel.Company" Width="1.5" PointX="0.75" PointY="4.375" />
-        <EntityTypeShape EntityType="AxolotlModel.EmployeePunch" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="AxolotlModel.EmployeeTask" Width="1.5" PointX="7.5" PointY="4.25" />
+        <EntityTypeShape EntityType="AxolotlModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxolotlModel.APILogActivity" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxolotlModel.AppVersionHistory" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetRole" Width="1.5" PointX="3.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUserClaim" Width="1.5" PointX="8.25" PointY="15.625" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUserLogin" Width="1.5" PointX="8.25" PointY="13.125" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUser" Width="1.5" PointX="6" PointY="9.75" />
+        <EntityTypeShape EntityType="AxolotlModel.Company" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyHoliday" Width="1.5" PointX="3" PointY="25.625" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyLocation" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeLeaf" Width="1.5" PointX="11.25" PointY="11.5" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeePunch" Width="1.5" PointX="8.25" PointY="18.375" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeTask" Width="1.5" PointX="10.5" PointY="16.375" />
         <AssociationConnector Association="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AxolotlModel.FK_AspNetUsers_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeLeaves_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeePunches_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeTasks_AspNetUsers" />
+        <AssociationConnector Association="AxolotlModel.FK_CompanyHolidays_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_CompanyLocation_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeLeaves_Company" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeTasks_EmployeePunches" />
         <AssociationConnector Association="AxolotlModel.AspNetUserRoles" />
       </Diagram>

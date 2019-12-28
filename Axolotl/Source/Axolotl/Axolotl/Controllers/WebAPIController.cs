@@ -138,7 +138,52 @@ namespace Axolotl.Controllers
         {
             return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyDetail(model));
         }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetUserDetail([FromBody]GetUserDetail_Request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetUserDetail(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> UpdateUserDetail([FromBody]SignUp_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.UpdateUserDetail(model));
+        }
         #endregion
+
+        #region Sprint #2
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyLocaitonList([FromBody]GetCompanyLocaitonList_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyLocaitonList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageCompanyLocation([FromBody]ManageCompanyLocation_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageCompanyLocation(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyLocationDetail([FromBody]GetCompanyLocationDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyLocationDetail(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ActiveInActiveCompanyLocation([FromBody]GetCompanyLocationDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ActiveInActiveCompanyLocation(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetEmployeePunchDetail([FromBody]GetEmployeePunchDetailWeb_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetEmployeePunchDetail(model));
+        }
+        //GetEmployeePunchDetail
+        #endregion 
 
         #region Global App
         [HttpPost]

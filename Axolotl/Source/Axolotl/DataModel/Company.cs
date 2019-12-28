@@ -18,6 +18,9 @@ namespace DataModel
         public Company()
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.CompanyHolidays = new HashSet<CompanyHoliday>();
+            this.CompanyLocations = new HashSet<CompanyLocation>();
+            this.EmployeeLeaves = new HashSet<EmployeeLeaf>();
         }
     
         public int ID { get; set; }
@@ -33,8 +36,18 @@ namespace DataModel
         public int NoOfWeekOffDays { get; set; }
         public int WorkingHoursInMinutes { get; set; }
         public bool IsDelete { get; set; }
+        public double PunchRangeInMeter { get; set; }
+        public double AllowedLeaves { get; set; }
+        public System.DateTime FincialStartYear { get; set; }
+        public System.DateTime FincialEndYear { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyHoliday> CompanyHolidays { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyLocation> CompanyLocations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLeaf> EmployeeLeaves { get; set; }
     }
 }

@@ -1,0 +1,48 @@
+
+  <div class="header-location-content">
+    <div style="margin-top:10px">
+      <div class=" spacer-bottom-10" style="float:right;">
+        <a class="btn btn-secondary " [routerLink]="['/managecompany',0]">+ New Company</a>
+      </div>
+    </div>
+    <div class=" spacer-top-20 spacer-bottom-20">
+      <table class="table table-theme">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Created Date</th>
+            <th style="text-align:center;">Total Users</th>
+            <th style="text-align:center;">Flexible Minutes</th>
+            <th style="text-align:center;">Total WeekOffs</th>
+            <th style="text-align:center;">Working Hours</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="model && model.records">
+          <tr *ngFor="let obj of model.records">
+            <td>{{obj.id}}</td>
+            <td>{{obj.name}}</td>
+            <td>{{obj.mobile}}</td>
+            <td>{{obj.datecreated}}</td>
+            <td style="text-align:center;"><b class="text text-primary">{{obj.totalusers}}</b></td>
+            <td style="text-align:center;"><b class="text text-danger">{{obj.flexiblebufferminutes}}</b></td>
+            <td style="text-align:center;"><b class="text text-success">{{obj.noofweekoffdays}}</b></td>
+            <td style="text-align:center;"><b class="text text-info">{{obj.workinghoursinminutes / 60}}</b></td>
+            <td style="text-align:center;">
+              <a href="javascript:void(0)" class="fa fa-edit" [routerLink]="['/managecompany',obj.id]"
+                 style="width:20px!important;"></a>
+              <!--<a href="javascript:void(0)" class="fa fa-remove"
+                 style="width:20px!important;"></a>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+

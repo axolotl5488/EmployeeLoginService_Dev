@@ -15,6 +15,7 @@ import { AppManageCompanyComponent } from './AppComponent/ManageCompany/manageco
 import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
 
 
+import { ResponseInterceptor } from './AppService/ResponseInterceptor_Service';
 import { Company_Service } from './AppService/Company_Service';
 import { User_Service } from './AppService/User_Service';
 import { EmployeePunch_Service } from './AppService/EmployePunch_Service';
@@ -31,7 +32,9 @@ import { Global_Service } from './AppService/Global_Service';
       HttpModule,
       HttpClientModule,
   ],
-  providers: [Company_Service, User_Service, EmployeePunch_Service, Global_Service],
+  providers: [Company_Service, User_Service, EmployeePunch_Service, Global_Service,
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,3 +15,13 @@ export class Dropdown_Model {
   id: number;
    name: string;
     }
+
+
+
+export class AppCommonResponse {
+  result: ResultStatus;
+
+  public constructor() {
+    this.result = new ResultStatus();
+  }
+}

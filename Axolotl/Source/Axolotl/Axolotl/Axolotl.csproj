@@ -1152,6 +1152,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\Global_Service.ts" />
+    <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\ResponseInterceptor_Service.ts" />
     <TypeScriptCompile Include="Axolotl_Web\src\app\AppService\User_Service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

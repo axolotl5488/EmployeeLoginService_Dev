@@ -53,6 +53,9 @@
     <Compile Include="APILogActivity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppVersionHistory.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -66,6 +69,12 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Company.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyHoliday.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyLocation.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="C__MigrationHistory.cs">
@@ -85,6 +94,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeLeaf.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeePunch.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

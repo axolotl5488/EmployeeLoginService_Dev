@@ -26,16 +26,20 @@ namespace DataModel
         public long UserID { get; set; }
         public System.DateTime ClockInTime { get; set; }
         public Nullable<System.DateTime> ClockOutTime { get; set; }
-        public decimal ClockInLatitude { get; set; }
-        public decimal ClockInLongitude { get; set; }
+        public double ClockInLatitude { get; set; }
+        public double ClockInLongitude { get; set; }
         public bool LateComer { get; set; }
         public bool EarlyOuter { get; set; }
         public string LateComerReason { get; set; }
         public string EarlyOuterReason { get; set; }
         public bool IsSystemClockOut { get; set; }
-        public Nullable<decimal> ClockOutLatitude { get; set; }
-        public Nullable<decimal> ClockOutLongitude { get; set; }
+        public Nullable<double> ClockOutLatitude { get; set; }
+        public Nullable<double> ClockOutLongitude { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsOutSidePunchIn { get; set; }
+        public bool IsOutSidePunchOut { get; set; }
+        public Nullable<long> PunchIn_LocationID { get; set; }
+        public Nullable<long> PunchOut_LocationID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

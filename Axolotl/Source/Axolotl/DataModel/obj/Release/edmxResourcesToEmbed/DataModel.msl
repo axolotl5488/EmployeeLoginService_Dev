@@ -26,6 +26,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AppVersionHistories">
+      <EntityTypeMapping TypeName="AxolotlModel.AppVersionHistory">
+        <MappingFragment StoreEntitySet="AppVersionHistory">
+          <ScalarProperty Name="IsRequiredToUpdate" ColumnName="IsRequiredToUpdate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+          <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+          <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="AxolotlModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
@@ -89,6 +103,10 @@
     <EntitySetMapping Name="Companies">
       <EntityTypeMapping TypeName="AxolotlModel.Company">
         <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="FincialEndYear" ColumnName="FincialEndYear" />
+          <ScalarProperty Name="FincialStartYear" ColumnName="FincialStartYear" />
+          <ScalarProperty Name="AllowedLeaves" ColumnName="AllowedLeaves" />
+          <ScalarProperty Name="PunchRangeInMeter" ColumnName="PunchRangeInMeter" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="WorkingHoursInMinutes" ColumnName="WorkingHoursInMinutes" />
           <ScalarProperty Name="NoOfWeekOffDays" ColumnName="NoOfWeekOffDays" />
@@ -105,9 +123,65 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CompanyHolidays">
+      <EntityTypeMapping TypeName="AxolotlModel.CompanyHoliday">
+        <MappingFragment StoreEntitySet="CompanyHolidays">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyLocations">
+      <EntityTypeMapping TypeName="AxolotlModel.CompanyLocation">
+        <MappingFragment StoreEntitySet="CompanyLocation">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeLeaves">
+      <EntityTypeMapping TypeName="AxolotlModel.EmployeeLeaf">
+        <MappingFragment StoreEntitySet="EmployeeLeaves">
+          <ScalarProperty Name="ApprovaRemarks" ColumnName="ApprovaRemarks" />
+          <ScalarProperty Name="ApplyRemarks" ColumnName="ApplyRemarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsPaidLeave" ColumnName="IsPaidLeave" />
+          <ScalarProperty Name="LeaveStatus" ColumnName="LeaveStatus" />
+          <ScalarProperty Name="DayTypeID" ColumnName="DayTypeID" />
+          <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EmployeePunches">
       <EntityTypeMapping TypeName="AxolotlModel.EmployeePunch">
         <MappingFragment StoreEntitySet="EmployeePunches">
+          <ScalarProperty Name="PunchOut_LocationID" ColumnName="PunchOut_LocationID" />
+          <ScalarProperty Name="PunchIn_LocationID" ColumnName="PunchIn_LocationID" />
+          <ScalarProperty Name="IsOutSidePunchOut" ColumnName="IsOutSidePunchOut" />
+          <ScalarProperty Name="IsOutSidePunchIn" ColumnName="IsOutSidePunchIn" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ClockOutLongitude" ColumnName="ClockOutLongitude" />
           <ScalarProperty Name="ClockOutLatitude" ColumnName="ClockOutLatitude" />

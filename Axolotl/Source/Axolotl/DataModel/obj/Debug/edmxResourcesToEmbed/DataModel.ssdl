@@ -24,6 +24,19 @@
     <Property Name="Error" Type="nvarchar(max)" />
     <Property Name="IsSuccess" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="AppVersionHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="DeviceType" Type="int" Nullable="false" />
+    <Property Name="VersionName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VersionID" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Message" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsRequiredToUpdate" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
@@ -107,6 +120,59 @@
     <Property Name="NoOfWeekOffDays" Type="int" Nullable="false" />
     <Property Name="WorkingHoursInMinutes" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="PunchRangeInMeter" Type="float" Nullable="false" />
+    <Property Name="AllowedLeaves" Type="float" Nullable="false" />
+    <Property Name="FincialStartYear" Type="datetime" Nullable="false" />
+    <Property Name="FincialEndYear" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyHolidays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyLocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="500" />
+    <Property Name="City" Type="nvarchar" MaxLength="500" />
+    <Property Name="Zipcode" Type="nvarchar" MaxLength="500" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeLeaves">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="ToDate" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="LeaveTypeID" Type="int" Nullable="false" />
+    <Property Name="DayTypeID" Type="int" Nullable="false" />
+    <Property Name="LeaveStatus" Type="int" Nullable="false" />
+    <Property Name="IsPaidLeave" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ApplyRemarks" Type="nvarchar(max)" />
+    <Property Name="ApprovaRemarks" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="EmployeePunches">
     <Key>
@@ -118,16 +184,20 @@
     <Property Name="UserID" Type="bigint" Nullable="false" />
     <Property Name="ClockInTime" Type="datetime" Nullable="false" />
     <Property Name="ClockOutTime" Type="datetime" />
-    <Property Name="ClockInLatitude" Type="decimal" Precision="18" Scale="18" Nullable="false" />
-    <Property Name="ClockInLongitude" Type="decimal" Precision="18" Scale="18" Nullable="false" />
+    <Property Name="ClockInLatitude" Type="float" Nullable="false" />
+    <Property Name="ClockInLongitude" Type="float" Nullable="false" />
     <Property Name="LateComer" Type="bit" Nullable="false" />
     <Property Name="EarlyOuter" Type="bit" Nullable="false" />
     <Property Name="LateComerReason" Type="varchar(max)" />
     <Property Name="EarlyOuterReason" Type="varchar(max)" />
     <Property Name="IsSystemClockOut" Type="bit" Nullable="false" />
-    <Property Name="ClockOutLatitude" Type="decimal" Precision="18" Scale="18" />
-    <Property Name="ClockOutLongitude" Type="decimal" Precision="18" Scale="18" />
+    <Property Name="ClockOutLatitude" Type="float" />
+    <Property Name="ClockOutLongitude" Type="float" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="IsOutSidePunchIn" Type="bit" Nullable="false" />
+    <Property Name="IsOutSidePunchOut" Type="bit" Nullable="false" />
+    <Property Name="PunchIn_LocationID" Type="bigint" />
+    <Property Name="PunchOut_LocationID" Type="bigint" />
   </EntityType>
   <EntityType Name="EmployeeTasks">
     <Key>
@@ -149,6 +219,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="AspNetUsers">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyHolidays_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyHolidays" Type="Self.CompanyHolidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyHolidays">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyLocation_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyLocation" Type="Self.CompanyLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyLocation">
         <PropertyRef Name="CompanyID" />
       </Dependent>
     </ReferentialConstraint>
@@ -209,6 +303,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EmployeeLeaves_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLeaves">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeLeaves_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EmployeeLeaves">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EmployeePunches_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="EmployeePunches" Type="Self.EmployeePunches" Multiplicity="*" />
@@ -248,17 +366,29 @@
   <EntityContainer Name="AxolotlModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APILogActivity" EntityType="Self.APILogActivity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppVersionHistory" EntityType="Self.AppVersionHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyHolidays" EntityType="Self.CompanyHolidays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyLocation" EntityType="Self.CompanyLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmployeePunches" EntityType="Self.EmployeePunches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmployeeTasks" EntityType="Self.EmployeeTasks" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_AspNetUsers_Company" Association="Self.FK_AspNetUsers_Company">
       <End Role="Company" EntitySet="Company" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyHolidays_Company" Association="Self.FK_CompanyHolidays_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyHolidays" EntitySet="CompanyHolidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyLocation_Company" Association="Self.FK_CompanyLocation_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyLocation" EntitySet="CompanyLocation" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -275,6 +405,14 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeLeaves_AspNetUsers" Association="Self.FK_EmployeeLeaves_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeLeaves_Company" Association="Self.FK_EmployeeLeaves_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeePunches_AspNetUsers" Association="Self.FK_EmployeePunches_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

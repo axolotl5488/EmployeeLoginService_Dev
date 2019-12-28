@@ -27,11 +27,15 @@ namespace DataModel
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<APILogActivity> APILogActivities { get; set; }
+        public virtual DbSet<AppVersionHistory> AppVersionHistories { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CompanyHoliday> CompanyHolidays { get; set; }
+        public virtual DbSet<CompanyLocation> CompanyLocations { get; set; }
+        public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
         public virtual DbSet<EmployeePunch> EmployeePunches { get; set; }
         public virtual DbSet<EmployeeTask> EmployeeTasks { get; set; }
     }

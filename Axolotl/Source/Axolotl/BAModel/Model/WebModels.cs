@@ -7,6 +7,95 @@ using BAModel.Model;
 
 namespace BAModel.Model
 {
+    public class GetEmployeePunchDetailWeb_request
+    {
+        public long punchid { get; set; }
+    }
+
+    public class GetEmployeePunchDetailWeb_response
+    {
+        public ResultStatus result { get; set; }
+
+        public EmployeePunchList_Detail record { get; set; }
+
+        public GetEmployeePunchDetailWeb_response()
+        {
+            result = new ResultStatus();
+            record = new EmployeePunchList_Detail();
+        }
+    }
+
+
+    public class GetCompanyLocationDetail_request
+    {
+        public long locationid { get; set; }
+    }
+
+    public class GetCompanyLocationDetail_response
+    {
+        public ResultStatus result { get; set; }
+
+        public ManageCompanyLocation_request record { get; set; }
+        public GetCompanyLocationDetail_response()
+        {
+            result = new ResultStatus();
+            record = new ManageCompanyLocation_request();
+        }
+    }
+    public class ManageCompanyLocation_request
+    {
+        public int companyid { get; set; }
+        public long id { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public string state { get; set; }
+        public string city { get; set; }
+        public string zipcode { get; set; }
+        public double lat { get; set; }
+        public double lng { get; set; }
+
+    }
+
+    public class ManageCompanyLocation_response
+    {
+        public ResultStatus result { get; set; }
+
+        public ManageCompanyLocation_response()
+        {
+            result = new ResultStatus();
+        }
+    }
+    public class GetCompanyLocaitonList_request
+    {
+        public int companyid { get; set; }
+    }
+
+    public class GetCompanyLocaitonList_response
+    {
+        public ResultStatus result { get; set; }
+
+        public List<GetCompanyLocaitonList_Detail> records { get; set; }
+        public GetCompanyLocaitonList_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetCompanyLocaitonList_Detail>();
+        }
+    }
+
+    public class GetCompanyLocaitonList_Detail
+    {
+        public long id { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public string state { get; set; }
+        public string city { get; set; }
+        public string zipcode { get; set; }
+        public double lat { get; set; }
+        public double lng { get; set; }
+        public bool isdeleted { get; set; }
+    }
+
+    #region Sprint #1
     public class SignUp_request
     {
         public string firstname { get; set; }
@@ -16,7 +105,7 @@ namespace BAModel.Model
         public string password { get; set; }
         public int companyid { get; set; }
         public int Shifttype { get; set; }
-        public int id { get; set; }
+        public long id { get; set; }
     }
 
     public class SignUp_response
@@ -111,15 +200,28 @@ namespace BAModel.Model
         public string username { get; set; }
         public string clockintime { get; set; }
         public string clockouttime { get; set; }
-        public decimal clockinlatitude { get; set; }
-        public decimal clockinlongitude { get; set; }
+        public double clockinlatitude { get; set; }
+        public double clockinlongitude { get; set; }
         public bool latecomer { get; set; }
         public bool earlyouter { get; set; }
         public string latecomerreason { get; set; }
         public string earlyouterreason { get; set; }
         public bool issystemclockout { get; set; }
-        public Nullable<decimal> clockoutlatitude { get; set; }
-        public Nullable<decimal> clockoutlongitude { get; set; }
+        public Nullable<double> clockoutlatitude { get; set; }
+        public Nullable<double> clockoutlongitude { get; set; }
+
+        public List<PunchTask_Model> taskrecords { get; set; }
+
+        public EmployeePunchList_Detail()
+        {
+            taskrecords = new List<PunchTask_Model>();
+        }
+    }
+
+    public class PunchTask_Model
+    {
+        public long taskid { get; set; }
+        public string Task { get; set; }
     }
 
     public class ManageCompany_Request
@@ -134,6 +236,7 @@ namespace BAModel.Model
         public int flexiblebufferminutes { get; set; }
         public int noofweekOffdays { get; set; }
         public int workinghours { get; set; }
+        public double punchrangeinmeter { get; set; }
     }
 
     public class ManageCompany_Response
@@ -163,4 +266,23 @@ namespace BAModel.Model
             record = new ManageCompany_Request();
         }
     }
+
+    public class GetUserDetail_Request
+    {
+        public long id { get; set; }
+    }
+
+    public class GetUserDetail_Response
+    {
+        public SignUp_request record { get; set; }
+        public ResultStatus result { get; set; }
+
+        public GetUserDetail_Response()
+        {
+            result = new ResultStatus();
+            record = new SignUp_request();
+        }
+    }
+    #endregion 
+
 }

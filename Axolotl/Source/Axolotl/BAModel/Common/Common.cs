@@ -7,6 +7,7 @@ using DataModel;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace BAModel.Common
 {
@@ -59,6 +60,28 @@ namespace BAModel.Common
             return shifttime;
         }
 
+        public static int GetShiftTimeBySpan(string OfficeShifttype)
+        {
+            int shifttime = (int)AppEnum.OfficeShiftEnum.Shift_1;
+            switch (OfficeShifttype)
+            {
+                case "09:00":
+                    shifttime = (int)AppEnum.OfficeShiftEnum.Shift_1;
+                    break;
+                case "09:30":
+                    shifttime = (int)AppEnum.OfficeShiftEnum.Shift_2;
+                    break;
+                case "10:00":
+                    shifttime = (int)AppEnum.OfficeShiftEnum.Shift_3;
+                    break;
+                case "10:30":
+                    shifttime = (int)AppEnum.OfficeShiftEnum.Shift_4;
+                    break;
+            }
+
+            return shifttime;
+        }
+
         public static DateTime GetDateTimeFromTimeStamp(double timestamp)
         {
             try
@@ -79,6 +102,20 @@ namespace BAModel.Common
             TimeSpan elapsedTime = value - Epoch;
             return (long)elapsedTime.TotalSeconds;
         }
+
+        public static string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+
+            return value.ToString();
+        }
     }
 
     public static class AppEnum
@@ -88,7 +125,7 @@ namespace BAModel.Common
             Android,
             IOS
         }
-        public  enum OfficeShiftEnum
+        public enum OfficeShiftEnum
         {
             [Description("09:00 To 09:30")]
             Shift_1,
@@ -104,6 +141,40 @@ namespace BAModel.Common
         {
             In = 1,
             Out = 2
+        }
+
+        public enum LeaveTypeEnum
+        {
+            [Description("Casual Leave")]
+            CasualLeave = 1,
+            [Description("Duty Leave")]
+            DutyLeave = 2,
+            [Description("Sick Leave")]
+            SickLeave = 3,
+            [Description("Leave Without Pay")]
+            LeaveWithoutPay = 4,
+        }
+
+        public enum DayTypeEnum
+        {
+            [Description("Full Leave")]
+            FullLeave = 1,
+            [Description("Half Leave")]
+            HalfLeave = 2
+        }
+
+        public enum LeaveStatusEnum
+        {
+            [Description("Pending")]
+            Pending = 1,
+            [Description("Sanctioned")]
+            Sanctioned = 2,
+            [Description("Rejected")]
+            Rejected = 3,
+            [Description("Reverted")]
+            Reverted = 4,
+            [Description("Canceled")]
+            Canceled = 5
         }
     }
 }

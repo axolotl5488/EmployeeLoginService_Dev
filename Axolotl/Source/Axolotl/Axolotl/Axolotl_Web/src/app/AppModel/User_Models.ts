@@ -43,3 +43,19 @@ export class SignUp_response {
     this.result = new ResultStatus();
   }
 }
+
+
+export class GetUserDetail_Request {
+  id: number;
+}
+
+export class GetUserDetail_Response {
+  record: SignUp_request;
+  result: ResultStatus;
+
+  public constructor() {
+    this.result = new ResultStatus();
+    this.record = new SignUp_request();
+  }
+}
+
