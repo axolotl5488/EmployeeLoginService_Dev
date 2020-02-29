@@ -23,6 +23,9 @@ export class GetUserList_Detail {
   isdeleted: boolean;
   phonenumber: string;
   officeshifttype: string;
+  rolename: string;
+  reportingperson: string;
+  totalmember: number;
 }
 
 export class SignUp_request {
@@ -34,6 +37,8 @@ export class SignUp_request {
   password: string;
   companyid: number;
   Shifttype: number;
+  companyroleid: number;
+  haveteam: boolean;
 }
 
 export class SignUp_response {
@@ -59,3 +64,40 @@ export class GetUserDetail_Response {
   }
 }
 
+export class ReportingPerson_request {
+  userid: number;
+  companyid: number;
+}
+
+export class GetEmployeeWeekOffs_request {
+  employeeid: number;
+}
+
+export class GetEmployeeWeekOffs_response {
+  result: ResultStatus;
+  records: GetEmployeeWeekOffs_weekdetail[];
+  constructor() {
+    this.result = new ResultStatus();
+    this.records = new Array<GetEmployeeWeekOffs_weekdetail>();
+  }
+}
+
+export class GetEmployeeWeekOffs_weekdetail {
+  week: string;
+  records: GetEmployeeWeekOffs_detail[];
+
+  public constructor() {
+    this.records = new Array<GetEmployeeWeekOffs_detail>();
+  }
+}
+
+export class GetEmployeeWeekOffs_detail {
+  weekno: number;
+  week: string;
+  day: string;
+  id: number;
+  isadd: boolean;
+  employeeid: number;
+  companyid: number;
+  companyweekoffdays: number;
+}

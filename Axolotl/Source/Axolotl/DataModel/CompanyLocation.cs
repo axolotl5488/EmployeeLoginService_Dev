@@ -26,6 +26,7 @@ namespace DataModel
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImageURL { get; set; }
     
         public virtual Company Company { get; set; }
     }

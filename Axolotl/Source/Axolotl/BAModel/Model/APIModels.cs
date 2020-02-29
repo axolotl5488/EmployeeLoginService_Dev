@@ -49,6 +49,10 @@ namespace BAModel.Model
         public string remarks { get; set; }
         public string statusname { get; set; }
         public int statusid { get; set; }
+
+        public long employeeid { get; set; }
+        public string employeename { get; set; }
+        public long datecreated_timespan { get; set; }
     }
 
     public class UpdateLeaveStatus_request
@@ -89,6 +93,7 @@ namespace BAModel.Model
         public string zipcode { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
+        public string imageurl { get; set; }
 
     }
     public class APIVersionCheck_request
@@ -130,6 +135,7 @@ namespace BAModel.Model
         public ResultStatus result { get; set; }
 
         public List<GetEmployeeTodaysPunchDetail> records { get; set; }
+
         public GetEmployeePunchList_response()
         {
             result = new ResultStatus();
@@ -201,10 +207,13 @@ namespace BAModel.Model
         public GetEmployeeTodaysPunchDetail record { get; set; }
         public ResultStatus result { get; set; }
 
+        public List<GetEmployeeCallList_detail> calls { get; set; }
+
         public GetEmployeeTodaysPunchDetail_response()
         {
             result = new ResultStatus();
             record = new GetEmployeeTodaysPunchDetail();
+            calls = new List<GetEmployeeCallList_detail>();
         }
     }
 
@@ -228,8 +237,11 @@ namespace BAModel.Model
         public long? punchout_locationid { get; set; }
 
         public List<GetEmployeeTodaysPunchDetail_TaskList> tasks { get; set; }
+
+        public List<GetEmployeeCallList_detail> calls { get; set; }
         public GetEmployeeTodaysPunchDetail()
         {
+            calls = new List<GetEmployeeCallList_detail>();
             tasks = new List<GetEmployeeTodaysPunchDetail_TaskList>();
         }
     }
@@ -238,6 +250,7 @@ namespace BAModel.Model
     {
         public long taskid { get; set; }
         public string Task { get; set; }
+        public string TaskStatus { get; set; }
 
     }
 
@@ -307,11 +320,14 @@ namespace BAModel.Model
     {
         public GetUserProfile_detail record { get; set; }
         public ResultStatus result { get; set; }
+        public List<ScreenRight_detail> screenrights { get; set; }
+
 
         public GetUserProfile_response()
         {
             result = new ResultStatus();
             record = new GetUserProfile_detail();
+            screenrights = new List<ScreenRight_detail>();
         }
     }
     public class GetUserProfile_detail
@@ -325,7 +341,7 @@ namespace BAModel.Model
         public string userphotourl { get; set; }
         public int companyid { get; set; }
         public string companyname { get; set; }
-        public double  totalallowedleaves { get; set; }
+        public double totalallowedleaves { get; set; }
 
         public int flexiblebufferminutes { get; set; }
         public int noofweekoffdays { get; set; }
@@ -337,5 +353,164 @@ namespace BAModel.Model
         public Nullable<decimal> longitude { get; set; }
         public double punchrangeinmeter { get; set; }
         public double totalappliedleaves { get; set; }
+
+        public long? roleid { get; set; }
+        public string rolename { get; set; }
+        public string reportingperson { get; set; }
+
+        public bool hasteam { get; set; }
+
+    }
+
+    public class ScreenRight_detail
+    {
+        public int screenid { get; set; }
+        public string screenname { get; set; }
+
+        public bool right { get; set; }
+    }
+
+    public class GetMyTeam_response
+    {
+        public ResultStatus result { get; set; }
+
+        public List<GetMyTeam_detail> records { get; set; }
+        public GetMyTeam_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetMyTeam_detail>();
+        }
+    }
+
+    public class GetMyTeam_detail
+    {
+        public long userid { get; set; }
+        public string name { get; set; }
+        public string rolename { get; set; }
+        public long? roleid { get; set; }
+    }
+
+    public class UpdateEmployeeTaskStatus_request
+    {
+        public long taskid { get; set; }
+        public int statusid { get; set; }
+    }
+
+    public class AddUpdateEmployeeCalls_request
+    {
+        public long id { get; set; }
+        public int companyid { get; set; }
+        public long punchid { get; set; }
+        public double start_lat { get; set; }
+        public double start_lng { get; set; }
+        public string title { get; set; }
+        public string callfor { get; set; }
+        public string remarks { get; set; }
+
+        public double start_datetime_timestamp { get; set; }
+
+        public int calltype { get; set; }
+    }
+
+    public class EndEmployeeCalls_request
+    {
+        public long id { get; set; }
+        public double end_lat { get; set; }
+        public double end_lng { get; set; }
+        public string remarks { get; set; }
+        public double end_datetime_timestamp { get; set; }
+    }
+
+    public class GetEmployeeCallList_response
+    {
+        public List<GetEmployeeCallList_detail> records { get; set; }
+        public ResultStatus result { get; set; }
+        public GetEmployeeCallList_response()
+        {
+            records = new List<GetEmployeeCallList_detail>();
+            result = new ResultStatus();
+        }
+    }
+    public class GetEmployeeCallList_detail
+    {
+        public long id { get; set; }
+        public int companyid { get; set; }
+        public long punchid { get; set; }
+        public double start_lat { get; set; }
+        public double start_lng { get; set; }
+        public string title { get; set; }
+        public string callfor { get; set; }
+        public string remarks { get; set; }
+
+        public double start_datetime_timestamp { get; set; }
+
+        public double? _end_lat { get; set; }
+        public double? _end_lng { get; set; }
+        public double? _end_datetime_timestamp { get; set; }
+
+        public int calltype { get; set; }
+        public string calltypename { get; set; }
+    }
+
+    public class MarkNotificationAsRead_request
+    {
+        public long notificationid { get; set; }
+    }
+
+    public class UserDashboardStatics_response
+    {
+        public decimal total_punch { get; set; }
+
+        public decimal total_punch_In { get; set; }
+
+        public decimal total_punch_In_outside { get; set; }
+
+        public decimal total_punch_In_late { get; set; }
+
+        public decimal total_punch_Out { get; set; }
+
+        public decimal total_punch_Out_outside { get; set; }
+
+        public decimal total_punch_Out_early { get; set; }
+
+        public decimal total_punch_Out_system { get; set; }
+        public ResultStatus result { get; set; }
+        public UserDashboardStatics_response()
+        {
+            result = new ResultStatus();
+        }
+    }
+
+    public class UserLeaveStatics_response
+    {
+        public decimal total_leaves { get; set; }
+
+        public decimal total_leaves_pending { get; set; }
+
+        public decimal total_leaves_rejected { get; set; }
+
+        public decimal total_leaves_reverted { get; set; }
+
+        public decimal total_leaves_sanctioned { get; set; }
+
+        public decimal total_leaves_canceled { get; set; }
+
+        public ResultStatus result { get; set; }
+        public UserLeaveStatics_response()
+        {
+            result = new ResultStatus();
+        }
+    }
+
+    public class UserCallStatics_response
+    {
+        public decimal total_calls { get; set; }
+        public decimal total_calls_client { get; set; }
+        public decimal total_calls_personal { get; set; }
+        public ResultStatus result { get; set; }
+        public UserCallStatics_response()
+        {
+            result = new ResultStatus();
+        }
     }
 }

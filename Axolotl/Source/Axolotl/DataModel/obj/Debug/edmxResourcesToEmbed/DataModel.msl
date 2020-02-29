@@ -70,6 +70,8 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="AxolotlModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="ReportingUserID" ColumnName="ReportingUserID" />
+          <ScalarProperty Name="CompanyRoleID" ColumnName="CompanyRoleID" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
@@ -140,6 +142,7 @@
     <EntitySetMapping Name="CompanyLocations">
       <EntityTypeMapping TypeName="AxolotlModel.CompanyLocation">
         <MappingFragment StoreEntitySet="CompanyLocation">
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
@@ -149,6 +152,55 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyRolePermissions">
+      <EntityTypeMapping TypeName="AxolotlModel.CompanyRolePermission">
+        <MappingFragment StoreEntitySet="CompanyRolePermission">
+          <ScalarProperty Name="CompanyRoleID" ColumnName="CompanyRoleID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+          <ScalarProperty Name="ScreenID" ColumnName="ScreenID" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyRoles">
+      <EntityTypeMapping TypeName="AxolotlModel.CompanyRole">
+        <MappingFragment StoreEntitySet="CompanyRoles">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeCalls">
+      <EntityTypeMapping TypeName="AxolotlModel.EmployeeCall">
+        <MappingFragment StoreEntitySet="EmployeeCalls">
+          <ScalarProperty Name="CallType" ColumnName="CallType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EndLongitude" ColumnName="EndLongitude" />
+          <ScalarProperty Name="EndLatitude" ColumnName="EndLatitude" />
+          <ScalarProperty Name="StartLongitude" ColumnName="StartLongitude" />
+          <ScalarProperty Name="StartLatitude" ColumnName="StartLatitude" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="EmployeePunchID" ColumnName="EmployeePunchID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CallFor" ColumnName="CallFor" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="DateModified" ColumnName="DateModified" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -204,10 +256,49 @@
     <EntitySetMapping Name="EmployeeTasks">
       <EntityTypeMapping TypeName="AxolotlModel.EmployeeTask">
         <MappingFragment StoreEntitySet="EmployeeTasks">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Task" ColumnName="Task" />
           <ScalarProperty Name="EmployeePunchID" ColumnName="EmployeePunchID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeWeekOffs">
+      <EntityTypeMapping TypeName="AxolotlModel.EmployeeWeekOff">
+        <MappingFragment StoreEntitySet="EmployeeWeekOffs">
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="WeekNo" ColumnName="WeekNo" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="AxolotlModel.Notification">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+          <ScalarProperty Name="HasRead" ColumnName="HasRead" />
+          <ScalarProperty Name="HasSent" ColumnName="HasSent" />
+          <ScalarProperty Name="EmployeeCallID" ColumnName="EmployeeCallID" />
+          <ScalarProperty Name="EmployeeTaskID" ColumnName="EmployeeTaskID" />
+          <ScalarProperty Name="EmployeeLeaveID" ColumnName="EmployeeLeaveID" />
+          <ScalarProperty Name="EmployeePunchID" ColumnName="EmployeePunchID" />
+          <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
           <ScalarProperty Name="DateModified" ColumnName="DateModified" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="ID" ColumnName="ID" />

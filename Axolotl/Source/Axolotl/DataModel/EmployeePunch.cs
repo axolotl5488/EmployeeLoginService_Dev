@@ -17,6 +17,7 @@ namespace DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmployeePunch()
         {
+            this.EmployeeCalls = new HashSet<EmployeeCall>();
             this.EmployeeTasks = new HashSet<EmployeeTask>();
         }
     
@@ -42,6 +43,8 @@ namespace DataModel
         public Nullable<long> PunchOut_LocationID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeCall> EmployeeCalls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeTask> EmployeeTasks { get; set; }
     }

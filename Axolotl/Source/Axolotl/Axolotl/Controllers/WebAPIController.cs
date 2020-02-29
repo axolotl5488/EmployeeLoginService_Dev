@@ -55,6 +55,14 @@ namespace Axolotl.Controllers
         }
         #endregion
 
+        #region Global App
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyList_drp()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, GlobalService.GetCompanyList_drp());
+        }
+        #endregion 
+
         #region Sprint #1
 
         // #1 SignUp
@@ -84,10 +92,18 @@ namespace Axolotl.Controllers
                 user.ShouldSendNotification = true;
                 user.OfficeShiftType = Common.GetShiftTimeByType(request.Shifttype);
                 user.CompanyID = request.companyid;
+
+                CompanyRole employeeRole = new AxolotlEntities().CompanyRoles.FirstOrDefault(x => x.CompanyID == user.CompanyID
+                && x.Name == AppEnum.CompanyDefaultRole.Employee.ToString());
+                if(employeeRole != null)
+                {
+                    user.CompanyRoleID = employeeRole.ID;
+                }
+
                 IdentityResult result = await UserManager.CreateAsync(user, request.password);
                 if (result.Succeeded)
                 {
-                   // await this.UserManager.AddToRoleAsync(user.Id, HonestAbeEnum.UserRoleEnum.Technician.ToString());
+                    // await this.UserManager.AddToRoleAsync(user.Id, HonestAbeEnum.UserRoleEnum.Technician.ToString());
                     response.result.status = true;
                     response.result.message = "";
                 }
@@ -96,7 +112,7 @@ namespace Axolotl.Controllers
                     response.result.status = false;
                     response.result.message = result.Errors.FirstOrDefault();
                 }
-                Common.AddAPIActivityLog("SignUp", DateTime.UtcNow, DateTime.UtcNow,JsonConvert.SerializeObject(request), JsonConvert.SerializeObject(response),null, true);
+                Common.AddAPIActivityLog("SignUp", DateTime.UtcNow, DateTime.UtcNow, JsonConvert.SerializeObject(request), JsonConvert.SerializeObject(response), null, true);
             }
             catch (Exception ex)
             {
@@ -130,7 +146,12 @@ namespace Axolotl.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> ManageCompany([FromBody]ManageCompany_Request model)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageCompany(model));
+            ManageCompany_Response response =  WebService.ManageCompany(model);
+            if (response.IsCompanyhasAdmin)
+            {
+                //SignUp_request
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpPost]
@@ -213,13 +234,88 @@ namespace Axolotl.Controllers
         {
             return Request.CreateResponse(HttpStatusCode.OK, WebService.EmployeeLeaveList(model));
         }
-        #endregion 
+        #endregion
 
-        #region Global App
+        #region Sprint #3/4
         [HttpPost]
-        public async Task<HttpResponseMessage> GetCompanyList_drp()
+        public async Task<HttpResponseMessage> GetCompanyRolesList([FromBody]GetCompanyRolesList_request model)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, GlobalService.GetCompanyList_drp());
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyRolesList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageCompanyRoles([FromBody]ManageCompanyRoles_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageCompanyRoles(model));
+        }
+
+        
+        [HttpPost]
+        public async Task<HttpResponseMessage> RemoveCompanyRoles([FromBody]GetCompanyRoleDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.RemoveCompanyRoles(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyRoleDetail([FromBody]GetCompanyRoleDetail_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyRoleDetail(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetCompanyRolesPermissionList([FromBody]GetCompanyRolesPermissionList_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetCompanyRolesPermissionList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageCompanyRolesPermission([FromBody]ManageCompanyRolesPermission_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageCompanyRolesPermission(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageTeamList([FromBody]ManageTeamList_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageTeamList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageTeam([FromBody]ManageTeam_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageTeam(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetMyteamEmployeeList([FromBody]ReportingPerson_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetMyteamEmployeeList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetMyteamEmployeePunchList([FromBody]ReportingPerson_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetMyteamEmployeePunchList(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetMyTeamEmployeeLeaveList([FromBody]ReportingPerson_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetMyTeamEmployeeLeaveList(model));
+        }
+        #endregion
+
+        #region Sprint #5
+        [HttpPost]
+        public async Task<HttpResponseMessage> ManageEmployeeWeekOffs([FromBody]GetEmployeeWeekOffs_detail model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.ManageEmployeeWeekOffs(model));
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetEmployeeWeekOffs([FromBody]GetEmployeeWeekOffs_request model)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.GetEmployeeWeekOffs(model));
         }
         #endregion 
     }

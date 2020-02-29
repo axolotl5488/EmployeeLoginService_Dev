@@ -38,7 +38,10 @@ namespace Axolotl.Models
         public decimal Longitude { get; set; }
 
         public System.TimeSpan OfficeShiftType { get; set; }
-        #endregion 
+
+        public long? CompanyRoleID { get; set; }
+        public long? ReportingUserID { get; set; }
+        #endregion
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, long, CustomUserLogin, CustomUserRole, CustomUserClaim>

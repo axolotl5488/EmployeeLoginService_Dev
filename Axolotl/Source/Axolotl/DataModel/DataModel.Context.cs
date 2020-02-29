@@ -35,8 +35,13 @@ namespace DataModel
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyHoliday> CompanyHolidays { get; set; }
         public virtual DbSet<CompanyLocation> CompanyLocations { get; set; }
+        public virtual DbSet<CompanyRolePermission> CompanyRolePermissions { get; set; }
+        public virtual DbSet<CompanyRole> CompanyRoles { get; set; }
+        public virtual DbSet<EmployeeCall> EmployeeCalls { get; set; }
         public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
         public virtual DbSet<EmployeePunch> EmployeePunches { get; set; }
         public virtual DbSet<EmployeeTask> EmployeeTasks { get; set; }
+        public virtual DbSet<EmployeeWeekOff> EmployeeWeekOffs { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
     }
 }

@@ -8,25 +8,40 @@
         <EntityTypeShape EntityType="AxolotlModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="AxolotlModel.APILogActivity" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="AxolotlModel.AppVersionHistory" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetRole" Width="1.5" PointX="3.75" PointY="14.75" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUserClaim" Width="1.5" PointX="8.25" PointY="15.625" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUserLogin" Width="1.5" PointX="8.25" PointY="13.125" />
-        <EntityTypeShape EntityType="AxolotlModel.AspNetUser" Width="1.5" PointX="6" PointY="9.75" />
-        <EntityTypeShape EntityType="AxolotlModel.Company" Width="1.5" PointX="0.75" PointY="11" />
-        <EntityTypeShape EntityType="AxolotlModel.CompanyHoliday" Width="1.5" PointX="3" PointY="25.625" />
-        <EntityTypeShape EntityType="AxolotlModel.CompanyLocation" Width="1.5" PointX="3" PointY="10" />
-        <EntityTypeShape EntityType="AxolotlModel.EmployeeLeaf" Width="1.5" PointX="11.25" PointY="11.5" />
-        <EntityTypeShape EntityType="AxolotlModel.EmployeePunch" Width="1.5" PointX="8.25" PointY="18.375" />
-        <EntityTypeShape EntityType="AxolotlModel.EmployeeTask" Width="1.5" PointX="10.5" PointY="16.375" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetRole" Width="1.5" PointX="3" PointY="28.875" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="35.25" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="24.875" />
+        <EntityTypeShape EntityType="AxolotlModel.AspNetUser" Width="1.5" PointX="5.25" PointY="25.25" />
+        <EntityTypeShape EntityType="AxolotlModel.Company" Width="1.5" PointX="0.75" PointY="19.875" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyHoliday" Width="1.5" PointX="3" PointY="40.375" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyLocation" Width="1.5" PointX="3" PointY="17.25" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyRolePermission" Width="1.5" PointX="8.25" PointY="28.375" />
+        <EntityTypeShape EntityType="AxolotlModel.CompanyRole" Width="1.5" PointX="3" PointY="36.75" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeCall" Width="1.5" PointX="9.75" PointY="32" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeLeaf" Width="1.5" PointX="7.5" PointY="20" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeePunch" Width="1.5" PointX="7.5" PointY="43.625" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeTask" Width="1.5" PointX="9.75" PointY="37.625" />
+        <EntityTypeShape EntityType="AxolotlModel.EmployeeWeekOff" Width="1.5" PointX="10.5" PointY="25.625" />
+        <EntityTypeShape EntityType="AxolotlModel.Notification" Width="1.5" PointX="0.75" PointY="4.75" />
         <AssociationConnector Association="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AxolotlModel.FK_AspNetUsers_AspNetUsers1" />
         <AssociationConnector Association="AxolotlModel.FK_AspNetUsers_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_AspNetUsers_CompanyRoles" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeCalls_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeLeaves_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeePunches_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeTasks_AspNetUsers" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeWeekOffs_AspNetUsers" />
         <AssociationConnector Association="AxolotlModel.FK_CompanyHolidays_Company" />
         <AssociationConnector Association="AxolotlModel.FK_CompanyLocation_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_CompanyRolePermission_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_CompanyRoles_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeCalls_Company" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeLeaves_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeWeekOffs_Company" />
+        <AssociationConnector Association="AxolotlModel.FK_CompanyRolePermission_CompanyRoles" />
+        <AssociationConnector Association="AxolotlModel.FK_EmployeeCalls_EmployeePunches" />
         <AssociationConnector Association="AxolotlModel.FK_EmployeeTasks_EmployeePunches" />
         <AssociationConnector Association="AxolotlModel.AspNetUserRoles" />
       </Diagram>

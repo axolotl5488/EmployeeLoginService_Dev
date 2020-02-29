@@ -106,6 +106,8 @@ namespace BAModel.Model
         public int companyid { get; set; }
         public int Shifttype { get; set; }
         public long id { get; set; }
+        public int companyroleid { get; set; }
+        public bool haveteam { get; set; }
     }
 
     public class SignUp_response
@@ -176,6 +178,9 @@ namespace BAModel.Model
         public bool isdeleted { get; set; }
         public string phonenumber { get; set; }
         public string officeshifttype { get; set; }
+        public string rolename { get; set; }
+        public string reportingperson { get; set; }
+        public int totalmember { get; set; }
     }
 
     public class EmployeePunchList_Request
@@ -217,17 +222,38 @@ namespace BAModel.Model
         public Nullable<double> clockoutlongitude { get; set; }
 
         public List<PunchTask_Model> taskrecords { get; set; }
-
+        public List<GetEmployeeCallList_detail_Webportal> callrecords { get; set; }
         public EmployeePunchList_Detail()
         {
             taskrecords = new List<PunchTask_Model>();
+            callrecords = new List<GetEmployeeCallList_detail_Webportal>();
         }
+    }
+
+    public class GetEmployeeCallList_detail_Webportal
+    {
+        public long id { get; set; }
+        public int companyid { get; set; }
+        public long punchid { get; set; }
+        public double start_lat { get; set; }
+        public double start_lng { get; set; }
+        public string title { get; set; }
+        public string callfor { get; set; }
+        public string remarks { get; set; }
+
+        public string start_datetime_timestamp { get; set; }
+
+        public double? _end_lat { get; set; }
+        public double? _end_lng { get; set; }
+        public string _end_datetime_timestamp { get; set; }
     }
 
     public class PunchTask_Model
     {
         public long taskid { get; set; }
         public string Task { get; set; }
+        public string TaskStatus { get; set; }
+        public int TaskStatusID { get; set; }
     }
 
     public class ManageCompany_Request
@@ -248,7 +274,7 @@ namespace BAModel.Model
     public class ManageCompany_Response
     {
         public ResultStatus result { get; set; }
-
+        public bool IsCompanyhasAdmin { get; set; }
         public ManageCompany_Response()
         {
             result = new ResultStatus();
@@ -280,6 +306,7 @@ namespace BAModel.Model
 
     public class GetUserDetail_Response
     {
+
         public SignUp_request record { get; set; }
         public ResultStatus result { get; set; }
 
@@ -412,5 +439,206 @@ namespace BAModel.Model
         public string approvalremarks { get; set; }
         public double totaldays { get; set; }
 
+    }
+
+    public class GetCompanyRolesList_request
+    {
+        public int companyid { get; set; }
+    }
+
+    public class GetCompanyRolesList_response
+    {
+        public List<GetCompanyRolesList_detail> records { get; set; }
+        public ResultStatus result { get; set; }
+
+        public GetCompanyRolesList_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetCompanyRolesList_detail>();
+        }
+    }
+
+    public class GetCompanyRolesList_detail
+    {
+        public long id { get; set; }
+        public string lastmodified { get; set; }
+        public int companyid { get; set; }
+        public int totalmembers { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public bool isactive { get; set; }
+    }
+
+    public class ManageCompanyRoles_request
+    {
+        public long id { get; set; }
+        public int companyid { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+    }
+
+    public class GetCompanyRoleDetail_request
+    {
+        public long id { get; set; }
+    }
+
+    public class GetCompanyRoleDetail_response
+    {
+        public ManageCompanyRoles_request record { get; set; }
+
+        public ResultStatus result { get; set; }
+
+        public GetCompanyRoleDetail_response()
+        {
+            result = new ResultStatus();
+            record = new ManageCompanyRoles_request();
+        }
+    }
+
+    public class GetCompanyRolesPermissionList_request
+    {
+        public int companyid { get; set; }
+    }
+
+    public class GetCompanyRolesPermissionList_response
+    {
+        public List<GetCompanyRolesPermissionList_Role_detail> records { get; set; }
+
+        public ResultStatus result { get; set; }
+
+        public GetCompanyRolesPermissionList_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetCompanyRolesPermissionList_Role_detail>();
+        }
+    }
+
+    public class GetCompanyRolesPermissionList_Role_detail
+    {
+        public long id { get; set; }
+        public int companyid { get; set; }
+        public string name { get; set; }
+
+        public List<GetCompanyRolesPermissionList_RolePermission_detail> items { get; set; }
+
+        public GetCompanyRolesPermissionList_Role_detail()
+        {
+            items = new List<GetCompanyRolesPermissionList_RolePermission_detail>();
+        }
+    }
+
+    public class GetCompanyRolesPermissionList_RolePermission_detail
+    {
+        public long id { get; set; }
+        public string lastmodified { get; set; }
+        public string screenname { get; set; }
+        public int screenid { get; set; }
+        public int companyid { get; set; }
+        public long companyroleid { get; set; }
+
+        public bool isactive { get; set; }
+    }
+    public class ManageCompanyRolesPermission_request
+    {
+        public int companyid { get; set; }
+        public long companyroleid { get; set; }
+        public long companyrolepermissionid { get; set; }
+        public int screenid { get; set; }
+    }
+
+    public class ManageTeamList_request
+    {
+        public int companyid { get; set; }
+    }
+
+    public class ManageTeamList_response
+    {
+        public List<ManageTeamList_detail> records { get; set; }
+        public List<ManageTeamList_reporting_person_detail> reportingusers { get; set; }
+        public List<ManageTeamList_reporting_role_detail> roles { get; set; }
+        public ResultStatus result { get; set; }
+
+        public ManageTeamList_response()
+        {
+            result = new ResultStatus();
+            records = new List<ManageTeamList_detail>();
+            reportingusers = new List<ManageTeamList_reporting_person_detail>();
+            roles = new List<ManageTeamList_reporting_role_detail>();
+        }
+    }
+
+    public class ManageTeamList_detail
+    {
+        public long userid { get; set; }
+        public string name { get; set; }
+        public long roleid { get; set; }
+        public string rolename { get; set; }
+        public int totalmember { get; set; }
+        public long? reportingperson { get; set; }
+        public string reportingpersonname { get; set; }
+
+    }
+
+    public class ManageTeamList_reporting_person_detail
+    {
+        public long userid { get; set; }
+        public string name { get; set; }
+    }
+
+    public class ManageTeamList_reporting_role_detail
+    {
+        public long roleid { get; set; }
+        public string name { get; set; }
+    }
+
+    public class ManageTeam_request
+    {
+        public long userid { get; set; }
+        public long roleid { get; set; }
+        public long? reportingpersonid { get; set; }
+    }
+
+    public class ReportingPerson_request
+    {
+        public long userid { get; set; }
+        public int companyid { get; set; }
+    }
+
+
+    public class GetEmployeeWeekOffs_request
+    {
+        public long employeeid { get; set; }
+    }
+
+    public class GetEmployeeWeekOffs_response
+    {
+        public ResultStatus result { get; set; }
+        public List<GetEmployeeWeekOffs_weekdetail> records { get; set; }
+        public GetEmployeeWeekOffs_response()
+        {
+            result = new ResultStatus();
+            records = new List<GetEmployeeWeekOffs_weekdetail>();
+        }
+    }
+    public class GetEmployeeWeekOffs_weekdetail
+    {
+        public string week { get; set; }
+        public List<GetEmployeeWeekOffs_detail> records { get; set; }
+
+        public GetEmployeeWeekOffs_weekdetail()
+        {
+            records = new List<GetEmployeeWeekOffs_detail>();
+        }
+    }
+        public class GetEmployeeWeekOffs_detail
+    {
+        public int weekno { get; set; }
+        public string week { get; set; }
+        public string day { get; set; }
+        public long id { get; set; }
+        public bool isadd { get; set; }
+        public long employeeid { get; set; }
+        public int companyid { get; set; }
+        public int companyweekoffdays { get; set; }
     }
 }

@@ -183,21 +183,21 @@ namespace Axolotl.Controllers
         public HttpResponseMessage AddEmployeeLeave(AddEmployeeLeave_request model)
         {
             long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
-            return Request.CreateResponse(HttpStatusCode.OK, AppService.AddEmployeeLeave(model,UserID, Request.RequestUri.AbsoluteUri));
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.AddEmployeeLeave(model, UserID, Request.RequestUri.AbsoluteUri));
         }
 
         [HttpPost]
         public HttpResponseMessage UpdateLeaveStatus(UpdateLeaveStatus_request model)
         {
             long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
-            return Request.CreateResponse(HttpStatusCode.OK, AppService.UpdateLeaveStatus(model,UserID, Request.RequestUri.AbsoluteUri));
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.UpdateLeaveStatus(model, UserID, Request.RequestUri.AbsoluteUri));
         }
 
         [HttpPost]
         public HttpResponseMessage GetLeaveDetail(GetLeaveDetail_request model)
         {
             long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
-            return Request.CreateResponse(HttpStatusCode.OK, AppService.GetLeaveDetail(model,UserID, Request.RequestUri.AbsoluteUri));
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.GetLeaveDetail(model, UserID, Request.RequestUri.AbsoluteUri));
         }
 
         [HttpPost]
@@ -205,6 +205,80 @@ namespace Axolotl.Controllers
         {
             long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
             return Request.CreateResponse(HttpStatusCode.OK, AppService.GetEmployeeLeaves(UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetMyTeamEmployeeLeaves()
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.GetMyTeamEmployeeLeaves(UserID, Request.RequestUri.AbsoluteUri));
+        }
+        #endregion
+
+        #region Sprint #3-4
+        [HttpPost]
+        public HttpResponseMessage GetMyTeam()
+        {
+
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.GetMyTeam(UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateEmployeeTaskStatus(UpdateEmployeeTaskStatus_request model)
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.UpdateEmployeeTaskStatus(model, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage AddUpdateEmployeeCalls(AddUpdateEmployeeCalls_request model)
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.AddUpdateEmployeeCalls(model, UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage EndEmployeeCalls(EndEmployeeCalls_request model)
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.EndEmployeeCalls(model, UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetEmployeeCallList()
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.GetEmployeeCallList(UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public HttpResponseMessage MarkNotificationAsRead(MarkNotificationAsRead_request model)
+        {
+
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.MarkNotificationAsRead(model, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UserDashboardStatics()
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.UserDashboardStatics(UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UserLeaveStatics()
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.UserLeaveStatics(UserID, Request.RequestUri.AbsoluteUri));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UserCallStatics()
+        {
+            long UserID = Convert.ToInt64(System.Security.Claims.ClaimsPrincipal.Current.Identity.GetUserId());
+            return Request.CreateResponse(HttpStatusCode.OK, AppService.UserCallStatics(UserID, Request.RequestUri.AbsoluteUri));
         }
         #endregion
     }

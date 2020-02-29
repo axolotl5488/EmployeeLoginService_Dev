@@ -13,6 +13,7 @@ import { AppEmployeePunchComponent } from './AppComponent/EmployePunch/employeep
 import { AppManageCompanyComponent } from './AppComponent/ManageCompany/managecompany.component';
 import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
 import { AppEmployeeLeaveComponent } from './AppComponent/EmployeeLeaves/EmployeeLeaves.component';
+import { AppManageEmployeePunchComponent } from './AppComponent/ManageEmployeePunch/manageemployeepunch.component';
 
 
 import { ResponseInterceptor } from './AppService/ResponseInterceptor_Service';
@@ -24,7 +25,8 @@ import { EmployeeLeave_Service } from './AppService/EmployeeLeave_Service';
 
 @NgModule({
   declarations: [
-    AppComponent, AppCompanyComponent, AppUserComponent, AppEmployeePunchComponent, AppManageCompanyComponent, AppManageUserComponent, AppEmployeeLeaveComponent
+    AppComponent, AppCompanyComponent, AppUserComponent, AppEmployeePunchComponent, AppManageCompanyComponent, AppManageUserComponent, AppEmployeeLeaveComponent,
+    AppManageEmployeePunchComponent
   ],
   imports: [
       BrowserModule,

@@ -11,9 +11,14 @@
     <EntitySet Name="Companies" EntityType="AxolotlModel.Company" />
     <EntitySet Name="CompanyHolidays" EntityType="AxolotlModel.CompanyHoliday" />
     <EntitySet Name="CompanyLocations" EntityType="AxolotlModel.CompanyLocation" />
+    <EntitySet Name="CompanyRolePermissions" EntityType="AxolotlModel.CompanyRolePermission" />
+    <EntitySet Name="CompanyRoles" EntityType="AxolotlModel.CompanyRole" />
+    <EntitySet Name="EmployeeCalls" EntityType="AxolotlModel.EmployeeCall" />
     <EntitySet Name="EmployeeLeaves" EntityType="AxolotlModel.EmployeeLeaf" />
     <EntitySet Name="EmployeePunches" EntityType="AxolotlModel.EmployeePunch" />
     <EntitySet Name="EmployeeTasks" EntityType="AxolotlModel.EmployeeTask" />
+    <EntitySet Name="EmployeeWeekOffs" EntityType="AxolotlModel.EmployeeWeekOff" />
+    <EntitySet Name="Notifications" EntityType="AxolotlModel.Notification" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -22,9 +27,21 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
     </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_AspNetUsers1" Association="AxolotlModel.FK_AspNetUsers_AspNetUsers1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+    </AssociationSet>
     <AssociationSet Name="FK_AspNetUsers_Company" Association="AxolotlModel.FK_AspNetUsers_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_CompanyRoles" Association="AxolotlModel.FK_AspNetUsers_CompanyRoles">
+      <End Role="CompanyRole" EntitySet="CompanyRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeCalls_AspNetUsers" Association="AxolotlModel.FK_EmployeeCalls_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="EmployeeCall" EntitySet="EmployeeCalls" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeeLeaves_AspNetUsers" Association="AxolotlModel.FK_EmployeeLeaves_AspNetUsers">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -38,6 +55,10 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="EmployeeTask" EntitySet="EmployeeTasks" />
     </AssociationSet>
+    <AssociationSet Name="FK_EmployeeWeekOffs_AspNetUsers" Association="AxolotlModel.FK_EmployeeWeekOffs_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="EmployeeWeekOff" EntitySet="EmployeeWeekOffs" />
+    </AssociationSet>
     <AssociationSet Name="FK_CompanyHolidays_Company" Association="AxolotlModel.FK_CompanyHolidays_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="CompanyHoliday" EntitySet="CompanyHolidays" />
@@ -46,9 +67,33 @@
       <End Role="Company" EntitySet="Companies" />
       <End Role="CompanyLocation" EntitySet="CompanyLocations" />
     </AssociationSet>
+    <AssociationSet Name="FK_CompanyRolePermission_Company" Association="AxolotlModel.FK_CompanyRolePermission_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyRolePermission" EntitySet="CompanyRolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyRoles_Company" Association="AxolotlModel.FK_CompanyRoles_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyRole" EntitySet="CompanyRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeCalls_Company" Association="AxolotlModel.FK_EmployeeCalls_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="EmployeeCall" EntitySet="EmployeeCalls" />
+    </AssociationSet>
     <AssociationSet Name="FK_EmployeeLeaves_Company" Association="AxolotlModel.FK_EmployeeLeaves_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="EmployeeLeaf" EntitySet="EmployeeLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeWeekOffs_Company" Association="AxolotlModel.FK_EmployeeWeekOffs_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="EmployeeWeekOff" EntitySet="EmployeeWeekOffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyRolePermission_CompanyRoles" Association="AxolotlModel.FK_CompanyRolePermission_CompanyRoles">
+      <End Role="CompanyRole" EntitySet="CompanyRoles" />
+      <End Role="CompanyRolePermission" EntitySet="CompanyRolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeCalls_EmployeePunches" Association="AxolotlModel.FK_EmployeeCalls_EmployeePunches">
+      <End Role="EmployeePunch" EntitySet="EmployeePunches" />
+      <End Role="EmployeeCall" EntitySet="EmployeeCalls" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeeTasks_EmployeePunches" Association="AxolotlModel.FK_EmployeeTasks_EmployeePunches">
       <End Role="EmployeePunch" EntitySet="EmployeePunches" />
@@ -156,12 +201,19 @@
     <Property Name="DeviceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Latitude" Type="Decimal" Precision="18" Scale="18" />
     <Property Name="Longitude" Type="Decimal" Precision="18" Scale="18" />
+    <Property Name="CompanyRoleID" Type="Int64" />
+    <Property Name="ReportingUserID" Type="Int64" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="AxolotlModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="AxolotlModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="AxolotlModel.FK_AspNetUsers_AspNetUsers1" FromRole="AspNetUser" ToRole="AspNetUser1" />
+    <NavigationProperty Name="AspNetUser1" Relationship="AxolotlModel.FK_AspNetUsers_AspNetUsers1" FromRole="AspNetUser1" ToRole="AspNetUser" />
     <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
+    <NavigationProperty Name="CompanyRole" Relationship="AxolotlModel.FK_AspNetUsers_CompanyRoles" FromRole="AspNetUser" ToRole="CompanyRole" />
+    <NavigationProperty Name="EmployeeCalls" Relationship="AxolotlModel.FK_EmployeeCalls_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeeCall" />
     <NavigationProperty Name="EmployeeLeaves" Relationship="AxolotlModel.FK_EmployeeLeaves_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeeLeaf" />
     <NavigationProperty Name="EmployeePunches" Relationship="AxolotlModel.FK_EmployeePunches_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeePunch" />
     <NavigationProperty Name="EmployeeTasks" Relationship="AxolotlModel.FK_EmployeeTasks_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeeTask" />
+    <NavigationProperty Name="EmployeeWeekOffs" Relationship="AxolotlModel.FK_EmployeeWeekOffs_AspNetUsers" FromRole="AspNetUser" ToRole="EmployeeWeekOff" />
     <NavigationProperty Name="AspNetRoles" Relationship="AxolotlModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="Company">
@@ -188,7 +240,11 @@
     <NavigationProperty Name="AspNetUsers" Relationship="AxolotlModel.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
     <NavigationProperty Name="CompanyHolidays" Relationship="AxolotlModel.FK_CompanyHolidays_Company" FromRole="Company" ToRole="CompanyHoliday" />
     <NavigationProperty Name="CompanyLocations" Relationship="AxolotlModel.FK_CompanyLocation_Company" FromRole="Company" ToRole="CompanyLocation" />
+    <NavigationProperty Name="CompanyRolePermissions" Relationship="AxolotlModel.FK_CompanyRolePermission_Company" FromRole="Company" ToRole="CompanyRolePermission" />
+    <NavigationProperty Name="CompanyRoles" Relationship="AxolotlModel.FK_CompanyRoles_Company" FromRole="Company" ToRole="CompanyRole" />
+    <NavigationProperty Name="EmployeeCalls" Relationship="AxolotlModel.FK_EmployeeCalls_Company" FromRole="Company" ToRole="EmployeeCall" />
     <NavigationProperty Name="EmployeeLeaves" Relationship="AxolotlModel.FK_EmployeeLeaves_Company" FromRole="Company" ToRole="EmployeeLeaf" />
+    <NavigationProperty Name="EmployeeWeekOffs" Relationship="AxolotlModel.FK_EmployeeWeekOffs_Company" FromRole="Company" ToRole="EmployeeWeekOff" />
   </EntityType>
   <EntityType Name="CompanyHoliday">
     <Key>
@@ -220,7 +276,62 @@
     <Property Name="Latitude" Type="Double" Nullable="false" />
     <Property Name="Longitude" Type="Double" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_CompanyLocation_Company" FromRole="CompanyLocation" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="CompanyRolePermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ScreenID" Type="Int32" Nullable="false" />
+    <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyRoleID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_CompanyRolePermission_Company" FromRole="CompanyRolePermission" ToRole="Company" />
+    <NavigationProperty Name="CompanyRole" Relationship="AxolotlModel.FK_CompanyRolePermission_CompanyRoles" FromRole="CompanyRolePermission" ToRole="CompanyRole" />
+  </EntityType>
+  <EntityType Name="CompanyRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AxolotlModel.FK_AspNetUsers_CompanyRoles" FromRole="CompanyRole" ToRole="AspNetUser" />
+    <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_CompanyRoles_Company" FromRole="CompanyRole" ToRole="Company" />
+    <NavigationProperty Name="CompanyRolePermissions" Relationship="AxolotlModel.FK_CompanyRolePermission_CompanyRoles" FromRole="CompanyRole" ToRole="CompanyRolePermission" />
+  </EntityType>
+  <EntityType Name="EmployeeCall">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CallFor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="EmployeePunchID" Type="Int64" Nullable="false" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+    <Property Name="StartLatitude" Type="Double" Nullable="false" />
+    <Property Name="StartLongitude" Type="Double" Nullable="false" />
+    <Property Name="EndLatitude" Type="Double" />
+    <Property Name="EndLongitude" Type="Double" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CallType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeeCalls_AspNetUsers" FromRole="EmployeeCall" ToRole="AspNetUser" />
+    <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_EmployeeCalls_Company" FromRole="EmployeeCall" ToRole="Company" />
+    <NavigationProperty Name="EmployeePunch" Relationship="AxolotlModel.FK_EmployeeCalls_EmployeePunches" FromRole="EmployeeCall" ToRole="EmployeePunch" />
   </EntityType>
   <EntityType Name="EmployeeLeaf">
     <Key>
@@ -268,6 +379,7 @@
     <Property Name="PunchIn_LocationID" Type="Int64" />
     <Property Name="PunchOut_LocationID" Type="Int64" />
     <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeePunches_AspNetUsers" FromRole="EmployeePunch" ToRole="AspNetUser" />
+    <NavigationProperty Name="EmployeeCalls" Relationship="AxolotlModel.FK_EmployeeCalls_EmployeePunches" FromRole="EmployeePunch" ToRole="EmployeeCall" />
     <NavigationProperty Name="EmployeeTasks" Relationship="AxolotlModel.FK_EmployeeTasks_EmployeePunches" FromRole="EmployeePunch" ToRole="EmployeeTask" />
   </EntityType>
   <EntityType Name="EmployeeTask">
@@ -281,8 +393,47 @@
     <Property Name="EmployeePunchID" Type="Int64" Nullable="false" />
     <Property Name="Task" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeeTasks_AspNetUsers" FromRole="EmployeeTask" ToRole="AspNetUser" />
     <NavigationProperty Name="EmployeePunch" Relationship="AxolotlModel.FK_EmployeeTasks_EmployeePunches" FromRole="EmployeeTask" ToRole="EmployeePunch" />
+  </EntityType>
+  <EntityType Name="EmployeeWeekOff">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="WeekNo" Type="Int32" Nullable="false" />
+    <Property Name="Day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeeWeekOffs_AspNetUsers" FromRole="EmployeeWeekOff" ToRole="AspNetUser" />
+    <NavigationProperty Name="Company" Relationship="AxolotlModel.FK_EmployeeWeekOffs_Company" FromRole="EmployeeWeekOff" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="MessageType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceType" Type="Int32" />
+    <Property Name="DeviceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeePunchID" Type="Int64" />
+    <Property Name="EmployeeLeaveID" Type="Int64" />
+    <Property Name="EmployeeTaskID" Type="Int64" />
+    <Property Name="EmployeeCallID" Type="Int64" />
+    <Property Name="HasSent" Type="Boolean" Nullable="false" />
+    <Property Name="HasRead" Type="Boolean" Nullable="false" />
+    <Property Name="SentDate" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -312,6 +463,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AspNetUsers_AspNetUsers1">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser1">
+        <PropertyRef Name="ReportingUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AspNetUsers_Company">
     <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
     <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
@@ -321,6 +484,30 @@
       </Principal>
       <Dependent Role="AspNetUser">
         <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_CompanyRoles">
+    <End Type="AxolotlModel.CompanyRole" Role="CompanyRole" Multiplicity="0..1" />
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="CompanyRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeCalls_AspNetUsers">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeCall" Role="EmployeeCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeCall">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -360,6 +547,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EmployeeWeekOffs_AspNetUsers">
+    <End Type="AxolotlModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeWeekOff" Role="EmployeeWeekOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeWeekOff">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CompanyHolidays_Company">
     <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
     <End Type="AxolotlModel.CompanyHoliday" Role="CompanyHoliday" Multiplicity="*" />
@@ -384,6 +583,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CompanyRolePermission_Company">
+    <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AxolotlModel.CompanyRolePermission" Role="CompanyRolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyRolePermission">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyRoles_Company">
+    <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AxolotlModel.CompanyRole" Role="CompanyRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyRole">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeCalls_Company">
+    <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeCall" Role="EmployeeCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EmployeeCall">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EmployeeLeaves_Company">
     <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
     <End Type="AxolotlModel.EmployeeLeaf" Role="EmployeeLeaf" Multiplicity="*" />
@@ -393,6 +628,42 @@
       </Principal>
       <Dependent Role="EmployeeLeaf">
         <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeWeekOffs_Company">
+    <End Type="AxolotlModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeWeekOff" Role="EmployeeWeekOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EmployeeWeekOff">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyRolePermission_CompanyRoles">
+    <End Type="AxolotlModel.CompanyRole" Role="CompanyRole" Multiplicity="1" />
+    <End Type="AxolotlModel.CompanyRolePermission" Role="CompanyRolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyRolePermission">
+        <PropertyRef Name="CompanyRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeCalls_EmployeePunches">
+    <End Type="AxolotlModel.EmployeePunch" Role="EmployeePunch" Multiplicity="1" />
+    <End Type="AxolotlModel.EmployeeCall" Role="EmployeeCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePunch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EmployeeCall">
+        <PropertyRef Name="EmployeePunchID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

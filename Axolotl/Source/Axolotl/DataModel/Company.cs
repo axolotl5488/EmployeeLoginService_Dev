@@ -20,7 +20,11 @@ namespace DataModel
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.CompanyHolidays = new HashSet<CompanyHoliday>();
             this.CompanyLocations = new HashSet<CompanyLocation>();
+            this.CompanyRolePermissions = new HashSet<CompanyRolePermission>();
+            this.CompanyRoles = new HashSet<CompanyRole>();
+            this.EmployeeCalls = new HashSet<EmployeeCall>();
             this.EmployeeLeaves = new HashSet<EmployeeLeaf>();
+            this.EmployeeWeekOffs = new HashSet<EmployeeWeekOff>();
         }
     
         public int ID { get; set; }
@@ -48,6 +52,14 @@ namespace DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyLocation> CompanyLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyRolePermission> CompanyRolePermissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyRole> CompanyRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeCall> EmployeeCalls { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeLeaf> EmployeeLeaves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeWeekOff> EmployeeWeekOffs { get; set; }
     }
 }

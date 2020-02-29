@@ -14,6 +14,7 @@ namespace BAModel.Service
 {
     public static class AppService
     {
+        #region Sprint #1
         public static GetUserProfile_response GetUserProfile(long UserID, string url)
         {
             DateTime starttime = DateTime.UtcNow;
@@ -58,7 +59,14 @@ namespace BAModel.Service
                     map.punchrangeinmeter = obj_company.PunchRangeInMeter;
 
                     map.totalallowedleaves = obj_company.AllowedLeaves;
-
+                    map.roleid = obj.CompanyRoleID;
+                    map.rolename = obj.CompanyRole.Name;
+                    map.hasteam = obj.AspNetUsers1.Any();
+                    if (obj.ReportingUserID != null)
+                    {
+                        AspNetUser obj_reporting_user = db.AspNetUsers.Find(obj.ReportingUserID);
+                        map.reportingperson = obj_reporting_user.FirstName + " " + obj_reporting_user.LastName;
+                    }
 
                     List<EmployeeLeaf> leaves = obj.EmployeeLeaves.Where(x =>
                                                                           (x.LeaveStatus == (int)AppEnum.LeaveStatusEnum.Pending
@@ -70,6 +78,19 @@ namespace BAModel.Service
                     map.totalappliedleaves = map.totalappliedleaves + leaves.Where(x => x.DayTypeID == (int)AppEnum.DayTypeEnum.HalfLeave).Count() / 2;
 
                     response.record = map;
+
+                    // rights 
+                    List<AppEnum.AppScreen> screenlist = Enum.GetValues(typeof(AppEnum.AppScreen)).Cast<AppEnum.AppScreen>().ToList();
+                    List<CompanyRolePermission> rolepermission = db.CompanyRolePermissions.Where(x => x.CompanyRoleID == obj.CompanyRoleID).ToList();
+                    foreach (AppEnum.AppScreen objrole in screenlist)
+                    {
+                        ScreenRight_detail maprole = new ScreenRight_detail();
+                        maprole.right = rolepermission.Any(x => x.ScreenID == (int)objrole);
+                        maprole.screenname = objrole.ToString();
+                        maprole.screenid = (int)objrole;
+                        response.screenrights.Add(maprole);
+                    }
+
                     response.result.message = "";
                     response.result.status = true;
                 }
@@ -303,6 +324,26 @@ namespace BAModel.Service
                             db.SaveChanges();
                             response.result.message = "";
                             response.result.status = true;
+
+                            // Add Notification
+                            AspNetUser user = db.AspNetUsers.Find(UserID);
+                            if (user != null && user.ReportingUserID != null)
+                            {
+
+                                string location = "out side";
+
+                                if (obj.PunchIn_LocationID != null)
+                                {
+                                    CompanyLocation companyLocation = db.CompanyLocations.Find(obj.PunchIn_LocationID);
+                                    if (companyLocation != null)
+                                        location = companyLocation.Name;
+                                }
+                                string message = user.FirstName + " " + user.LastName + " is availabel at " + location;
+                                string messagetype = Common.AppEnum.MessageTye.PunchInReporting.ToString();
+                                AspNetUser reportinguser = db.AspNetUsers.Find(user.ReportingUserID);
+                                Common.Common.AddNotification(reportinguser.CompanyID, reportinguser.Company.Name, reportinguser.DeviceToken,
+                                    null, null, obj.ID, null, user.Id, user.FirstName, reportinguser.DeviceID, reportinguser.DeviceType, message, messagetype);
+                            }
                         }
                     }
                 }
@@ -365,8 +406,30 @@ namespace BAModel.Service
                         GetEmployeeTodaysPunchDetail_TaskList map = new GetEmployeeTodaysPunchDetail_TaskList();
                         map.Task = objtask.Task;
                         map.taskid = objtask.ID;
-
+                        map.TaskStatus = Convert.ToString((AppEnum.EmployeeTaskStatus)objtask.Status);
                         response.record.tasks.Add(map);
+                    }
+
+                    foreach (EmployeeCall objcall in obj.EmployeeCalls)
+                    {
+                        GetEmployeeCallList_detail map = new GetEmployeeCallList_detail();
+                        map.callfor = objcall.CallFor;
+                        map.companyid = objcall.CompanyID;
+                        map.id = objcall.ID;
+                        map.punchid = objcall.EmployeePunchID;
+                        map.remarks = objcall.Remarks;
+                        map.start_datetime_timestamp = ConvertToTimestamp(objcall.StartDateTime);
+                        map.start_lat = objcall.StartLatitude;
+                        map.start_lng = objcall.StartLongitude;
+                        map.title = objcall.Title;
+                        if (objcall.EndDateTime != null)
+                        {
+                            map._end_datetime_timestamp = ConvertToTimestamp(objcall.EndDateTime.Value);
+                            map._end_lat = objcall.EndLatitude;
+                            map._end_lng = objcall.EndLongitude;
+                        }
+
+                        response.calls.Add(map);
                     }
                 }
                 else
@@ -410,7 +473,7 @@ namespace BAModel.Service
                     objtask.IsDeleted = false;
                     objtask.Task = request.task;
                     objtask.UserID = UserID;
-
+                    objtask.Status = (int)Common.AppEnum.EmployeeTaskStatus.Pending;
                     db.EmployeeTasks.Add(objtask);
                     db.SaveChanges();
 
@@ -454,7 +517,7 @@ namespace BAModel.Service
                         GetEmployeeTodaysPunchDetail_TaskList map = new GetEmployeeTodaysPunchDetail_TaskList();
                         map.Task = objtask.Task;
                         map.taskid = objtask.ID;
-
+                        map.TaskStatus = Convert.ToString((Common.AppEnum.EmployeeTaskStatus)objtask.Status);
                         response.records.Add(map);
                     }
                     response.result.message = "";
@@ -519,8 +582,30 @@ namespace BAModel.Service
                         GetEmployeeTodaysPunchDetail_TaskList map = new GetEmployeeTodaysPunchDetail_TaskList();
                         map.Task = objtask.Task;
                         map.taskid = objtask.ID;
-
+                        map.TaskStatus = Convert.ToString((AppEnum.EmployeeTaskStatus)objtask.Status);
                         response.record.tasks.Add(map);
+                    }
+
+                    foreach (EmployeeCall objcall in obj.EmployeeCalls)
+                    {
+                        GetEmployeeCallList_detail map = new GetEmployeeCallList_detail();
+                        map.callfor = objcall.CallFor;
+                        map.companyid = objcall.CompanyID;
+                        map.id = objcall.ID;
+                        map.punchid = objcall.EmployeePunchID;
+                        map.remarks = objcall.Remarks;
+                        map.start_datetime_timestamp = ConvertToTimestamp(objcall.StartDateTime);
+                        map.start_lat = objcall.StartLatitude;
+                        map.start_lng = objcall.StartLongitude;
+                        map.title = objcall.Title;
+                        if (objcall.EndDateTime != null)
+                        {
+                            map._end_datetime_timestamp = ConvertToTimestamp(objcall.EndDateTime.Value);
+                            map._end_lat = objcall.EndLatitude;
+                            map._end_lng = objcall.EndLongitude;
+                        }
+
+                        response.record.calls.Add(map);
                     }
                 }
                 response.result.message = "";
@@ -573,8 +658,29 @@ namespace BAModel.Service
                         GetEmployeeTodaysPunchDetail_TaskList map = new GetEmployeeTodaysPunchDetail_TaskList();
                         map.Task = objtask.Task;
                         map.taskid = objtask.ID;
-
+                        map.TaskStatus = Convert.ToString((AppEnum.EmployeeTaskStatus)objtask.Status);
                         record.tasks.Add(map);
+                    }
+                    foreach (EmployeeCall objcall in obj.EmployeeCalls)
+                    {
+                        GetEmployeeCallList_detail map = new GetEmployeeCallList_detail();
+                        map.callfor = objcall.CallFor;
+                        map.companyid = objcall.CompanyID;
+                        map.id = objcall.ID;
+                        map.punchid = objcall.EmployeePunchID;
+                        map.remarks = objcall.Remarks;
+                        map.start_datetime_timestamp = ConvertToTimestamp(objcall.StartDateTime);
+                        map.start_lat = objcall.StartLatitude;
+                        map.start_lng = objcall.StartLongitude;
+                        map.title = objcall.Title;
+                        if (objcall.EndDateTime != null)
+                        {
+                            map._end_datetime_timestamp = ConvertToTimestamp(objcall.EndDateTime.Value);
+                            map._end_lat = objcall.EndLatitude;
+                            map._end_lng = objcall.EndLongitude;
+                        }
+
+                        record.calls.Add(map);
                     }
 
                     response.records.Add(record);
@@ -622,6 +728,7 @@ namespace BAModel.Service
             }
             return response;
         }
+        #endregion
 
         #region Sprint #2
 
@@ -694,6 +801,7 @@ namespace BAModel.Service
                     map.name = obj.Name;
                     map.state = obj.State;
                     map.zipcode = obj.Zipcode;
+                    map.imageurl = obj.ImageURL;
 
                     response.records.Add(map);
                 }
@@ -750,6 +858,11 @@ namespace BAModel.Service
                     db.EmployeeLeaves.Add(obj);
                     db.SaveChanges();
 
+                    // Add Notification 
+                    string message = "Hey! Your leaves are here";
+                    string messagetype = Common.AppEnum.MessageTye.LeaveCreated.ToString();
+                    Common.Common.AddNotification(user.CompanyID, user.Company.Name, user.DeviceToken,
+                                    null, null, obj.ID, null, user.Id, user.FirstName+" "+ user.LastName, user.DeviceID, user.DeviceType, message, messagetype);
                     response.result.message = "";
                     response.result.status = true;
                 }
@@ -790,6 +903,32 @@ namespace BAModel.Service
                     obj.LeaveStatus = model.leavestatusid;
                     db.SaveChanges();
 
+                    string message = "";
+                    string messagetype = "";
+                    AspNetUser user = obj.AspNetUser;
+                    if (model.leavestatusid == (int)Common.AppEnum.LeaveStatusEnum.Sanctioned)
+                    {
+                        messagetype = Common.AppEnum.MessageTye.LeaveSanctioned.ToString();
+                        message = "Hurray! your leave is sanction for DATERANGE";
+                        Common.Common.AddNotification(user.CompanyID, user.Company.Name, user.DeviceToken,
+                                    null, null, obj.ID, null, user.Id, user.FirstName + " " + user.LastName, user.DeviceID, user.DeviceType, message, messagetype);
+                    }
+                    else if (model.leavestatusid == (int)Common.AppEnum.LeaveStatusEnum.Rejected)
+                    {
+                        messagetype = Common.AppEnum.MessageTye.LeaveRejected.ToString();
+                        message = "Sorry! your leave is rejected for DATERANGE";
+                        Common.Common.AddNotification(user.CompanyID, user.Company.Name, user.DeviceToken,
+                                    null, null, obj.ID, null, user.Id, user.FirstName + " " + user.LastName, user.DeviceID, user.DeviceType, message, messagetype);
+                    }
+                    else if (model.leavestatusid == (int)Common.AppEnum.LeaveStatusEnum.Reverted)
+                    {
+                        messagetype = Common.AppEnum.MessageTye.LeaveReverted.ToString();
+                        message = "Your leave is reverted for DATERANGE";
+                        Common.Common.AddNotification(user.CompanyID, user.Company.Name, user.DeviceToken,
+                                    null, null, obj.ID, null, user.Id, user.FirstName + " " + user.LastName, user.DeviceID, user.DeviceType, message, messagetype);
+                    }
+                    
+
                     response.result.status = true;
                     response.result.message = "";
                 }
@@ -816,7 +955,7 @@ namespace BAModel.Service
             {
                 AxolotlEntities db = new AxolotlEntities();
                 EmployeeLeaf obj = db.EmployeeLeaves.Find(model.id);
-                if(obj != null)
+                if (obj != null)
                 {
                     GetLeaveDetail_Model map = new GetLeaveDetail_Model();
                     map.daytype = obj.DayTypeID;
@@ -825,7 +964,7 @@ namespace BAModel.Service
                     map.id = obj.ID;
                     map.leavetype = obj.LeaveTypeID;
                     map.leavetypename = GetEnumDescription((AppEnum.LeaveTypeEnum)obj.LeaveTypeID);
-                    map.remarks = !string.IsNullOrEmpty(obj.ApplyRemarks)?obj.ApplyRemarks:obj.ApplyRemarks;
+                    map.remarks = !string.IsNullOrEmpty(obj.ApplyRemarks) ? obj.ApplyRemarks : obj.ApplyRemarks;
                     map.statusname = GetEnumDescription((AppEnum.LeaveStatusEnum)obj.LeaveStatus);
                     map.statusid = obj.LeaveStatus;
                     map.to_timespan = ConvertToTimestamp(obj.ToDate);
@@ -859,7 +998,7 @@ namespace BAModel.Service
             {
                 AxolotlEntities db = new AxolotlEntities();
                 List<EmployeeLeaf> objs = db.EmployeeLeaves.Where(x => x.UserID == UserID).OrderByDescending(x => x.ID).ToList();
-               foreach(EmployeeLeaf obj in objs)
+                foreach (EmployeeLeaf obj in objs)
                 {
                     GetLeaveDetail_Model map = new GetLeaveDetail_Model();
                     map.daytype = obj.DayTypeID;
@@ -892,6 +1031,419 @@ namespace BAModel.Service
             }
             return response;
         }
+
+        public static GetEmployeeLeaves_response GetMyTeamEmployeeLeaves(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            GetEmployeeLeaves_response response = new GetEmployeeLeaves_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<long> userids = db.AspNetUsers.Where(x => x.ReportingUserID == UserID).Select(x => x.Id).ToList();
+
+                List<EmployeeLeaf> objs = db.EmployeeLeaves.Where(x => userids.Contains(x.UserID)).OrderByDescending(x => x.ID).ToList();
+                foreach (EmployeeLeaf obj in objs)
+                {
+                    AspNetUser employee = obj.AspNetUser;
+                    GetLeaveDetail_Model map = new GetLeaveDetail_Model();
+                    map.daytype = obj.DayTypeID;
+                    map.daytypename = GetEnumDescription((AppEnum.DayTypeEnum)obj.DayTypeID);
+                    map.from_timespan = ConvertToTimestamp(obj.FromDate);
+                    map.id = obj.ID;
+                    map.leavetype = obj.LeaveTypeID;
+                    map.leavetypename = GetEnumDescription((AppEnum.LeaveTypeEnum)obj.LeaveTypeID);
+                    map.remarks = !string.IsNullOrEmpty(obj.ApplyRemarks) ? obj.ApplyRemarks : obj.ApplyRemarks;
+                    map.statusname = GetEnumDescription((AppEnum.LeaveStatusEnum)obj.LeaveStatus);
+                    map.statusid = obj.LeaveStatus;
+                    map.to_timespan = ConvertToTimestamp(obj.ToDate);
+
+                    map.employeeid = obj.UserID;
+                    map.employeename = employee.FirstName + " " + employee.LastName;
+                    map.datecreated_timespan = ConvertToTimestamp(obj.DateCreated);
+                    response.records.Add(map);
+                }
+
+                response.result.status = true;
+                response.result.message = "";
+
+
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), ex, false);
+            }
+            return response;
+        }
         #endregion
+
+        #region Sprint #3
+        public static GetMyTeam_response GetMyTeam(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            GetMyTeam_response response = new GetMyTeam_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<AspNetUser> records = db.AspNetUsers.Where(x => x.ReportingUserID == UserID).ToList();
+
+                foreach (AspNetUser obj in records)
+                {
+                    GetMyTeam_detail map = new GetMyTeam_detail();
+                    map.name = obj.FirstName + " " + obj.LastName;
+                    map.roleid = obj.CompanyRoleID;
+                    map.rolename = obj.CompanyRoleID == null ? "" : obj.CompanyRole.Name;
+
+                    response.records.Add(map);
+
+                }
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), ex, false);
+            }
+
+
+            return response;
+        }
+
+        public static AppCommonResponse UpdateEmployeeTaskStatus(UpdateEmployeeTaskStatus_request model, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                EmployeeTask record = db.EmployeeTasks.Find(model.taskid);
+
+                if (record != null)
+                {
+                    record.DateModified = DateTime.UtcNow;
+                    record.Status = model.statusid;
+                    db.SaveChanges();
+                }
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), ex, false);
+            }
+
+
+            return response;
+        }
+
+        public static AppCommonResponse AddUpdateEmployeeCalls(AddUpdateEmployeeCalls_request model, long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                if (model.id == 0)
+                {
+                    EmployeeCall record = new EmployeeCall();
+                    record.CallFor = model.callfor;
+                    record.CompanyID = model.companyid;
+                    record.DateCreated = DateTime.UtcNow;
+                    record.DateModified = DateTime.UtcNow;
+                    record.EmployeePunchID = model.punchid;
+                    record.EndDateTime = null;
+                    record.EndLatitude = null;
+                    record.EndLongitude = null;
+                    record.IsActive = true;
+                    record.Remarks = model.remarks;
+                    record.StartDateTime = GetDateTimeFromTimeStamp(model.start_datetime_timestamp);
+                    record.StartLatitude = model.start_lat;
+                    record.StartLongitude = model.start_lng;
+                    record.Title = model.title;
+                    record.UserID = UserID;
+                    record.EmployeePunchID = model.punchid;
+                    record.CallType = model.calltype;
+                    db.EmployeeCalls.Add(record);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    EmployeeCall record = db.EmployeeCalls.Find(model.id);
+
+                    if (record != null)
+                    {
+                        record.CallFor = model.callfor;
+                        record.CompanyID = model.companyid;
+                        record.DateCreated = DateTime.UtcNow;
+                        record.DateModified = DateTime.UtcNow;
+                        record.EmployeePunchID = model.punchid;
+                        record.EndDateTime = null;
+                        record.EndLatitude = null;
+                        record.EndLongitude = null;
+                        record.IsActive = true;
+                        record.Remarks = model.remarks;
+                        record.StartDateTime = GetDateTimeFromTimeStamp(model.start_datetime_timestamp);
+                        record.StartLatitude = model.start_lat;
+                        record.StartLongitude = model.start_lng;
+                        record.Title = model.title;
+                        record.UserID = UserID;
+                        record.CallType = model.calltype;
+                        db.SaveChanges();
+                    }
+                }
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), ex, false);
+            }
+
+
+            return response;
+        }
+
+        public static AppCommonResponse EndEmployeeCalls(EndEmployeeCalls_request model, long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+
+                EmployeeCall record = db.EmployeeCalls.Find(model.id);
+
+                if (record != null)
+                {
+                    record.DateModified = DateTime.UtcNow;
+                    record.EndDateTime = GetDateTimeFromTimeStamp(model.end_datetime_timestamp);
+                    record.EndLatitude = model.end_lat;
+                    record.EndLongitude = model.end_lng;
+                    record.Remarks = model.remarks;
+                    db.SaveChanges();
+                }
+
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), ex, false);
+            }
+
+
+            return response;
+        }
+
+        public static GetEmployeeCallList_response GetEmployeeCallList(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            GetEmployeeCallList_response response = new GetEmployeeCallList_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<EmployeeCall> records = db.EmployeeCalls.Where(x => x.UserID == UserID).ToList();
+
+                foreach (EmployeeCall obj in records)
+                {
+                    GetEmployeeCallList_detail map = new GetEmployeeCallList_detail();
+                    map.callfor = obj.CallFor;
+                    map.companyid = obj.CompanyID;
+                    map.id = obj.ID;
+                    map.punchid = obj.EmployeePunchID;
+                    map.remarks = obj.Remarks;
+                    map.start_datetime_timestamp = ConvertToTimestamp(obj.StartDateTime);
+                    map.start_lat = obj.StartLatitude;
+                    map.start_lng = obj.StartLongitude;
+                    map.title = obj.Title;
+                    map.calltype = obj.CallType;
+                    map.calltypename = GetEnumDescription((AppEnum.EmployeeCallType)obj.CallType);
+
+                    if (obj.EndDateTime != null)
+                    {
+                        map._end_datetime_timestamp = ConvertToTimestamp(obj.EndDateTime.Value);
+                        map._end_lat = obj.EndLatitude;
+                        map._end_lng = obj.EndLongitude;
+                    }
+
+                    response.records.Add(map);
+                }
+
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(""), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(""), JsonConvert.SerializeObject(response), ex, false);
+            }
+
+
+            return response;
+        }
+
+        #endregion
+
+        #region Sprint #5-6
+        public static AppCommonResponse MarkNotificationAsRead(MarkNotificationAsRead_request model, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            AppCommonResponse response = new AppCommonResponse();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+
+                Notification obj = db.Notifications.Find(model.notificationid);
+                if (obj != null)
+                {
+                    obj.DateModified = DateTime.UtcNow;
+                    obj.HasRead = true;
+                    db.SaveChanges();
+                }
+                response.result.status = true;
+                response.result.message = "";
+
+
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(model), JsonConvert.SerializeObject(response), ex, false);
+            }
+            return response;
+        }
+
+        public static UserDashboardStatics_response UserDashboardStatics(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            UserDashboardStatics_response response = new UserDashboardStatics_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<EmployeePunch> records = db.EmployeePunches.Where(x => x.UserID == UserID).ToList();
+
+                response.total_punch = records.Count;
+                response.total_punch_In = records.Where(x => x.ClockInTime != null).Count();
+                response.total_punch_In_late = records.Where(x => x.LateComer && x.ClockInTime != null).Count();
+                response.total_punch_In_outside = records.Where(x => x.IsOutSidePunchIn && x.ClockInTime != null).Count();
+
+                response.total_punch_Out = records.Where(x => x.ClockOutTime != null).Count();
+                response.total_punch_Out_early = records.Where(x => x.ClockOutTime != null && x.EarlyOuter).Count();
+                response.total_punch_Out_outside = records.Where(x => x.ClockOutTime != null  && x.IsOutSidePunchOut).Count();
+                response.total_punch_Out_system = records.Where(x => x.ClockOutTime != null && x.IsSystemClockOut).Count();
+                response.result.status = true;
+                response.result.message = "";
+
+
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), ex, false);
+            }
+            return response;
+        }
+
+        public static UserLeaveStatics_response UserLeaveStatics(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            UserLeaveStatics_response response = new UserLeaveStatics_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<EmployeeLeaf> records = db.EmployeeLeaves.Where(x => x.UserID == UserID).ToList();
+                response.total_leaves = records.Count;
+                response.total_leaves_canceled = records.Where(x => x.LeaveStatus == (int)Common.AppEnum.LeaveStatusEnum.Canceled).Count();
+                response.total_leaves_pending = records.Where(x => x.LeaveStatus == (int)Common.AppEnum.LeaveStatusEnum.Pending).Count();
+                response.total_leaves_rejected = records.Where(x => x.LeaveStatus == (int)Common.AppEnum.LeaveStatusEnum.Rejected).Count();
+                response.total_leaves_reverted = records.Where(x => x.LeaveStatus == (int)Common.AppEnum.LeaveStatusEnum.Reverted).Count();
+                response.total_leaves_sanctioned = records.Where(x => x.LeaveStatus == (int)Common.AppEnum.LeaveStatusEnum.Sanctioned).Count();
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), ex, false);
+            }
+            return response;
+        }
+
+        public static UserCallStatics_response UserCallStatics(long UserID, string url)
+        {
+            DateTime starttime = DateTime.UtcNow;
+            DateTime endtime = DateTime.UtcNow;
+            UserCallStatics_response response = new UserCallStatics_response();
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                List<EmployeeCall> records = db.EmployeeCalls.Where(x => x.UserID == UserID).ToList();
+                response.total_calls = records.Count;
+                response.total_calls_client = records.Where(x => x.CallType == (int)Common.AppEnum.EmployeeCallType.Client).Count();
+                response.total_calls_personal = records.Where(x => x.CallType == (int)Common.AppEnum.EmployeeCallType.Personal).Count();
+                response.result.status = true;
+                response.result.message = "";
+                endtime = DateTime.UtcNow;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), null, true);
+            }
+            catch (Exception ex)
+            {
+                endtime = DateTime.UtcNow;
+                response.result.message = "something went wrong!";
+                response.result.status = false;
+                Common.Common.AddAPIActivityLog(url, starttime, endtime, JsonConvert.SerializeObject(UserID), JsonConvert.SerializeObject(response), ex, false);
+            }
+            return response;
+        }
+        #endregion 
     }
 }

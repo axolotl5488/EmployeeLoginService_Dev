@@ -15,7 +15,6 @@ E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityF
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.SqlServer.dll
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.xml
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\bin\Debug\EntityFramework.SqlServer.xml
-E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csprojAssemblyReference.cache
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csproj.CoreCompileInputs.cache
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csproj.CopyComplete
 E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.dll
@@ -31,3 +30,4 @@ D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csprojAs
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csproj.CopyComplete
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.dll
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.pdb
+E:\NKTPL\EmployeeLoginService\Axolotl\Source\Axolotl\DataModel\obj\Debug\DataModel.csprojAssemblyReference.cache

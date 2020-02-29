@@ -116,6 +116,42 @@ namespace BAModel.Common
 
             return value.ToString();
         }
+
+        public static void AddNotification(int CompanyID,string CompanyName,string DeviceToken,long? EmployeeCallID,
+            long? EmployeeLeaveID,long? EmployeePunchID,long? EmployeeTaskID,long UserID,string UserName,string DeviceID,int? DeviceType,
+            string Message,string MessageType)
+        {
+            try
+            {
+                AxolotlEntities db = new AxolotlEntities();
+                Notification obj = new Notification();
+                obj.CompanyID = CompanyID;
+                obj.CompanyName = CompanyName;
+                obj.DateCreated = DateTime.UtcNow;
+                obj.DateModified = DateTime.UtcNow;
+                obj.DeviceToken = DeviceToken;
+                obj.EmployeeCallID = EmployeeCallID;
+                obj.EmployeeLeaveID = EmployeeLeaveID;
+                obj.EmployeePunchID = EmployeePunchID;
+                obj.EmployeeTaskID = EmployeeTaskID;
+                obj.HasRead = false;
+                obj.HasSent = false;
+                obj.SentDate = null;
+                obj.UserID = UserID;
+                obj.UserName = UserName;
+                obj.DeviceID = DeviceID;
+                obj.DeviceType = DeviceType;
+                obj.Message = Message;
+                obj.MessageType = MessageType;
+
+                db.Notifications.Add(obj);
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
     }
 
     public static class AppEnum
@@ -175,6 +211,70 @@ namespace BAModel.Common
             Reverted = 4,
             [Description("Canceled")]
             Canceled = 5
+        }
+
+        public enum CompanyDefaultRole
+        {
+            [Description("Admin")]
+            Admin = 1,
+            [Description("Employee")]
+            Employee = 2
+        }
+
+
+        public enum AppScreen
+        {
+            [Description("Punch")]
+            Punch = 1,
+            [Description("Leave")]
+            Leave = 2,
+            [Description("Team")]
+            Team = 3
+        }
+
+        public enum EmployeeTaskStatus
+        {
+            [Description("Pending")]
+            Pending = 1,
+            [Description("In-Progress")]
+            InProgress = 2,
+            [Description("Completed")]
+            Completed = 3,
+            [Description("Cancelled")]
+            Cancelled = 4
+        }
+
+        public enum EmployeeWeekOff_Enum
+        {
+            [Description("Week One")]
+            Week_One = 1,
+            [Description("Week Two")]
+            Week_Two = 2,
+            [Description("Week Three")]
+            Week_Three = 3,
+            [Description("Week Four")]
+            Week_Four = 4,
+            [Description("Week Five")]
+            Week_Fice = 5,
+        }
+
+        public enum EmployeeCallType
+        {
+            [Description("Personal")]
+            Personal = 1,
+            [Description("Client")]
+            Client = 2,
+        }
+
+        public enum MessageTye
+        {
+            PunchInReMinder,
+            PunchOutReMinder,
+            PunchInReporting,
+            LeaveCreated,
+            LeaveSanctioned,
+            LeaveRejected,
+            LeaveReverted
         }
     }
 }

@@ -1,0 +1,54 @@
+
+<div class="header-location-content">
+  <div class=" spacer-top-20 spacer-bottom-20">
+    <table class="table table-theme">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Company</th>
+          <th>From</th>
+          <th>To</th>
+          <th style="text-align:center;">Days</th>
+          <th style="text-align:center;">Day Type</th>
+          <th style="text-align:center;">Leave Type</th>
+          <th style="text-align:center;">Leave Status</th>
+          <th style="text-align:center;">Paid Leave?</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="model && model.records">
+        <tr *ngFor="let obj of model.records">
+          <td>{{obj.username}}</td>
+          <td>{{obj.companyname}}</td>
+          <td>{{obj.fromdate}}</td>
+          <td>{{obj.todate}}</td>
+
+          <td style="text-align:center;"><b class="text text-success">{{obj.totaldays}}</b></td>
+          <td style="text-align:center;">{{obj.daytype}}</td>
+          <td style="text-align:center;">{{obj.leavetype}}</td>
+          <td style="text-align:center;">
+            <ng-container *ngIf="obj.leavestatus == 'Pending'">
+              <b class="text text-success">{{obj.leavestatus}}</b>
+            </ng-container>
+            <ng-container *ngIf="obj.leavestatus != 'Pending'">
+              <b class="text text-default">{{obj.leavestatus}}</b>
+            </ng-container>
+          </td>
+          <td style="text-align:center;">
+            <ng-container *ngIf="obj.ispaidleave">
+              <b class="text text-success">{{obj.totaldays}}</b>
+            </ng-container>
+            <ng-container *ngIf="!obj.ispaidleave">
+              <b class="text text-danger">{{obj.totaldays}}</b>
+            </ng-container>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+

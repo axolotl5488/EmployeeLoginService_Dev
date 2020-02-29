@@ -21,6 +21,7 @@ namespace DataModel
         public long EmployeePunchID { get; set; }
         public string Task { get; set; }
         public bool IsDeleted { get; set; }
+        public int Status { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual EmployeePunch EmployeePunch { get; set; }

@@ -8,8 +8,10 @@ import { AppEmployeePunchComponent } from './AppComponent/EmployePunch/employeep
 import { AppManageCompanyComponent } from './AppComponent/ManageCompany/managecompany.component';
 import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
 import { AppEmployeeLeaveComponent } from './AppComponent/EmployeeLeaves/EmployeeLeaves.component';
+import { AppManageEmployeePunchComponent } from './AppComponent/ManageEmployeePunch/manageemployeepunch.component';
 
 const routes: Routes = [
+    { path: 'manageemployeepunch/:id', component: AppManageEmployeePunchComponent, canActivate: [AppRoutingServiceService], data: ['employeepunch'] }, 
     { path: 'employeeleaves', component: AppEmployeeLeaveComponent, canActivate: [AppRoutingServiceService], data: ['employeeleaves'] },
     { path: 'manageuser/:id', component: AppManageUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] }, 
     { path: 'user', component: AppUserComponent, canActivate: [AppRoutingServiceService], data: ['user'] },
