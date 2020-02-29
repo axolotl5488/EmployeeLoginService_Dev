@@ -41,6 +41,8 @@ namespace DataModel
         public bool IsOutSidePunchOut { get; set; }
         public Nullable<long> PunchIn_LocationID { get; set; }
         public Nullable<long> PunchOut_LocationID { get; set; }
+        public string PunchIn_OutsideReason { get; set; }
+        public string PunchOut_OutsideReason { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -9,6 +9,8 @@ using DataModel;
 using Newtonsoft.Json;
 using System.Data.Entity;
 using static BAModel.Common.Common;
+using System.Web;
+using System.IO;
 
 namespace BAModel.Service
 {
@@ -458,7 +460,7 @@ namespace BAModel.Service
                     obj.Name = model.name;
                     obj.State = model.state;
                     obj.Zipcode = model.zipcode;
-
+                    obj.ImageURL = model.imageurl;
                     db.CompanyLocations.Add(obj);
                     db.SaveChanges();
                 }
@@ -476,6 +478,7 @@ namespace BAModel.Service
                     obj.Name = model.name;
                     obj.State = model.state;
                     obj.Zipcode = model.zipcode;
+                    obj.ImageURL = model.imageurl;
 
                     db.SaveChanges();
                 }
@@ -510,7 +513,7 @@ namespace BAModel.Service
                 map.zipcode = obj.Zipcode;
                 map.name = obj.Name;
                 map.companyid = obj.CompanyID;
-
+                map.imageurl = obj.ImageURL;
                 response.record = map;
 
                 response.result.status = true;
@@ -652,7 +655,7 @@ namespace BAModel.Service
                         obj.Date = holidaydate;
                         obj.DateCreated = DateTime.UtcNow;
                         obj.DateModified = DateTime.UtcNow;
-                        obj.Description = model.description;
+                        obj.Description =  model.description;
                         obj.IsActive = true;
                         obj.Name = model.Name;
 
@@ -701,7 +704,7 @@ namespace BAModel.Service
                 response.record.date = obj.Date.ToString("dd/MM/yyyy");
                 response.record.description = obj.Description;
                 response.record.Name = obj.Name;
-
+                response.record.id = obj.ID;
                 response.result.status = true;
                 response.result.message = "";
 
@@ -1455,6 +1458,42 @@ namespace BAModel.Service
             {
                 response.result.message = "something went wrong!";
                 response.result.status = false;
+            }
+            return response;
+        }
+
+        public static UploadImage_Response UploadImage(HttpPostedFile file)
+        {
+            UploadImage_Response response = new UploadImage_Response();
+            try
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                string[] fileextension = file.FileName.Split('.');
+                string fileext = fileextension[fileextension.Length - 1];
+                string updatedfilename = "axolotlimage_" + DateTime.Now.ToString("MMddyyyyhhmmss") + "." + fileext;
+
+                if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Images")))
+                {
+                    System.IO.Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("~/Images"));
+                }
+
+                if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Images/AxololtImages")))
+                {
+                    System.IO.Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("~/Images/AxololtImages"));
+                }
+                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/AxololtImages"), updatedfilename);
+                file.SaveAs(path);
+
+                response.filename = updatedfilename;
+
+
+                response.response.status = true;
+                response.response.message = "";
+            }
+            catch (Exception ex)
+            {
+                response.response.status = false;
+                response.response.message = ex.Message;
             }
             return response;
         }

@@ -257,6 +257,7 @@ namespace BAModel.Service
                                         obj.EarlyOuterReason = request.earlyoutouterreason;
                                         obj.IsOutSidePunchOut = request.isoutside_punchout;
                                         obj.PunchOut_LocationID = request.punchout_locationid;
+                                        obj.PunchOut_OutsideReason = request.punchout_outsidereason;
                                         db.SaveChanges();
 
                                         response.result.message = "";
@@ -319,6 +320,7 @@ namespace BAModel.Service
                             obj.UserID = UserID;
                             obj.IsOutSidePunchIn = request.isoutside_punchin;
                             obj.PunchIn_LocationID = request.punchin_locationid;
+                            obj.PunchIn_OutsideReason = request.punchin_outsidereason;
 
                             db.EmployeePunches.Add(obj);
                             db.SaveChanges();
@@ -401,6 +403,8 @@ namespace BAModel.Service
                     response.record.isoutside_punchout = obj.IsOutSidePunchOut;
                     response.record.punchin_locationid = obj.PunchIn_LocationID;
                     response.record.punchout_locationid = obj.PunchOut_LocationID;
+                    response.record.punchin_outsidereason = obj.PunchIn_OutsideReason;
+                    response.record.punchout_outsidereason = obj.PunchOut_OutsideReason;
                     foreach (EmployeeTask objtask in obj.EmployeeTasks)
                     {
                         GetEmployeeTodaysPunchDetail_TaskList map = new GetEmployeeTodaysPunchDetail_TaskList();

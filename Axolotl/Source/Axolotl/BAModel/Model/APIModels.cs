@@ -235,7 +235,8 @@ namespace BAModel.Model
         public bool isoutside_punchout { get; set; }
         public long? punchin_locationid { get; set; }
         public long? punchout_locationid { get; set; }
-
+        public string punchin_outsidereason { get; set; }
+        public string punchout_outsidereason { get; set; }
         public List<GetEmployeeTodaysPunchDetail_TaskList> tasks { get; set; }
 
         public List<GetEmployeeCallList_detail> calls { get; set; }
@@ -273,6 +274,9 @@ namespace BAModel.Model
         public bool isoutside_punchout { get; set; }
         public long? punchin_locationid { get; set; }
         public long? punchout_locationid { get; set; }
+
+        public string punchin_outsidereason { get; set; }
+        public string punchout_outsidereason { get; set; }
     }
     public class ManageEmployeePunch_response
     {

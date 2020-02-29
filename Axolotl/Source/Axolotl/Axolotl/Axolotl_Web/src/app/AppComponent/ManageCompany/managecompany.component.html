@@ -216,7 +216,7 @@
 
         <!-- Modal content-->
         <div id="companylocation_popmodal" class="modal fade in modal-theme" role="dialog" data-backdrop="false">
-          <div class="modal-dialog" style="width:850px;">
+          <div class="modal-dialog" style="width:1050px;">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -225,10 +225,11 @@
               <form id="companylocationform" #companylocationform="ngForm" (submit)="ManageCompanyLocation()">
                 <div class="modal-body" *ngIf="model_companylocationrequest">
                   <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 br">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 br">
                       <div id="map" class="map-box" style="height:400px;"></div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-left:1px solid #C3C3C3">
+
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  br" style="border-left:1px solid #C3C3C3;border-right:1px solid #C3C3C3">
                       <div class="col-xs-11 col-sm-11 col-md-11 col-lg-12">
                         <div class="form-group form-group-theme">
                           <div class="label">Name *</div>
@@ -295,6 +296,20 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="">
+                      <div class="form-group form-group-theme">
+                        <div class="label"><b>Location Image</b></div>
+                        <div class="form-control" style="height:auto;border:none;">
+                          <img src="{{model_companylocationrequest.imageurl}}" class="img-rounded " alt="no image" width="304" height="236">
+                          <button type="button" class="btn btn-block btn-theme" style="width:304px;" (click)="Image1Browse()">
+                            Upload Location Image
+                          </button>
+                          <input type="file" class="form-control" id="Image1Browse" name="Image1Browse" style="display:none" (change)="Image1Upload($event)" />
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -386,7 +401,7 @@
                           <div class="label">Date *</div>
                           <input type="text" class="form-control" id="holidaydate" name="holidaydate" #holidaydate="ngModel"
                                  [(ngModel)]="model_companyholidayrequest.date" placeholder="01/01/2001"
-                                 [class.required]="(holidaydate.touched && holidaydate.invalid)"
+                                 [class.required]="(holidaydate.touched && holidaydate.invalid)" autocomplete="off"
                                  required />
                         </div>
                       </div>
@@ -395,7 +410,9 @@
                         <div class="form-group form-group-theme">
                           <div class="label">Remarks</div>
                           <textarea class="form-control" id="holidaydescription" name="holidaydescription" #holidaydescription="ngModel"
-                                    [(ngModel)]="model_companyholidayrequest.description" placeholder="description"></textarea>
+                                    [(ngModel)]="model_companyholidayrequest.description" placeholder="description"
+                                    [class.required]="(holidaydescription.touched && holidaydescription.invalid)"
+                                    required></textarea>
                         </div>
                       </div>
                     </div>

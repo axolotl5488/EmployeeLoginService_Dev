@@ -362,3 +362,5 @@ D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\bin\Microsoft.Owin.Security.OA
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\bin\System.Web.Http.Owin.xml
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\obj\Debug\Axolotl.csproj.CopyComplete
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\bin\Microsoft.Owin.Cors.dll
+D:\Milan\NKTPL_GIT\Axolotl\Source\Axolotl\Axolotl\bin\Microsoft.Owin.Cors.xml

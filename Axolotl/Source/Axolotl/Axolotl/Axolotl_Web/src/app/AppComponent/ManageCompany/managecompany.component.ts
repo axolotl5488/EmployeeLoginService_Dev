@@ -27,6 +27,8 @@ import {
 
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.js';
+import * as moment from 'moment/moment.js';
 import * as $ from 'jquery';
 declare const google: any;
 
@@ -65,7 +67,7 @@ export class AppManageCompanyComponent implements OnInit {
   activeTab: number;
   activeholidayear: string;
 
-
+    
   constructor(private _Router: Router, private _ActivatedRoute: ActivatedRoute, private _Company_Service: Company_Service, private _EmployeePunch_Service: EmployeePunch_Service, private _EmployeeLeave_Service: EmployeeLeave_Service) {
     this.model = new ManageCompany_Request();
     this.model_companylocationlist = new GetCompanyLocaitonList_response();
@@ -103,9 +105,11 @@ export class AppManageCompanyComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-    // this.initAutocomplete();
-  }
+  
+
+    ngAfterViewInit(): void {
+       
+    }
 
   ManageCompany(): void {
     this._Company_Service.ManageCompany(this.model).subscribe(x => {
@@ -177,7 +181,10 @@ export class AppManageCompanyComponent implements OnInit {
       request.locationid = id;
       this._Company_Service.GetCompanyLocationDetail(request).subscribe(x => {
         if (x.result.status) {
-          this.model_companylocationrequest = x.record;
+            this.model_companylocationrequest = x.record;
+            if (this.model_companylocationrequest.imageurl == null || this.model_companylocationrequest.imageurl == undefined || this.model_companylocationrequest.imageurl == '') {
+                this.model_companylocationrequest.imageurl = "assets/images/image_placeholder.png";
+            }
           $("#companylocation_popmodal").modal('show');
           this.initAutocomplete();
           this.ShowLocationonMap(x.record.lat, x.record.lng, 15);
@@ -189,12 +196,33 @@ export class AppManageCompanyComponent implements OnInit {
     }
     else {
       this.model_companylocationrequest = new ManageCompanyLocation_request();
-      this.model_companylocationrequest.companyid = this.model.id;
+        this.model_companylocationrequest.companyid = this.model.id;
+        this.model_companylocationrequest.imageurl = "assets/images/image_placeholder.png";
       $("#companylocation_popmodal").modal('show');
       this.initAutocomplete();
       this.ShowLocationonMap(21.7679, 78.8718, 4);
     }
-  }
+    }
+
+
+    Image1Browse(): void {
+        $("#Image1Browse").trigger("click")
+    }
+
+    Image1Upload(event): void {
+        let uploadfile: FormData = new FormData();
+        let files = event.target.files;
+        if (files) {
+            for (let file of files) {
+                uploadfile.append("supplyitem", file);
+                this._Company_Service.UploadImage(uploadfile).subscribe(x => {
+                    if (x.response.status) {
+                        this.model_companylocationrequest.imageurl = AppCommon.APIImageURL + "/AxololtImages/" + x.filename;
+                    }
+                })
+            }
+        }
+    }
 
   ActiveInActiveCompanyLocation(id: number): void {
 
@@ -339,7 +367,14 @@ export class AppManageCompanyComponent implements OnInit {
       this._Company_Service.GetCompanyHolidayDetail(request).subscribe(x => {
         if (x.result.status) {
           this.model_companyholidayrequest = x.record;
-          $("#companyholiday_popmodal").modal('show');
+            $("#companyholiday_popmodal").modal('show');
+
+            let _this = this;
+            $('#holidaydate').datepicker({
+                format: 'dd/mm/yyyy',
+            }).on('changeDate', function (e) {
+                _this.model_companyholidayrequest.date = $("#holidaydate").val();
+            });
         }
         else {
           AppCommon.DangerNotify(x.result.message);
@@ -349,7 +384,14 @@ export class AppManageCompanyComponent implements OnInit {
     else {
       this.model_companyholidayrequest = new MangeCompantHolidays_request();
       this.model_companylocationrequest.companyid = this.model.id;
-      $("#companyholiday_popmodal").modal('show');
+        $("#companyholiday_popmodal").modal('show');
+
+        let _this = this;
+        $('#holidaydate').datepicker({
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function (e) {
+            _this.model_companyholidayrequest.date = $("#holidaydate").val();
+        });
     }
   }
 

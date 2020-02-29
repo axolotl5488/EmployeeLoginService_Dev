@@ -89,7 +89,8 @@ export class ManageCompanyLocation_request {
   city: string;
   zipcode: string;
   lat: number;
-  lng: number;
+    lng: number;
+    imageurl: string;
 
 }
 
@@ -328,4 +329,14 @@ export class ManageTeam_request {
   userid: number;
   roleid: number;
   reportingpersonid?: number;
+}
+
+
+
+export class UploadImage_Response {
+    filename: string;
+    response: ResultStatus;
+    constructor() {
+        this.response = new ResultStatus();
+    }
 }

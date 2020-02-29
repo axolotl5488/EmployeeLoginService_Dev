@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Axolotl.Providers;
 using Axolotl.Models;
+using Microsoft.Owin.Cors;
+using System.Web.Http.Cors;
 
 namespace Axolotl
 {
@@ -20,6 +22,7 @@ namespace Axolotl
         public static string PublicClientId { get; private set; }
 
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
+      
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
@@ -40,7 +43,8 @@ namespace Axolotl
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
+                AllowInsecureHttp = true,
+                
             };
 
             // Enable the application to use bearer tokens to authenticate users

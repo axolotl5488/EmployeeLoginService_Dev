@@ -644,7 +644,7 @@ namespace BAModel
             {
                 DailyUserReport_Model model = new DailyUserReport_Model();
                 EmployeeLoginEntities db = new EmployeeLoginEntities();
-                List<User> users = db.Users.ToList();
+                List<User> users = db.Users.Where(x=>x.CompanyID == 15).ToList();
                 DateTime currentdate = datetime;
                 List<PunchIn> records = db.PunchIns.Where(x => DbFunctions.TruncateTime(x.PunchinTime) == DbFunctions.TruncateTime(currentdate)).ToList();
                 List<Location> locations = db.Locations.ToList();

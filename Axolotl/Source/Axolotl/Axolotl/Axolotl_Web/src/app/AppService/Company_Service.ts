@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/Observable/throw';
@@ -14,7 +14,7 @@ import {
   GetCompanyRolesList_response, GetCompanyRolesList_request, ManageCompanyRoles_request, GetCompanyRoleDetail_request, GetCompanyRoleDetail_response,
   GetCompanyRolesPermissionList_response, GetCompanyRolesPermissionList_request, ManageCompanyRolesPermission_request,
   GetCompanyRolesList_detail, GetCompanyRolesPermissionList_RolePermission_detail, GetCompanyRolesPermissionList_Role_detail, ManageTeamList_detail,
-  ManageTeamList_reporting_person_detail, ManageTeamList_reporting_role_detail, ManageTeamList_request, ManageTeamList_response, ManageTeam_request
+    ManageTeamList_reporting_person_detail, ManageTeamList_reporting_role_detail, ManageTeamList_request, ManageTeamList_response, ManageTeam_request, UploadImage_Response
 } from '../AppModel/Company_Models'
 
 
@@ -22,8 +22,9 @@ import {
 export class Company_Service {
   constructor(private _HttpClient: HttpClient) { }
 
-  GetCompanyList(): Observable<GetCompany_Response> {
-    return this._HttpClient.post(AppCommon.APIURL + "/GetCompanyList", null).map(x => <GetCompany_Response>x).catch(this.httperrorHandle);
+    GetCompanyList(): Observable<GetCompany_Response> {
+        var header = { headers: new HttpHeaders().set('Access-Control-Allow-Origin', '*') }
+        return this._HttpClient.post(AppCommon.APIURL + "/GetCompanyList", null, header).map(x => <GetCompany_Response>x).catch(this.httperrorHandle);
   }
 
   ManageCompany(model: ManageCompany_Request): Observable<ManageCompany_Response> {
@@ -97,7 +98,11 @@ export class Company_Service {
 
   ManageTeam(model: ManageTeam_request): Observable<AppCommonResponse> {
     return this._HttpClient.post(AppCommon.APIURL + "/ManageTeam", model).map(x => <AppCommonResponse>x).catch(this.httperrorHandle);
-  }
+    }
+
+    UploadImage(model: FormData): Observable<UploadImage_Response> {
+        return this._HttpClient.post(AppCommon.APIURL + "/UploadImage", model).map(x => <UploadImage_Response>x).catch(this.httperrorHandle);
+    }
 
   httperrorHandle(error: HttpErrorResponse) {
     return Observable.throw(error);

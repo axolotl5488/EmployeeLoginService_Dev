@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppRoutingServiceService } from './AppService/app-routing-service.service';
+import { AppServiceService } from './AppService/app-routing-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,15 @@ import { AppRoutingServiceService } from './AppService/app-routing-service.servi
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    constructor(public _AppRoutingServiceService: AppRoutingServiceService) { }
+    constructor(public _AppRoutingServiceService: AppServiceService) { }
     title = 'epunchApp';
 
     getsd() {
       //  this._AppRoutingServiceService.appMmodel
+    }
+
+    Logout(): void {
+        this._AppRoutingServiceService.RemoveToken();
+        window.location.href = "login";
     }
 }

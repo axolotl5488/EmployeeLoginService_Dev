@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Axolotl.Models;
@@ -18,7 +19,7 @@ using Newtonsoft.Json;
 
 namespace Axolotl.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class WebAPIController : ApiController
     {
         #region Authentication 
@@ -316,6 +317,36 @@ namespace Axolotl.Controllers
         public async Task<HttpResponseMessage> GetEmployeeWeekOffs([FromBody]GetEmployeeWeekOffs_request model)
         {
             return Request.CreateResponse(HttpStatusCode.OK, WebService.GetEmployeeWeekOffs(model));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UploadImage()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, WebService.UploadImage(HttpContext.Current.Request.Files[0]));
+            //try
+            //{
+
+            //    HttpPostedFile file = HttpContext.Current.Request.Files[0];
+            //    if (file != null)
+            //    {
+            //        var fileName = Path.GetFileName(file.FileName);
+            //        string[] fileextension = file.FileName.Split('.');
+            //        string fileext = fileextension[fileextension.Length - 1];
+            //        string updatedfilename = "supplyitem_" + DateTime.Now.ToString("MMddyyyyhhmmss") + fileext;
+            //        var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/SupplyItems"), updatedfilename);
+            //        file.SaveAs(path);
+
+            //        return Request.CreateResponse(HttpStatusCode.OK, new { filename = updatedfilename });
+            //    }
+            //    else
+            //    {
+            //        return Request.CreateResponse(HttpStatusCode.OK, new { filename = "" });
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, new { filename = "" });
+            //}
         }
         #endregion 
     }

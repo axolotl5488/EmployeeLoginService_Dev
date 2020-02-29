@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AxolotlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AxolotlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -252,6 +252,8 @@
           <Property Name="IsOutSidePunchOut" Type="bit" Nullable="false" />
           <Property Name="PunchIn_LocationID" Type="bigint" />
           <Property Name="PunchOut_LocationID" Type="bigint" />
+          <Property Name="PunchIn_OutsideReason" Type="nvarchar(max)" />
+          <Property Name="PunchOut_OutsideReason" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EmployeeTasks">
           <Key>
@@ -1065,6 +1067,8 @@
           <Property Name="IsOutSidePunchOut" Type="Boolean" Nullable="false" />
           <Property Name="PunchIn_LocationID" Type="Int64" />
           <Property Name="PunchOut_LocationID" Type="Int64" />
+          <Property Name="PunchIn_OutsideReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PunchOut_OutsideReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="AxolotlModel.FK_EmployeePunches_AspNetUsers" FromRole="EmployeePunch" ToRole="AspNetUser" />
           <NavigationProperty Name="EmployeeCalls" Relationship="AxolotlModel.FK_EmployeeCalls_EmployeePunches" FromRole="EmployeePunch" ToRole="EmployeeCall" />
           <NavigationProperty Name="EmployeeTasks" Relationship="AxolotlModel.FK_EmployeeTasks_EmployeePunches" FromRole="EmployeePunch" ToRole="EmployeeTask" />
@@ -1605,6 +1609,8 @@
           <EntitySetMapping Name="EmployeePunches">
             <EntityTypeMapping TypeName="AxolotlModel.EmployeePunch">
               <MappingFragment StoreEntitySet="EmployeePunches">
+                <ScalarProperty Name="PunchOut_OutsideReason" ColumnName="PunchOut_OutsideReason" />
+                <ScalarProperty Name="PunchIn_OutsideReason" ColumnName="PunchIn_OutsideReason" />
                 <ScalarProperty Name="PunchOut_LocationID" ColumnName="PunchOut_LocationID" />
                 <ScalarProperty Name="PunchIn_LocationID" ColumnName="PunchIn_LocationID" />
                 <ScalarProperty Name="IsOutSidePunchOut" ColumnName="IsOutSidePunchOut" />

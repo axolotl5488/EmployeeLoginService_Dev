@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/Observable/throw';
@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { ResultStatus, AppCommonResponse } from '../AppModel/appmodel_Model'
 import { AppCommon } from '../AppCommon/AppCommon'
 import {
-  GetUserList_Response, GetUserList_Detail, SignUp_request, SignUp_response,
-  GetUserDetail_Request, GetUserDetail_Response, ReportingPerson_request, GetEmployeeWeekOffs_detail, GetEmployeeWeekOffs_request, GetEmployeeWeekOffs_response
+    GetUserList_Response, GetUserList_Detail, SignUp_request, SignUp_response,
+    GetUserDetail_Request, GetUserDetail_Response, ReportingPerson_request, GetEmployeeWeekOffs_detail, GetEmployeeWeekOffs_request, GetEmployeeWeekOffs_response, LoginModel
 } from '../AppModel/User_Models';
 
 import {
@@ -59,7 +59,13 @@ export class User_Service {
 
   GetEmployeeWeekOffs(model: GetEmployeeWeekOffs_request): Observable<GetEmployeeWeekOffs_response> {
     return this._HttpClient.post(AppCommon.APIURL + "/GetEmployeeWeekOffs", model).map(x => <GetEmployeeWeekOffs_response>x).catch(this.httperrorHandle);
-  }
+    }
+
+    Token(model: LoginModel): Observable<any> {
+        let request: string = `Username=${model.username}&Password=${model.password}&grant_type=password`;
+        var header = { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')}
+        return this._HttpClient.post(AppCommon.TokenURL, request, header).map(x => <any>x).catch(this.httperrorHandle);
+    }
 
   httperrorHandle(error: HttpErrorResponse) {
     return Observable.throw(error);

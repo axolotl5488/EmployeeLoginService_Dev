@@ -54,6 +54,7 @@ namespace BAModel.Model
         public double lat { get; set; }
         public double lng { get; set; }
 
+        public string imageurl { get; set; }
     }
 
     public class ManageCompanyLocation_response
@@ -640,5 +641,15 @@ namespace BAModel.Model
         public long employeeid { get; set; }
         public int companyid { get; set; }
         public int companyweekoffdays { get; set; }
+    }
+
+    public class UploadImage_Response
+    {
+        public string filename { get; set; }
+        public ResultStatus response { get; set; }
+        public UploadImage_Response()
+        {
+            response = new ResultStatus();
+        }
     }
 }

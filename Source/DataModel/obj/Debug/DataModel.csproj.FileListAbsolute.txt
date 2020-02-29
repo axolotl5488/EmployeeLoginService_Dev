@@ -50,7 +50,6 @@ D:\Milan\NKTPL_GIT\Source\DataModel\bin\Debug\EntityFramework.dll
 D:\Milan\NKTPL_GIT\Source\DataModel\bin\Debug\EntityFramework.SqlServer.dll
 D:\Milan\NKTPL_GIT\Source\DataModel\bin\Debug\EntityFramework.xml
 D:\Milan\NKTPL_GIT\Source\DataModel\bin\Debug\EntityFramework.SqlServer.xml
-D:\Milan\NKTPL_GIT\Source\DataModel\obj\Debug\DataModel.csprojAssemblyReference.cache
 D:\Milan\NKTPL_GIT\Source\DataModel\obj\Debug\DataModel.csproj.CopyComplete
 D:\Milan\NKTPL_GIT\Source\DataModel\obj\Debug\DataModel.dll
 D:\Milan\NKTPL_GIT\Source\DataModel\obj\Debug\DataModel.pdb

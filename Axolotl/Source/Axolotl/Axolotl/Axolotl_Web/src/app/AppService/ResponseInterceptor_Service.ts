@@ -20,7 +20,8 @@ export class ResponseInterceptor implements HttpInterceptor {
     }).catch((resp: any) => {
       //$("#honestabeloader").removeClass('show');
       if (resp instanceof HttpErrorResponse) {
-        if (resp.status == 401 || resp.status == 403) {
+          if (resp.status == 401 || resp.status == 403  || resp.status == 400) {
+              $("#loading").hide();
         }
       }
       return Observable.throw(resp);

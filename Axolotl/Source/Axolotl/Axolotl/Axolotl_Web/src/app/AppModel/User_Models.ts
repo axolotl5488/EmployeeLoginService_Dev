@@ -101,3 +101,8 @@ export class GetEmployeeWeekOffs_detail {
   companyid: number;
   companyweekoffdays: number;
 }
+
+export class LoginModel {
+    username: string;
+    password: string;
+}

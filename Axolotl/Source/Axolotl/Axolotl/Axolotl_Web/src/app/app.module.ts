@@ -14,6 +14,7 @@ import { AppManageCompanyComponent } from './AppComponent/ManageCompany/manageco
 import { AppManageUserComponent } from './AppComponent/ManageUser/manageuser.component';
 import { AppEmployeeLeaveComponent } from './AppComponent/EmployeeLeaves/EmployeeLeaves.component';
 import { AppManageEmployeePunchComponent } from './AppComponent/ManageEmployeePunch/manageemployeepunch.component';
+import { AppLoginComponent } from './AppComponent/Login/login.component';
 
 
 import { ResponseInterceptor } from './AppService/ResponseInterceptor_Service';
@@ -22,11 +23,12 @@ import { User_Service } from './AppService/User_Service';
 import { EmployeePunch_Service } from './AppService/EmployePunch_Service';
 import { Global_Service } from './AppService/Global_Service';
 import { EmployeeLeave_Service } from './AppService/EmployeeLeave_Service';
+import { AppServiceService } from './AppService/app-routing-service.service';
 
 @NgModule({
   declarations: [
     AppComponent, AppCompanyComponent, AppUserComponent, AppEmployeePunchComponent, AppManageCompanyComponent, AppManageUserComponent, AppEmployeeLeaveComponent,
-    AppManageEmployeePunchComponent
+        AppManageEmployeePunchComponent, AppLoginComponent
   ],
   imports: [
       BrowserModule,
@@ -35,7 +37,7 @@ import { EmployeeLeave_Service } from './AppService/EmployeeLeave_Service';
       HttpModule,
       HttpClientModule,
   ],
-    providers: [Company_Service, User_Service, EmployeePunch_Service, Global_Service, EmployeeLeave_Service,
+    providers: [Company_Service, User_Service, EmployeePunch_Service, Global_Service, EmployeeLeave_Service, AppServiceService,
     { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
