@@ -4,7 +4,8 @@ import { User_Service } from '../../AppService/User_Service';
 import { LoginModel } from '../../AppModel/User_Models';
 import { AppServiceService } from '../../AppService/app-routing-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { AppCommon } from '../../AppCommon/AppCommon'
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-login',
@@ -26,7 +27,7 @@ export class AppLoginComponent implements OnInit {
         this._User_Service.Token(this.model).subscribe(x => {
             this._AppServiceService.SetToken(x.access_token);
             //this._Router.navigate(["/company"]);
-            window.location.href = "/company";
+            window.location.href = AppCommon.RedirectURL+ "/company";
 
         }, err => {
                 $("#loading").hide();

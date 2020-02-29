@@ -230,6 +230,8 @@
     <EntitySetMapping Name="EmployeePunches">
       <EntityTypeMapping TypeName="AxolotlModel.EmployeePunch">
         <MappingFragment StoreEntitySet="EmployeePunches">
+          <ScalarProperty Name="PunchOut_OutsideReason" ColumnName="PunchOut_OutsideReason" />
+          <ScalarProperty Name="PunchIn_OutsideReason" ColumnName="PunchIn_OutsideReason" />
           <ScalarProperty Name="PunchOut_LocationID" ColumnName="PunchOut_LocationID" />
           <ScalarProperty Name="PunchIn_LocationID" ColumnName="PunchIn_LocationID" />
           <ScalarProperty Name="IsOutSidePunchOut" ColumnName="IsOutSidePunchOut" />

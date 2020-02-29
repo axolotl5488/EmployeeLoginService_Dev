@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppServiceService } from './AppService/app-routing-service.service';
+import { AppCommon } from '../../src/app/AppCommon/AppCommon';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,6 @@ export class AppComponent {
 
     Logout(): void {
         this._AppRoutingServiceService.RemoveToken();
-        window.location.href = "login";
+        window.location.href = AppCommon.RedirectURL +"/login";
     }
 }
