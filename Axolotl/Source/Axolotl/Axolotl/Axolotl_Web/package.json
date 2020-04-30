@@ -24,7 +24,7 @@
     "bootstrap-datepicker": "^1.9.0",
     "bootstrap3": "^3.3.5",
     "google-maps": "^3.3.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.5.3",
